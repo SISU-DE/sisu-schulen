@@ -1,0 +1,3664 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SISU Paket-Finder für Bibliotheken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F0E8;
+    --paper:#FCFAF5;
+    --paper-2:#F7F3EB;
+    --ink:#2A323D;
+    --ink-2:#4D5765;
+    --ink-3:#7A8493;
+    --line:#DCD5C7;
+    --line-soft:#E8E2D4;
+    --sage-deep:#5F7460;
+    --sage:#869A82;
+    --sage-soft:#DCE3D5;
+    --sage-tint:#EDF1E7;
+    --bluegrey:#3E4A5B;
+    --bluegrey-soft:#E2E5EA;
+    --sand:#C9A86A;
+    --sand-soft:#F0E5CC;
+    --danger:#A85B4F;
+    --radius-card:14px;
+    --radius-btn:10px;
+    --radius-chip:999px;
+    --shadow-sm:0 1px 2px rgba(40,46,55,.04), 0 0 0 1px var(--line-soft);
+    --shadow-md:0 1px 2px rgba(40,46,55,.04), 0 8px 24px -12px rgba(40,46,55,.10), 0 0 0 1px var(--line-soft);
+    --shadow-lg:0 1px 2px rgba(40,46,55,.04), 0 24px 48px -20px rgba(40,46,55,.18), 0 0 0 1px var(--line-soft);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    font-feature-settings:"ss01","cv11";
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.01em}
+  .mono{font-variant-numeric:tabular-nums}
+
+  /* ---------- Layout shell ---------- */
+  .app{min-height:100vh;display:flex;flex-direction:column}
+  .topbar{
+    position:sticky;top:0;z-index:30;
+    background:rgba(244,240,232,.85);
+    backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .topbar-inner{
+    max-width:1200px;margin:0 auto;
+    padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+  .brand-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:var(--sage-deep);
+    display:grid;place-items:center;
+    color:var(--paper);
+    font-family:'Instrument Serif',serif;
+    font-size:20px;line-height:1;
+    padding-top:2px;
+  }
+  .brand-name{font-weight:600;letter-spacing:.02em;font-size:15px}
+  .brand-sub{color:var(--ink-3);font-size:13px;margin-left:6px}
+
+  .nav{display:flex;gap:4px;align-items:center}
+  .nav button{
+    background:transparent;border:0;
+    font:inherit;font-size:13px;color:var(--ink-2);
+    padding:8px 12px;border-radius:8px;cursor:pointer;
+    letter-spacing:.01em;
+  }
+  .nav button:hover{background:var(--paper-2);color:var(--ink)}
+  .nav button.active{background:var(--bluegrey);color:#fff}
+
+  /* Engagierten-Portal Tab – visuell abgesetzt, rechtsbündig */
+  .nav button.portal-tab{
+    margin-left:auto;
+    background:var(--sage-tint);
+    color:var(--sage-deep);
+    font-weight:500;
+    padding:8px 14px;
+  }
+  .nav button.portal-tab:hover{background:var(--sage-soft);color:var(--sage-deep)}
+  .nav button.portal-tab.active{background:var(--sage-deep);color:#FCFAF5}
+
+  /* FAQ-Akkordeon im Portal */
+  details.faq-item{
+    background:var(--paper);
+    border:1px solid var(--line-soft);
+    border-radius:10px;
+    padding:14px 18px;
+    transition:border-color .2s, background .2s;
+  }
+  details.faq-item[open]{border-color:var(--sage-soft);background:var(--sage-tint)}
+  details.faq-item > summary{
+    cursor:pointer;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    font-weight:600;
+    color:var(--ink);
+    font-size:15.5px;
+  }
+  details.faq-item > summary::-webkit-details-marker{display:none}
+  details.faq-item > summary::marker{display:none}
+  details.faq-item > summary .faq-toggle{
+    color:var(--sage-deep);
+    font-size:22px;
+    line-height:1;
+    transition:transform .2s;
+    flex-shrink:0;
+  }
+  details.faq-item[open] > summary .faq-toggle{transform:rotate(45deg)}
+  details.faq-item > p{
+    margin:12px 0 0;
+    color:var(--ink-2);
+    font-size:14.5px;
+    line-height:1.6;
+  }
+
+  .container{max-width:1080px;margin:0 auto;padding:48px 32px 96px;width:100%}
+  .container.narrow{max-width:780px}
+  .container.wide{max-width:1200px}
+
+  /* ---------- Progress ---------- */
+  .progress{
+    max-width:1080px;margin:0 auto;padding:20px 32px 0;
+    display:flex;align-items:center;gap:16px;
+  }
+  .progress-track{flex:1;height:3px;background:var(--line-soft);border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--sage-deep);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .progress-label{color:var(--ink-3);font-size:13px;letter-spacing:.02em;white-space:nowrap}
+
+  /* ---------- Typography ---------- */
+  h1.display{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(38px,5vw,58px);
+    line-height:1.05;
+    letter-spacing:-0.015em;
+    margin:0 0 20px;
+    color:var(--ink);
+  }
+  h2.section{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:clamp(28px,3vw,38px);line-height:1.1;
+    letter-spacing:-0.01em;margin:0 0 14px;
+  }
+  .lede{
+    color:var(--ink-2);font-size:18px;line-height:1.55;
+    max-width:62ch;margin:0 0 40px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--sage-deep);font-weight:500;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--sage-deep)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font:inherit;font-weight:500;font-size:15px;
+    padding:13px 22px;border-radius:var(--radius-btn);
+    border:1px solid transparent;cursor:pointer;
+    transition:all .15s ease;letter-spacing:.005em;
+    text-decoration:none;
+  }
+  .btn-primary{background:var(--sage-deep);color:#FCFAF5;border-color:var(--sage-deep)}
+  .btn-primary:hover{background:#506452;border-color:#506452}
+  .btn-primary:disabled{background:var(--sage);border-color:var(--sage);opacity:.6;cursor:not-allowed}
+  .btn-secondary{background:var(--paper);color:var(--ink);border-color:var(--line)}
+  .btn-secondary:hover{background:var(--paper-2);border-color:#C9C0AE}
+  .btn-ghost{background:transparent;color:var(--ink-2);border-color:transparent}
+  .btn-ghost:hover{color:var(--ink);background:var(--paper-2)}
+  .btn-lg{padding:16px 28px;font-size:16px}
+
+  .btn-row{display:flex;gap:12px;align-items:center;margin-top:36px}
+  .btn-row.between{justify-content:space-between}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 32px;display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:center;
+  }
+  .hero-art{
+    aspect-ratio:4/5;background:var(--sage-tint);
+    border-radius:var(--radius-card);
+    border:1px solid var(--line-soft);
+    position:relative;overflow:hidden;
+  }
+  .hero-art::before{
+    content:"";position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(135deg,transparent 0 22px,rgba(95,116,96,.08) 22px 23px);
+  }
+  .hero-art-tag{
+    position:absolute;left:18px;bottom:18px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;
+    color:var(--sage-deep);background:var(--paper);
+    padding:5px 9px;border-radius:6px;border:1px solid var(--line-soft);
+    letter-spacing:.04em;
+  }
+  .hero-quote{
+    position:absolute;inset:auto 24px 80px 24px;
+    font-family:'Instrument Serif',serif;font-style:italic;
+    font-size:24px;line-height:1.25;color:var(--ink);
+    opacity:.85;
+  }
+
+  /* ---------- Tile grid ---------- */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+  .tile{
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:28px 26px;
+    display:flex;flex-direction:column;gap:10px;min-height:180px;
+  }
+  .tile-num{
+    font-family:'Instrument Serif',serif;font-size:32px;color:var(--sage-deep);line-height:1;
+  }
+  .tile-title{font-weight:600;font-size:16px}
+  .tile-text{color:var(--ink-2);font-size:14.5px;line-height:1.5}
+
+  .small-note{color:var(--ink-3);font-size:13px;margin-top:18px;letter-spacing:.01em}
+
+  /* ---------- Question screens ---------- */
+  .chip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0 8px}
+  .chip{
+    display:flex;align-items:center;gap:14px;
+    padding:18px 20px;background:var(--paper);
+    border:1px solid var(--line);border-radius:var(--radius-card);
+    cursor:pointer;text-align:left;
+    transition:all .12s ease;font:inherit;color:var(--ink);
+    min-height:64px;
+  }
+  .chip:hover{border-color:var(--sage);background:var(--paper-2)}
+  .chip[data-on="true"]{
+    background:var(--sage-tint);border-color:var(--sage-deep);
+  }
+  .chip-check{
+    width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);
+    flex-shrink:0;display:grid;place-items:center;
+    background:var(--paper);color:transparent;
+    font-size:13px;
+  }
+  .chip[data-on="true"] .chip-check{
+    background:var(--sage-deep);border-color:var(--sage-deep);color:#fff;
+  }
+  .chip-radio{border-radius:999px}
+  .chip-radio-dot{
+    width:10px;height:10px;border-radius:999px;background:#fff;display:none;
+  }
+  .chip[data-on="true"] .chip-radio-dot{display:block}
+  .chip-text{font-size:15.5px;font-weight:500;letter-spacing:.005em}
+  .chip-sub{color:var(--ink-3);font-size:13.5px;font-weight:400;line-height:1.4;margin-top:3px}
+
+  .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0 8px}
+  .opt-card{
+    padding:24px 26px;background:var(--paper);
+    border:1px solid var(--line);border-radius:var(--radius-card);
+    cursor:pointer;text-align:left;transition:all .12s ease;
+    font:inherit;color:var(--ink);position:relative;
+  }
+  .opt-card:hover{border-color:var(--sage);background:var(--paper-2)}
+  .opt-card[data-on="true"]{background:var(--sage-tint);border-color:var(--sage-deep);box-shadow:0 0 0 1px var(--sage-deep) inset}
+  .opt-letter{
+    position:absolute;top:20px;right:20px;
+    font-family:'Instrument Serif',serif;font-size:22px;color:var(--sage);
+  }
+  .opt-card[data-on="true"] .opt-letter{color:var(--sage-deep)}
+  .opt-title{font-weight:600;font-size:17px;margin:0 0 4px}
+  .opt-desc{color:var(--ink-2);font-size:14px;line-height:1.5}
+
+  .warn{
+    padding:12px 16px;background:var(--sand-soft);border:1px solid #E2D2A8;
+    border-radius:10px;color:#7A6328;font-size:14px;margin-top:12px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .warn-dot{width:6px;height:6px;border-radius:99px;background:#B8923D;margin-top:8px;flex-shrink:0}
+
+  .selected-count{
+    font-size:13px;color:var(--ink-3);letter-spacing:.01em;
+    margin-top:8px;
+  }
+
+  /* ---------- Result screen ---------- */
+  .summary-card{
+    background:var(--sage-deep);color:#FCFAF5;
+    border-radius:var(--radius-card);
+    padding:36px 36px;margin-bottom:36px;
+    display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;
+  }
+  .summary-card .eyebrow{color:var(--sand-soft)}
+  .summary-card .eyebrow::before{background:var(--sand-soft)}
+  .summary-card h3{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:34px;line-height:1.1;margin:0 0 8px;letter-spacing:-.01em;
+  }
+  .summary-card p{color:rgba(252,250,245,.85);margin:0;font-size:15.5px;max-width:62ch}
+  .summary-mark{
+    width:64px;height:64px;border-radius:14px;background:rgba(252,250,245,.12);
+    display:grid;place-items:center;
+    font-family:'Instrument Serif',serif;font-size:36px;color:#fff;
+  }
+
+  .results-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}
+  .results-head h2{margin:0}
+  .results-head .small-note{margin:0;max-width:36ch;text-align:right}
+
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pkg{
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:28px 26px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:all .15s ease;
+  }
+  .pkg.featured{border-color:var(--sage);background:var(--paper);box-shadow:var(--shadow-md)}
+  .pkg-rank{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;
+    color:var(--sage-deep);letter-spacing:.08em;
+  }
+  .pkg-rank-num{
+    width:22px;height:22px;border-radius:6px;background:var(--sage-tint);
+    display:grid;place-items:center;color:var(--sage-deep);font-weight:600;
+  }
+  .pkg h3{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:26px;line-height:1.15;margin:0;letter-spacing:-.005em;
+  }
+  .pkg-desc{color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  .pkg-meta{
+    display:grid;grid-template-columns:1fr;gap:8px;margin-top:4px;
+    border-top:1px solid var(--line-soft);padding-top:14px;
+  }
+  .pkg-meta-row{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+  .pkg-meta-row dt{color:var(--ink-3)}
+  .pkg-meta-row dd{margin:0;color:var(--ink);font-weight:500;text-align:right}
+  .pkg-why{
+    font-size:13.5px;color:var(--ink-2);background:var(--sage-tint);
+    border-radius:10px;padding:12px 14px;line-height:1.5;
+    border-left:3px solid var(--sage);
+  }
+  .pkg-why-label{font-weight:600;color:var(--sage-deep);display:block;margin-bottom:3px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+
+  .pot-bar{display:flex;align-items:center;gap:8px}
+  .pot-pips{display:flex;gap:3px}
+  .pot-pip{width:10px;height:6px;border-radius:2px;background:var(--line)}
+  .pot-pip.on{background:var(--sage-deep)}
+  .pot-text{font-size:12.5px;color:var(--ink-3)}
+
+  .footnote{
+    margin-top:36px;padding:18px 22px;
+    background:var(--paper-2);border:1px solid var(--line-soft);
+    border-radius:10px;color:var(--ink-2);font-size:13.5px;line-height:1.55;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .footnote-icon{
+    width:22px;height:22px;border-radius:99px;
+    background:var(--sand-soft);color:#9A7E36;
+    display:grid;place-items:center;flex-shrink:0;
+    font-family:'Instrument Serif',serif;font-size:14px;font-style:italic;
+  }
+
+  /* ---------- Detail screen ---------- */
+  .detail{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start}
+  .detail-main h1{margin-bottom:8px}
+  .detail-tagline{color:var(--ink-2);font-size:18px;line-height:1.55;margin:0 0 32px;max-width:62ch}
+  .detail-section{margin-bottom:32px}
+  .detail-section h4{
+    font-size:13px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--sage-deep);font-weight:600;margin:0 0 12px;
+  }
+  .detail-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .detail-list li{
+    padding:14px 16px;background:var(--paper);
+    border:1px solid var(--line-soft);border-radius:10px;
+    font-size:15px;color:var(--ink);
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .detail-list li::before{
+    content:"";width:6px;height:6px;border-radius:99px;
+    background:var(--sage);margin-top:9px;flex-shrink:0;
+  }
+  .detail-side{
+    position:sticky;top:90px;
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:28px;
+  }
+  .side-row{padding:14px 0;border-top:1px solid var(--line-soft);font-size:14px;display:flex;justify-content:space-between;gap:10px}
+  .side-row:first-of-type{border-top:0;padding-top:0}
+  .side-row dt{color:var(--ink-3)}
+  .side-row dd{margin:0;font-weight:500;text-align:right}
+  .test-box{
+    background:var(--sage-tint);padding:18px 20px;border-radius:10px;
+    margin-top:20px;
+  }
+  .test-box-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--sage-deep);font-weight:600}
+  .test-box p{margin:6px 0 0;font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--ink)}
+
+  /* ---------- Next-step screen ---------- */
+  .next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+  .next-card{
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:32px 28px;
+    display:flex;flex-direction:column;gap:14px;min-height:240px;
+    transition:all .15s ease;
+  }
+  .next-card.recommended{
+    background:var(--sage-tint);border-color:var(--sage);
+    box-shadow:var(--shadow-md);
+  }
+  .next-card .badge{
+    display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+    background:var(--sage-deep);color:#fff;font-size:11px;
+    padding:5px 10px;border-radius:99px;
+    letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  }
+  .next-card h3{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:24px;line-height:1.15;margin:6px 0 0;
+  }
+  .next-card p{color:var(--ink-2);font-size:14.5px;line-height:1.55;flex:1;margin:0}
+  .next-card .btn{align-self:flex-start;margin-top:8px}
+
+  /* ---------- Form screen ---------- */
+  .form-shell{
+    display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start;
+  }
+  .form-fields{display:flex;flex-direction:column;gap:22px}
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field label{font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:.005em}
+  .field .hint{font-size:13px;color:var(--ink-3);margin-top:-4px}
+  .field input[type="text"],.field input[type="email"],.field input[type="tel"],
+  .field textarea,.field select{
+    font:inherit;font-size:15px;
+    padding:12px 14px;border-radius:10px;
+    background:var(--paper);border:1px solid var(--line);
+    color:var(--ink);transition:border-color .12s;
+    width:100%;font-family:inherit;
+  }
+  .field textarea{min-height:90px;resize:vertical;line-height:1.5}
+  .field input:focus,.field textarea:focus,.field select:focus{
+    outline:none;border-color:var(--sage-deep);
+    box-shadow:0 0 0 3px rgba(95,116,96,.12);
+  }
+  .seg{
+    display:inline-flex;background:var(--paper-2);border:1px solid var(--line-soft);
+    border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap;
+  }
+  .seg button{
+    font:inherit;font-size:14px;padding:9px 14px;border-radius:8px;
+    background:transparent;border:0;cursor:pointer;color:var(--ink-2);
+  }
+  .seg button[data-on="true"]{background:var(--paper);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .seg button:hover:not([data-on="true"]){color:var(--ink)}
+
+  .check-line{
+    display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink-2);
+    margin-top:6px;cursor:pointer;
+  }
+  .check-line input{accent-color:var(--sage-deep);width:16px;height:16px}
+
+  .info-box{
+    background:var(--sand-soft);border:1px solid #E2D2A8;
+    border-radius:10px;padding:14px 16px;
+    color:#6B5728;font-size:13.5px;line-height:1.55;
+  }
+  .info-box strong{color:#5A4920;font-weight:600}
+
+  .form-side{
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:24px;
+    position:sticky;top:90px;
+  }
+  .form-side h5{
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--sage-deep);margin:0 0 10px;font-weight:600;
+  }
+  .form-side .pkg-name{
+    font-family:'Instrument Serif',serif;font-size:22px;line-height:1.15;margin:0 0 8px;
+  }
+  .form-side .pkg-desc{font-size:14px;color:var(--ink-2);line-height:1.5;margin:0 0 16px}
+  .form-side .micro{
+    font-size:12.5px;color:var(--ink-3);line-height:1.5;
+    border-top:1px solid var(--line-soft);padding-top:14px;margin-top:8px;
+  }
+
+  /* ---------- Public slot ---------- */
+  .public-shell{
+    background:#EFEAE0;
+    min-height:100vh;
+    margin:-48px -32px -96px;padding:48px 32px 96px;
+  }
+  .public-bar{
+    max-width:780px;margin:0 auto 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--ink-3);font-size:13px;
+  }
+  .public-bar .breadcrumb{display:flex;gap:8px;align-items:center}
+  .slot-public{
+    max-width:780px;margin:0 auto;
+    background:var(--paper);border-radius:18px;
+    border:1px solid var(--line-soft);
+    overflow:hidden;
+  }
+  .slot-public .head{
+    padding:36px 40px 28px;background:var(--sage-tint);
+    border-bottom:1px solid var(--sage-soft);
+  }
+  .slot-public .head .eyebrow{margin-bottom:10px}
+  .slot-public .head h1{font-size:42px;margin:0 0 12px}
+  .slot-public .head .where{
+    color:var(--ink-2);font-size:15px;display:flex;gap:24px;flex-wrap:wrap;
+  }
+  .slot-public .body{padding:32px 40px}
+  .slot-fact-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    background:var(--paper-2);border-radius:12px;padding:8px;margin-bottom:28px;
+  }
+  .slot-fact{padding:14px 16px;background:var(--paper);border-radius:8px}
+  .slot-fact dt{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:4px}
+  .slot-fact dd{margin:0;font-weight:500;font-size:15px}
+  .slot-block{margin-bottom:24px}
+  .slot-block h4{
+    font-size:13px;text-transform:uppercase;letter-spacing:.1em;
+    color:var(--sage-deep);font-weight:600;margin:0 0 8px;
+  }
+  .slot-block p{margin:0;color:var(--ink);line-height:1.6;font-size:15.5px}
+  .slot-public .cta-row{
+    padding:24px 40px;background:var(--paper-2);
+    border-top:1px solid var(--line-soft);
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  }
+  .commitment-note{
+    background:var(--sand-soft);padding:14px 16px;border-radius:10px;
+    font-size:14px;color:#6B5728;line-height:1.55;margin-bottom:8px;
+  }
+
+  /* ---------- Confirmation ---------- */
+  .confirm-card{
+    max-width:560px;margin:96px auto;
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:18px;padding:48px 48px;text-align:center;
+  }
+  .confirm-mark{
+    width:56px;height:56px;border-radius:99px;background:var(--sage-tint);
+    display:grid;place-items:center;margin:0 auto 20px;
+    color:var(--sage-deep);font-family:'Instrument Serif',serif;font-size:30px;
+  }
+  .confirm-card h2{margin:0 0 12px}
+  .confirm-card p{color:var(--ink-2);margin:0 0 24px;line-height:1.6}
+
+  /* ---------- Backend dashboard ---------- */
+  .dash-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+    border-bottom:1px solid var(--line-soft);padding-bottom:20px;margin-bottom:28px;
+  }
+  .dash-head h1{margin:0;font-size:36px}
+  .dash-head .meta{color:var(--ink-3);font-size:13.5px;display:flex;gap:18px;align-items:center}
+  .dot{width:8px;height:8px;border-radius:99px;background:var(--sage);display:inline-block}
+  .dash-tabs{
+    display:flex;gap:4px;margin-bottom:28px;
+    border-bottom:1px solid var(--line-soft);padding-bottom:0;
+  }
+  .dash-tab{
+    background:transparent;border:0;padding:10px 16px;cursor:pointer;
+    font:inherit;font-size:14px;color:var(--ink-2);
+    border-bottom:2px solid transparent;margin-bottom:-1px;
+  }
+  .dash-tab[data-on="true"]{color:var(--ink);border-bottom-color:var(--sage-deep);font-weight:600}
+  .dash-tab .count{
+    margin-left:6px;font-size:11px;background:var(--bluegrey-soft);color:var(--bluegrey);
+    padding:1px 7px;border-radius:99px;
+  }
+  .dash-tab[data-on="true"] .count{background:var(--sage-tint);color:var(--sage-deep)}
+
+  .dash-card{
+    background:var(--paper);border:1px solid var(--line-soft);
+    border-radius:var(--radius-card);padding:24px;margin-bottom:18px;
+  }
+  .dash-card h3{
+    font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;
+    margin:0 0 4px;
+  }
+  .dash-card .sub{color:var(--ink-3);font-size:13px;margin-bottom:16px}
+  table.dash{width:100%;border-collapse:collapse;font-size:14px}
+  table.dash th{
+    text-align:left;font-weight:600;color:var(--ink-3);
+    font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;
+    padding:10px 12px;border-bottom:1px solid var(--line-soft);
+  }
+  table.dash td{
+    padding:14px 12px;border-bottom:1px solid var(--line-soft);
+    color:var(--ink);vertical-align:top;
+  }
+  table.dash tr:last-child td{border-bottom:0}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:3px 10px;border-radius:99px;font-size:12px;font-weight:500;
+    background:var(--bluegrey-soft);color:var(--bluegrey);
+  }
+  .pill.new{background:var(--sand-soft);color:#7A5D1E}
+  .pill.ok{background:var(--sage-tint);color:var(--sage-deep)}
+  .pill.q{background:#EFE6E0;color:#7A5246}
+
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .row-actions button{
+    font:inherit;font-size:12.5px;padding:6px 10px;
+    background:var(--paper-2);border:1px solid var(--line-soft);
+    border-radius:7px;cursor:pointer;color:var(--ink-2);
+  }
+  .row-actions button:hover{background:var(--paper);color:var(--ink);border-color:var(--line)}
+
+  .empty-row td{
+    color:var(--ink-3);font-style:italic;text-align:center;padding:32px;
+    font-family:'Instrument Serif',serif;font-size:16px;
+  }
+
+  /* ---------- Misc ---------- */
+  .fade-in{animation:fade .35s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  hr.sep{border:0;border-top:1px solid var(--line-soft);margin:48px 0}
+
+  /* ---------- Anzeige (print) ---------- */
+  .anzeige-shell{max-width:780px;margin:0 auto}
+  .anzeige-controls{
+    display:flex;gap:12px;align-items:center;justify-content:space-between;
+    margin-bottom:24px;flex-wrap:wrap;
+  }
+  .anzeige-paper{
+    background:#FFFEFB;border:1px solid var(--line-soft);
+    border-radius:6px;padding:64px 64px;aspect-ratio:1/1.414;
+    box-shadow:0 24px 60px -30px rgba(40,46,55,.25);
+    display:flex;flex-direction:column;
+    color:#1F2530;
+  }
+  .anzeige-paper .brand-row{
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;letter-spacing:.08em;color:var(--sage-deep);
+    text-transform:uppercase;font-weight:600;
+  }
+  .anzeige-paper .brand-row .mark{
+    width:22px;height:22px;border-radius:6px;background:var(--sage-deep);
+    color:#fff;display:grid;place-items:center;
+    font-family:'Instrument Serif',serif;font-size:14px;padding-top:2px;
+  }
+  .anzeige-paper h1{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:54px;line-height:1.05;margin:32px 0 14px;
+    letter-spacing:-.015em;
+  }
+  .anzeige-paper .anz-tag{
+    color:var(--sage-deep);font-size:14px;letter-spacing:.04em;
+  }
+  .anzeige-paper .anz-lede{
+    font-family:'Instrument Serif',serif;font-style:italic;
+    font-size:22px;line-height:1.4;color:var(--ink);
+    margin:24px 0 32px;border-left:3px solid var(--sage);padding-left:18px;
+  }
+  .anzeige-paper .anz-block{margin-bottom:18px}
+  .anzeige-paper .anz-block h4{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--sage-deep);margin:0 0 4px;font-weight:700;
+  }
+  .anzeige-paper .anz-block p{margin:0;font-size:15px;line-height:1.55}
+  .anzeige-paper .anz-foot{
+    margin-top:auto;padding-top:24px;border-top:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);
+    letter-spacing:.04em;
+  }
+
+  @media print{
+    body{background:#fff}
+    .topbar,.dash-tabs,.anzeige-controls,footer{display:none !important}
+    .container{padding:0;max-width:none}
+    .anzeige-shell{max-width:none}
+    .anzeige-paper{
+      box-shadow:none;border:0;border-radius:0;
+      width:100%;aspect-ratio:auto;min-height:100vh;
+      padding:48px;
+      page-break-after:always;
+    }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;gap:32px;padding-top:40px}
+    .hero-art{aspect-ratio:16/9}
+    .tiles{grid-template-columns:1fr}
+    .pkg-grid{grid-template-columns:1fr}
+    .next-grid{grid-template-columns:1fr}
+    .detail{grid-template-columns:1fr}
+    .detail-side{position:static}
+    .form-shell{grid-template-columns:1fr}
+    .form-side{position:static}
+    .summary-card{grid-template-columns:1fr;padding:28px}
+    .chip-grid,.card-grid{grid-template-columns:1fr}
+    .slot-fact-grid{grid-template-columns:1fr}
+    .container{padding:32px 20px 80px}
+    .results-head{flex-direction:column;align-items:flex-start}
+    .results-head .small-note{text-align:left}
+    .public-shell{margin:-32px -20px -80px;padding:32px 20px 80px}
+  }
+
+  @media (max-width:640px){
+    .topbar-inner{padding:12px 16px;gap:8px}
+    .nav{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:none}
+    .nav::-webkit-scrollbar{display:none}
+    .nav button{padding:7px 10px;font-size:12px;white-space:nowrap;flex-shrink:0}
+    .nav button.portal-tab{padding:7px 12px}
+    .brand-sub{display:none}
+    .container{padding:24px 16px 56px}
+    .public-shell{margin:-24px -16px -56px;padding:24px 16px 56px}
+    .public-bar{padding:0 4px}
+    .slot-public .head{padding:24px 20px 20px}
+    .slot-public .body{padding:20px}
+    .slot-public .cta-row{padding:16px 20px}
+    .anzeige-paper{padding:32px 24px}
+    .confirm-card{margin:48px auto;padding:32px 24px}
+    h1.display{font-size:clamp(30px,8vw,46px)}
+    .lede{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+
+const { useState, useMemo, useEffect, useRef } = React;
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const PACKAGES = {
+  geschichten: {
+    id:"geschichten",
+    name:"Geschichten & Sprache",
+    short:"Engagierte mit Erfahrung unterstützen Vorlesen, Babylesen, Bilderbuchkino oder Leseförderung – mit klarer Rolle und begrenztem Einsatz.",
+    fitFor:"Kinder, Familien, Leseförderung, bestehende Vorleseangebote.",
+    effort:"Mittel",
+    effortLevel:2,
+    stage:"Mitmachen bis Dranbleiben",
+    potential:"mittel",
+    potentialLevel:2,
+    why:"Dieses Paket passt, wenn Ihre Bibliothek Kinder- oder Familienangebote sichern oder ausbauen möchte.",
+    roles:["Vorlese-Pat:in","Babylesen-Begleiter:in","Bilderbuchkino-Hilfe","Leseförderpat:in für Schule/Kita"],
+    formats:["Einmaliges Vorlesen am Samstagnachmittag","Babylesen einmal im Monat","Bilderbuchkino in den Ferien"],
+    clarify:["Wer wählt die Bücher aus?","An welchen Tagen findet das Format statt?","Wer übernimmt Anmeldung und Raum?","Was passiert bei Krankheit?"],
+    test:"Eine einzelne Vorlesestunde mit 1–2 Mitmachenden, mit kurzem Austausch danach."
+  },
+  begegnung: {
+    id:"begegnung",
+    name:"Begegnung & Gastgeber:innen",
+    short:"Engagierte mit Erfahrung helfen, Begegnung in der Bibliothek leichter zu machen – zum Beispiel beim Spieleabend, Erzählcafé oder als Willkommensteam.",
+    fitFor:"Dritter Ort, Aufenthalt, Nachbarschaft, soziale Teilhabe.",
+    effort:"Niedrig bis mittel",
+    effortLevel:1,
+    stage:"Schnuppern bis Dranbleiben",
+    potential:"hoch",
+    potentialLevel:3,
+    why:"Dieses Paket ist ein guter Einstieg, weil es wenig Vorlauf braucht und schnell Begegnung ermöglicht.",
+    roles:["Spiele-Gastgeber:in","Willkommensteam","Erzählcafé-Begleiter:in","Veranstaltungsbegleiter:in"],
+    formats:["Einmaliger Spieleabend","Offenes Erzählcafé","Begrüßungsteam bei einer Veranstaltung"],
+    clarify:["Wer ist Ansprechperson?","Wann findet der erste Termin statt?","Welche Aufgaben übernimmt die mitmachende Person?","Was bleibt bei der Bibliothek?"],
+    test:"Ein einzelner Termin mit 1–2 Mitmachenden und kurzem Feedback danach."
+  },
+  digital: {
+    id:"digital",
+    name:"Digitale Teilhabe",
+    short:"Geduldige Engagierte mit Erfahrung unterstützen andere bei Smartphone, Tablet, Onleihe oder digitalen Alltagsfragen.",
+    fitFor:"ältere Nutzer:innen, digitale Unsicherheit, Onleihe, Alltagshilfe.",
+    effort:"Mittel",
+    effortLevel:2,
+    stage:"Mitmachen bis Dranbleiben",
+    potential:"mittel",
+    potentialLevel:2,
+    why:"Dieses Paket passt, wenn Ihre Bibliothek digitale Alltagshilfe niedrigschwellig anbieten möchte.",
+    roles:["Smartphone-Pat:in","Onleihe-Helfer:in","Alltags-Digitallots:in","E-Mail- und Formular-Begleitung"],
+    formats:["Offene Sprechstunde 60 Minuten","Tablet-Café einmal im Monat","Onleihe-Einführung in Kleingruppen"],
+    clarify:["Welche Geräte werden mitgebracht?","Wie weit darf konkret geholfen werden (z. B. Bankgeschäfte)?","Wer übernimmt Datenschutz-Hinweise?","Welche Räume sind ruhig genug?"],
+    test:"Eine 60-minütige Sprechstunde mit 1–2 ehrenamtlichen Helfenden und kurzem Feedback."
+  },
+  kreativ: {
+    id:"kreativ",
+    name:"Kreativwerkstatt & Machen",
+    short:"Menschen bringen Hobbys, handwerkliche oder kreative Fähigkeiten in kleine Mitmachformate ein.",
+    fitFor:"Kreativnachmittage, Workshops, Schreiben, Upcycling, kleine Gruppen.",
+    effort:"Niedrig bis mittel",
+    effortLevel:1,
+    stage:"Mitmachen bis Mitgestalten",
+    potential:"mittel bis hoch",
+    potentialLevel:2,
+    why:"Dieses Paket eignet sich, wenn Engagierte mit Erfahrung eigene Interessen oder Hobbys in überschaubare Angebote einbringen möchten.",
+    roles:["Workshop-Anleiter:in","Mitmach-Begleiter:in","Material-Verantwortliche:r","Schreibwerkstatt-Pat:in"],
+    formats:["Einzelner Kreativnachmittag","Schreibwerkstatt 90 Minuten","Upcycling-Tisch in den Ferien"],
+    clarify:["Wer bringt das Material?","Welche Räume und Tische sind nutzbar?","Wie werden Anmeldung und Teilnehmerzahl gesteuert?","Wer dokumentiert?"],
+    test:"Ein einzelner Kreativnachmittag mit kleiner Gruppe, klar moderiert."
+  },
+  bne: {
+    id:"bne",
+    name:"Nachhaltigkeit & BNE",
+    short:"Bibliotheken machen Nachhaltigkeit praktisch erlebbar – etwa durch Saatgut, Upcycling, Tauschen, Reparieren oder Umweltwissen.",
+    fitFor:"BNE, Nachhaltigkeit, praktische Alltagsthemen, lokale Umweltakteure.",
+    effort:"Mittel bis höher",
+    effortLevel:3,
+    stage:"Mitmachen bis Mitgestalten",
+    potential:"mittel",
+    potentialLevel:2,
+    why:"Dieses Paket passt, wenn Nachhaltigkeit praktisch und alltagsnah erlebbar werden soll.",
+    roles:["Saatgut-Pat:in","Repair-Begleiter:in","Tauschtisch-Hosting","BNE-Impulsgeber:in"],
+    formats:["Saatgut-Tausch im Frühjahr","Repair-Café-Premiere","Tauschtisch zur Veranstaltung"],
+    clarify:["Welche Partner gibt es vor Ort?","Wer kümmert sich um Versicherung und Sicherheit?","Wie wird der Raum nach der Aktion zurückgebaut?","Wie wird Wiederholung organisiert?"],
+    test:"Ein einzelner Tauschtisch oder Saatgut-Termin als Test, mit klarem Zeitfenster."
+  },
+  wissen: {
+    id:"wissen",
+    name:"Wissen, Beruf & Lebenserfahrung",
+    short:"Engagierte mit Erfahrung teilen Erfahrungswissen aus Beruf, Leben, Hobby oder Ehrenamt in Gesprächs- und Impulsformaten.",
+    fitFor:"Erzählcafé, Lebensgeschichten, Berufswege, Generationendialog.",
+    effort:"Niedrig",
+    effortLevel:1,
+    stage:"Schnuppern bis Mitmachen",
+    potential:"hoch",
+    potentialLevel:3,
+    why:"Dieses Paket ist ein niedrigschwelliger Einstieg, weil es mit einzelnen Impulsen starten kann.",
+    roles:["Impulsgeber:in zum Berufsleben","Erzählcafé-Gast","Generationen-Brückenbauer:in","Themenpat:in (z. B. Reise, Garten, Geschichte)"],
+    formats:["30-Minuten-Impuls in der Bibliothek","Erzählcafé mit einem Gast","Berufsgeschichten für Schüler:innen"],
+    clarify:["Welches Thema, welche Zielgruppe?","Wie lang ist der Impuls realistisch?","Wer moderiert?","Wie wird eingeladen?"],
+    test:"Ein einzelner 30-Minuten-Impuls mit Gespräch und kleinem Publikum."
+  },
+};
+
+const TOPICS = [
+  { id:"familie", label:"Kinder- und Familienangebote sichern" },
+  { id:"begegnung", label:"Begegnung und Aufenthalt stärken" },
+  { id:"digital", label:"Digitale Teilhabe ermöglichen" },
+  { id:"kreativ", label:"Kreative Mitmachangebote starten" },
+  { id:"bne", label:"Nachhaltigkeit / BNE praktisch machen" },
+  { id:"wissen", label:"Erfahrungswissen sichtbar machen" },
+  { id:"entlasten", label:"Veranstaltungen entlasten" },
+  { id:"unsicher", label:"Wir wissen es noch nicht genau" },
+];
+
+const EXISTING = [
+  { id:"vorlesen", label:"Vorlesen / Babylesen / Bilderbuchkino" },
+  { id:"spiel", label:"Spieleabend / Begegnungstreff" },
+  { id:"kreativ", label:"Kreativangebote" },
+  { id:"digital", label:"Digitale Hilfe / Onleihe-Beratung" },
+  { id:"bne", label:"Nachhaltigkeit / Tausch- / Repair- oder BNE-Angebote" },
+  { id:"lese", label:"Leseförderung / Schule / Kita" },
+  { id:"extern", label:"Veranstaltungen mit Gastreferent:innen oder Kooperationspartner:innen" },
+  { id:"ehren", label:"Ehrenamtliche oder freiwillig Engagierte" },
+  { id:"wenig", label:"Noch wenig regelmäßige Angebote" },
+];
+
+const COORD_OPTS = [
+  { id:"A", letter:"A", title:"Sehr wenig", desc:"Einzelne Termine sind möglich, aber keine zusätzliche Koordination." },
+  { id:"B", letter:"B", title:"Etwas",      desc:"Eine Ansprechperson und einzelne Termine sind möglich." },
+  { id:"C", letter:"C", title:"Mittel",     desc:"Wiederkehrende Formate sind möglich, wenn Rollen klar sind." },
+  { id:"D", letter:"D", title:"Hoch",       desc:"Wir können Engagierte regelmäßig einbinden und Formate weiterentwickeln." },
+];
+
+const COORD_RESULT = {
+  A: { title:"Niedrigschwellig starten",
+       text:"Ihre Bibliothek sollte mit klar begrenzten Einzelterminen beginnen. SISU empfiehlt Pakete mit wenig Koordinationsaufwand und einfacher Rollenklärung." },
+  B: { title:"Erste Rollen möglich",
+       text:"Ihre Bibliothek kann erste Mitmachrollen gut testen, wenn Aufgabe, Termin und Ansprechperson klar definiert sind." },
+  C: { title:"Wiederkehrende Formate möglich",
+       text:"Ihre Bibliothek kann Formate aufbauen, die regelmäßig stattfinden – vorausgesetzt Rollen, Vertretung und Feedback sind einfach geregelt." },
+  D: { title:"Ausbau zum Engagement-Ort möglich",
+       text:"Ihre Bibliothek kann Engagierte mit Erfahrung nicht nur einbinden, sondern gemeinsam mit ihnen neue Formate entwickeln." },
+};
+
+const TARGETS = [
+  { id:"kinder", label:"Kinder und Familien" },
+  { id:"jugend", label:"Jugendliche" },
+  { id:"erwachsen", label:"Erwachsene allgemein" },
+  { id:"alt", label:"ältere Menschen" },
+  { id:"unsicher", label:"Menschen mit wenig digitaler Sicherheit" },
+  { id:"quartier", label:"Quartier / Nachbarschaft" },
+  { id:"generation", label:"generationsübergreifend" },
+  { id:"offen", label:"offen / noch unklar" },
+];
+
+/* ============================================================
+   SCORING
+   ============================================================ */
+const EXISTING_TO_PKG = {
+  vorlesen: "geschichten",
+  lese:     "geschichten",
+  spiel:    "begegnung",
+  kreativ:  "kreativ",
+  digital:  "digital",
+  bne:      "bne",
+};
+
+function scorePackages({ topics, existing, coord, targets }) {
+  const s = { geschichten:0, begegnung:0, digital:0, kreativ:0, bne:0, wissen:0 };
+
+  // Q1
+  if (topics.includes("familie"))    { s.geschichten+=3; s.kreativ+=1; }
+  if (topics.includes("begegnung"))  { s.begegnung+=3; s.wissen+=1; }
+  if (topics.includes("digital"))    { s.digital+=3; }
+  if (topics.includes("kreativ"))    { s.kreativ+=3; s.bne+=1; }
+  if (topics.includes("bne"))        { s.bne+=3; s.kreativ+=1; }
+  if (topics.includes("wissen"))     { s.wissen+=3; s.begegnung+=1; }
+  if (topics.includes("entlasten"))  { s.begegnung+=2; s.wissen+=1; }
+  if (topics.includes("unsicher"))   { s.begegnung+=2; s.wissen+=2; }
+
+  // Q2 — existing items are deprioritised (already covered); adjacent packages gain
+  if (existing.includes("vorlesen")) { s.geschichten-=2; s.begegnung+=1; s.kreativ+=1; }
+  if (existing.includes("spiel"))    { s.begegnung-=2; s.wissen+=1; s.kreativ+=1; }
+  if (existing.includes("kreativ"))  { s.kreativ-=2; s.bne+=1; s.wissen+=1; }
+  if (existing.includes("digital"))  { s.digital-=2; s.wissen+=1; }
+  if (existing.includes("bne"))      { s.bne-=2; s.kreativ+=1; s.wissen+=1; }
+  if (existing.includes("lese"))     { s.geschichten-=1; s.begegnung+=1; }
+  if (existing.includes("extern"))   { s.begegnung+=1; s.wissen+=2; }
+  if (existing.includes("wenig"))    { s.begegnung+=2; s.wissen+=2; }
+
+  // Q3
+  if (coord==="A"){ s.begegnung+=2; s.wissen+=2; s.kreativ+=1; s.bne-=2; s.geschichten-=1; s.digital-=1; }
+  if (coord==="B"){ s.begegnung+=1; s.geschichten+=1; s.kreativ+=1; s.wissen+=1; }
+  if (coord==="C"){ s.digital+=1; s.geschichten+=1; s.kreativ+=1; s.bne+=1; }
+  if (coord==="D"){ s.bne+=2; s.kreativ+=2; s.digital+=1; }
+
+  // Q4
+  if (targets.includes("kinder"))    { s.geschichten+=3; s.kreativ+=1; }
+  if (targets.includes("jugend"))    { s.digital+=1; s.bne+=1; s.wissen+=1; }
+  if (targets.includes("alt"))       { s.digital+=2; s.begegnung+=2; s.wissen+=1; }
+  if (targets.includes("unsicher"))  { s.digital+=3; }
+  if (targets.includes("quartier"))  { s.begegnung+=3; s.bne+=1; }
+  if (targets.includes("generation")){ s.begegnung+=2; s.wissen+=2; s.kreativ+=1; }
+  if (targets.includes("offen"))     { s.begegnung+=2; s.wissen+=2; }
+
+  // Sort by score, then lower effort, then prioritise begegnung
+  const arr = Object.entries(s).map(([id,score])=>({
+    id, score, effort: PACKAGES[id].effortLevel,
+  }));
+  arr.sort((a,b)=>{
+    if (b.score !== a.score) return b.score - a.score;
+    if (a.effort !== b.effort) return a.effort - b.effort;
+    if (a.id === "begegnung") return -1;
+    if (b.id === "begegnung") return 1;
+    return 0;
+  });
+  return arr.slice(0,3).map(x=>({ ...PACKAGES[x.id], score:x.score }));
+}
+
+function getCustomPkg(state){
+  if (!state.customOffer || !state.slot) return null;
+  return { name: state.slot.customThema || state.slot.title || "Eigenes Angebot", short: state.slot.desc || "", effort:"—", roles:[], id:"custom" };
+}
+
+/* ============================================================
+   SENIOR FLOW – DATA  (Engagierten-Assistent)
+   ============================================================ */
+const MOTIVATIONS = [
+  { id:"sinn",     label:"Etwas Sinnvolles bewirken" },
+  { id:"menschen", label:"Menschen kennenlernen, Begegnung haben" },
+  { id:"wissen",   label:"Wissen und Erfahrung weitergeben" },
+  { id:"aktiv",    label:"In Bewegung und aktiv bleiben" },
+  { id:"neu",      label:"Mich neu orientieren, etwas anderes machen" },
+  { id:"hand",     label:"Etwas mit den Händen tun" },
+  { id:"kind",     label:"Mit Kindern und Jugendlichen arbeiten" },
+  { id:"struktur", label:"Einen strukturierten Alltag haben" },
+  { id:"unklar",   label:"Noch unklar – ich möchte erst reinschauen" },
+];
+
+const COMPETENCES = [
+  { id:"organisieren", label:"Organisieren, planen, koordinieren" },
+  { id:"erklaeren",    label:"Erklären, lehren, anleiten" },
+  { id:"handwerk_k",   label:"Handwerk und Praktisches" },
+  { id:"kreativ_k",    label:"Kreativ gestalten – Schreiben, Kunst, Musik" },
+  { id:"zuhoeren",     label:"Zuhören, beraten, begleiten" },
+  { id:"sprache",      label:"Sprache(n) und Schreiben" },
+  { id:"digital_k",    label:"Digital, IT, Smartphone" },
+  { id:"natur_k",      label:"Natur, Garten, draußen sein" },
+  { id:"erfahrung",    label:"Berufserfahrung allgemein einbringen" },
+];
+
+const COMMIT_OPTS = [
+  { id:"A", letter:"A", title:"Reinschnuppern",   desc:"Ein einzelner Termin – unverbindlich, einmal mitmachen." },
+  { id:"B", letter:"B", title:"Eine kurze Reihe", desc:"3–5 Termine mit klarem Ende. Sie entscheiden danach weiter." },
+  { id:"C", letter:"C", title:"Regelmäßig",       desc:"1–2 Mal im Monat über längere Zeit, in festem Rhythmus." },
+  { id:"D", letter:"D", title:"Mitgestalten",     desc:"Verantwortung übernehmen, längerfristig dranbleiben." },
+];
+
+const COMMIT_RESULT = {
+  A: { title:"Erstmal hineinschnuppern",
+       text:"Sie beginnen mit einem einzelnen Termin — kein Druck, kein Commitment. Sie spüren in Ruhe, ob es passt." },
+  B: { title:"Eine kurze, klare Reihe",
+       text:"Sie steigen mit wenigen Terminen ein. Klares Ende, klare Wirkung — und Sie entscheiden danach, wie weiter." },
+  C: { title:"Regelmäßig dabei",
+       text:"Sie kommen verlässlich, in überschaubarem Rhythmus. Vertrauen und Kontinuität bauen sich auf." },
+  D: { title:"Mitgestalten und dranbleiben",
+       text:"Sie übernehmen Verantwortung, prägen mit. Hier zählt nicht nur Mithilfe — sondern Ihre Handschrift." },
+};
+
+const CONTEXTS = [
+  { id:"kinder_c",    label:"Mit Kindern und Familien" },
+  { id:"jugend_c",    label:"Mit Jugendlichen / Schüler:innen" },
+  { id:"erwachsen_c", label:"Mit Erwachsenen" },
+  { id:"aelter_c",    label:"Mit Älteren" },
+  { id:"generation",  label:"Generationsübergreifend" },
+  { id:"drinnen",     label:"Drinnen — in einer Einrichtung" },
+  { id:"draussen",    label:"Draußen — Natur, Quartier" },
+  { id:"offen_c",     label:"Bin offen – passe mich an" },
+];
+
+const ROLES = [
+  {
+    id:"vorlesen-pate",
+    name:"Vorlese-Pat:in für Kinder",
+    short:"Eine halbe Stunde Geschichten – ein paar Kinder, ein gemütliches Sofa.",
+    einrichtung:"Bibliothek Schwieberdingen",
+    aufgabe:"1× im Monat ein Bilderbuch vorlesen, danach kurz darüber sprechen.",
+    erster_schritt:"Ein erster Termin im Juni — wir bereiten alles vor.",
+    ansprechperson:"Frau Müller · Bibliothek Schwieberdingen",
+    fit:{
+      motivations:["wissen","kind","sinn"],
+      competences:["erklaeren","kreativ_k","sprache"],
+      commits:["B","C"],
+      contexts:["drinnen","kinder_c"],
+    },
+  },
+  {
+    id:"strick-runde",
+    name:"Gastgeber:in der Strickrunde",
+    short:"Einmal in der Woche eine offene Strick- und Bastelrunde begleiten.",
+    einrichtung:"Bibliothek Schwieberdingen",
+    aufgabe:"Strick-/Bastelrunde betreuen — Kaffee, Material, offenes Ohr.",
+    erster_schritt:"Bei einer laufenden Runde mitmachen, dann übernehmen wenn es passt.",
+    ansprechperson:"Frau Müller · Bibliothek Schwieberdingen",
+    fit:{
+      motivations:["menschen","hand","struktur"],
+      competences:["handwerk_k","zuhoeren","kreativ_k"],
+      commits:["C","D"],
+      contexts:["drinnen","generation","aelter_c"],
+    },
+  },
+  {
+    id:"digital-lotse",
+    name:"Digital-Lots:in",
+    short:"Wer mit Smartphone oder Tablet hadert, kommt zu Ihnen.",
+    einrichtung:"Bibliothek Schwieberdingen",
+    aufgabe:"Offene Sprechstunde — zeigen, erklären, Geduld haben.",
+    erster_schritt:"Eine erste Sprechstunde im Tandem mit einem erfahrenen Lots:in.",
+    ansprechperson:"Frau Müller · Bibliothek Schwieberdingen",
+    fit:{
+      motivations:["wissen","sinn","menschen"],
+      competences:["digital_k","erklaeren","zuhoeren"],
+      commits:["B","C"],
+      contexts:["drinnen","aelter_c","erwachsen_c"],
+    },
+  },
+  {
+    id:"berufs-erzaehler",
+    name:"Berufs-Erzähler:in für Schulklassen",
+    short:"Eine Stunde, eine Geschichte: Wie war Ihr Berufsleben wirklich?",
+    einrichtung:"Schule Schwieberdingen",
+    aufgabe:"Einzeltermin in einer Klasse 8–10 — was Sie gemacht haben, was Sie geprägt hat.",
+    erster_schritt:"Vorgespräch mit der Lehrkraft — wir bereiten den Rahmen vor.",
+    ansprechperson:"Herr Becker · Schule Schwieberdingen",
+    fit:{
+      motivations:["wissen","neu","kind"],
+      competences:["erfahrung","erklaeren"],
+      commits:["A","B"],
+      contexts:["drinnen","jugend_c"],
+    },
+  },
+  {
+    id:"lese-mentor",
+    name:"Lese-Mentor:in",
+    short:"Mit einem Kind lesen üben — eine Stunde pro Woche, ein Jahr lang.",
+    einrichtung:"Schule Schwieberdingen",
+    aufgabe:"1:1-Lesebegleitung mit einem Kind, das beim Lesen unsicher ist.",
+    erster_schritt:"Ein erstes Kennenlernen mit Kind und Lehrkraft.",
+    ansprechperson:"Frau Becker · Schule Schwieberdingen",
+    fit:{
+      motivations:["wissen","kind","sinn","struktur"],
+      competences:["erklaeren","zuhoeren","sprache"],
+      commits:["C","D"],
+      contexts:["drinnen","kinder_c"],
+    },
+  },
+  {
+    id:"naturpfad",
+    name:"Naturpfad-Pat:in",
+    short:"Anpacken, Pfade pflegen, Familien durch die Natur führen.",
+    einrichtung:"Naturschutzverein Schwieberdingen",
+    aufgabe:"Naturpfad pflegen, an monatlichen Familienführungen mitwirken.",
+    erster_schritt:"Eine Pflege-Aktion mit dem Verein mitmachen.",
+    ansprechperson:"Herr Klein · NABU Schwieberdingen",
+    fit:{
+      motivations:["hand","sinn","aktiv","struktur"],
+      competences:["handwerk_k","natur_k"],
+      commits:["B","C"],
+      contexts:["draussen","generation","kinder_c"],
+    },
+  },
+  {
+    id:"verein-copilot",
+    name:"Vereins-Co-Pilot:in",
+    short:"Ein Verein braucht Struktur — Sie haben ein Leben lang welche aufgebaut.",
+    einrichtung:"Naturschutzverein Schwieberdingen",
+    aufgabe:"Vorstand entlasten — Veranstaltungen, Mitgliederpost, Förderanträge.",
+    erster_schritt:"Treffen mit dem Vorstand — wir klären gemeinsam, wo Sie reinpassen.",
+    ansprechperson:"Herr Klein · NABU Schwieberdingen",
+    fit:{
+      motivations:["sinn","struktur","neu"],
+      competences:["organisieren","erfahrung","digital_k"],
+      commits:["D"],
+      contexts:["drinnen","draussen"],
+    },
+  },
+  {
+    id:"erzaehl-werkstatt",
+    name:"Erzähl-Werkstatt-Pat:in",
+    short:"Menschen Ü60 schreiben ihre Lebensgeschichten — Sie geben den Rahmen.",
+    einrichtung:"Bibliothek Schwieberdingen",
+    aufgabe:"5 Termine: Anleitung, Austausch, am Ende eine kleine Lesung.",
+    erster_schritt:"Wir entwickeln zusammen einen ersten Termin-Aufbau.",
+    ansprechperson:"Frau Müller · Bibliothek Schwieberdingen",
+    fit:{
+      motivations:["wissen","menschen","neu"],
+      competences:["kreativ_k","erklaeren","sprache"],
+      commits:["B"],
+      contexts:["drinnen","aelter_c","erwachsen_c"],
+    },
+  },
+];
+
+const DEMO_SLOTS = [
+  {
+    id:"demo-lese-mentor",
+    pkgId:"geschichten",
+    title:"Lese-Mentor:in für ein Schulkind",
+    flexible:true,
+    when:"Wochentag flexibel · 60 Minuten pro Woche · ab September",
+    seats:"3–4",
+    registrations:[],
+    type:"Reihe über ein Schuljahr – nach einem Probetermin",
+    desc:"Eine Stunde pro Woche mit einem Kind, das beim Lesen unsicher ist. Geduldig, regelmäßig, mit sichtbarer Wirkung nach Monaten.",
+    role:"Mit dem Kind in Ruhe Texte lesen, Wörter besprechen, kleine Erfolge feiern.",
+    library:"Kind-Auswahl mit Lehrkraft, Materialien, Raum, Versicherung über Land BW.",
+    seek:"Gern mit Kindern arbeiten und sich auf einen Menschen einlassen können.",
+    contactName:"Frau Becker",
+    contactEmail:"becker@schule-schwieberdingen.de",
+    einrichtung:"Schule Schwieberdingen",
+    img:"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id:"demo-digital",
+    pkgId:"digital",
+    title:"Smartphone-Sprechstunde",
+    flexible:false,
+    when:"jeden Dienstag, 10:00–11:30 (ab 1. Juni)",
+    seats:"unbegrenzt",
+    registrations:[],
+    type:"Wiederkehrender Termin – nach Absprache regelmäßig",
+    desc:"Offene Sprechstunde für alle, die mit Smartphone oder Tablet hadern. Zeigen, erklären, Geduld haben.",
+    role:"Sie hören zu, was nicht funktioniert, und zeigen Schritt für Schritt – kein technisches Studium nötig.",
+    library:"Raum, Ankündigung, Getränke, ein erfahrener Lots:in im Tandem für den Einstieg.",
+    seek:"Mit Geduld erklären können und keine Scheu vor Smartphone-Fragen haben.",
+    contactName:"Frau Müller",
+    contactEmail:"mueller@bibliothek-schwieberdingen.de",
+    einrichtung:"Bibliothek Schwieberdingen",
+    img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id:"demo-natur",
+    pkgId:"bne",
+    title:"Naturpfad-Pflege & Familienführung",
+    flexible:true,
+    when:"flexible Termine – etwa monatlich, samstags vormittags",
+    seats:"3–4",
+    registrations:[],
+    type:"Reihe mit 4–6 Terminen – Sie entscheiden, ob Sie weitermachen",
+    desc:"Naturpfad gemeinsam pflegen und an monatlichen Familienführungen mitwirken. Draußen, in Bewegung, mit netten Menschen.",
+    role:"Mit anpacken bei der Pfadpflege; bei den Führungen Geschichten und Naturwissen weitergeben.",
+    library:"Werkzeug, Routenplanung, Versicherung, Anmeldung der Teilnehmenden.",
+    seek:"Gern draußen sind, gern erklären – und sich nicht vor einer Heckenschere fürchten.",
+    contactName:"Herr Klein",
+    contactEmail:"klein@nabu-schwieberdingen.de",
+    einrichtung:"Naturschutzverein Schwieberdingen",
+    img:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    name:"Renate", age:64, role:"Vorlese-Patin",
+    quote:"Ich war unsicher, ob ich genug Zeit habe. Beim ersten Termin habe ich gemerkt: zwei Stunden im Monat reichen schon, um etwas zu bewirken.",
+  },
+  {
+    name:"Klaus", age:68, role:"Berufs-Erzähler in der Schule",
+    quote:"Ich dachte, mein Beruf wäre langweilig für Schüler. Stattdessen kamen so viele Fragen, dass die Stunde zu kurz war.",
+  },
+  {
+    name:"Margarete", age:71, role:"Strickrunde-Gastgeberin",
+    quote:"Es ist kein Geben und Nehmen — es ist Begegnung. Und die fehlt mir seit meinem Ruhestand am meisten.",
+  },
+];
+
+const FAQS = [
+  { q:"Wie kann ich mitmachen?",
+    a:"Wählen Sie einfach ein Projekt aus oder beschreiben Sie kurz, was Sie interessiert. Wir melden uns, besprechen gemeinsam den passenden Einsatz und begleiten den Start." },
+  { q:"Wie viel Zeit muss ich einplanen?",
+    a:"Sie entscheiden selbst, wie viel Zeit Sie geben möchten. Viele Einsätze dauern nur wenige Stunden oder finden flexibel nach Wunsch 1–2 Stunden pro Woche statt." },
+  { q:"Kann ich jemanden mitbringen?",
+    a:"Ja, sehr gerne! Viele Projekte lassen sich gut zu zweit oder im Tandem umsetzen." },
+  { q:"Entstehen mir Kosten?",
+    a:"Materialkosten werden in der Regel von der Schule, dem Verein oder der Gemeinde übernommen. Manche Einrichtungen bieten zusätzlich eine Ehrenamtspauschale an — das klären wir vorab gemeinsam mit Ihnen." },
+  { q:"Brauche ich spezielle Vorkenntnisse?",
+    a:"Nein. Ihre Lebenserfahrung, Geduld und Freude am Mitmachen sind das Wichtigste." },
+  { q:"Bin ich versichert?",
+    a:"Ja. Alle Engagierten sind über das Land Baden-Württemberg haftpflicht- und unfallversichert, sobald sie sich freiwillig engagieren." },
+  { q:"Muss ich ein Führungszeugnis vorlegen?",
+    a:"Bei einmaligen oder begleiteten Einsätzen ist kein Führungszeugnis notwendig. Nur bei regelmäßiger und eigenverantwortlicher Arbeit mit Kindern ist eines erforderlich." },
+  { q:"Kann ich einfach ausprobieren?",
+    a:"Ja, selbstverständlich. Sie können klein starten und jederzeit aufhören." },
+];
+
+function scoreRoles({motivations=[], competences=[], commit="", contexts=[]}){
+  const scored = ROLES.map(r => {
+    let score = 0;
+    motivations.forEach(m => { if (r.fit.motivations.includes(m)) score += 3; });
+    competences.forEach(c => { if (r.fit.competences.includes(c)) score += 2; });
+    contexts.forEach(c => { if (r.fit.contexts.includes(c)) score += 2; });
+    if (commit && r.fit.commits.includes(commit)) score += 4;
+    if (motivations.includes("unklar") && (r.fit.commits.includes("A") || r.fit.commits.includes("B"))){
+      score += 2;
+    }
+    return { ...r, _score: score };
+  });
+  scored.sort((a,b)=>b._score - a._score);
+  return scored.slice(0,3);
+}
+
+/* ============================================================
+   ATOMS
+   ============================================================ */
+function Brand({ onClick, screen }){
+  const portalScreens = ["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"];
+  const sub = portalScreens.includes(screen) ? "Mitmach-Portal" : "Mitmach-Planer für Bibliotheken";
+  return (
+    <div className="brand" onClick={onClick}>
+      <div className="brand-mark">s</div>
+      <div>
+        <span className="brand-name">SISU</span>
+        <span className="brand-sub">{sub}</span>
+      </div>
+    </div>
+  );
+}
+
+function Topbar({ go, screen, hideNav }){
+  return (
+    <div className="topbar">
+      <div className="topbar-inner">
+        <Brand onClick={()=>go("start")} screen={screen} />
+        {!hideNav && (
+          <nav className="nav">
+            <button className={["start"].includes(screen)?"active":""} onClick={()=>go("start")}>Start</button>
+            <button className={["q1","q2","q3","q4","result","detail","eigenesAngebot"].includes(screen)?"active":""} onClick={()=>go("q1")}>Mitmach-Planer</button>
+            <button className={["dashboard"].includes(screen)?"active":""} onClick={()=>go("dashboard")}>Backend</button>
+            <button className={"portal-tab "+(["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"].includes(screen)?"active":"")} onClick={()=>go("portal")}>Für Engagierte →</button>
+          </nav>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Progress({ step, total }){
+  const pct = Math.max(0, Math.min(100, (step/total)*100));
+  return (
+    <div className="progress">
+      <span className="progress-label mono">Frage {step} von {total}</span>
+      <div className="progress-track"><div className="progress-fill" style={{width:`${pct}%`}}/></div>
+      <span className="progress-label">ca. 5–7 Minuten</span>
+    </div>
+  );
+}
+
+function PotentialPips({ level }){
+  return (
+    <span className="pot-pips" aria-label={`Potenzial ${level} von 3`}>
+      {[1,2,3].map(i=>(
+        <span key={i} className={"pot-pip "+(i<=level?"on":"")}/>
+      ))}
+    </span>
+  );
+}
+
+/* ============================================================
+   SCREEN: START
+   ============================================================ */
+function HeroQuotes(){
+  const quotes = [
+    { text:"Frau M., 67, liest jetzt jeden zweiten Samstag Bilderbücher vor. Wir hätten sie nie gefragt.", source:"Stadtbibliothek · 18.000 Einw.", img:"https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80" },
+    { text:"Aus einem Spieleabend wurden drei feste Gastgeber:innen. Niemand musste sich verpflichten.", source:"Gemeindebibliothek · 6.000 Einw.", img:"https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=80" },
+    { text:"Die Smartphone-Sprechstunde läuft seit acht Monaten. Zwei Engagierte, eine ruhige Stunde, viele dankbare Gesichter.", source:"Stadtbibliothek · 32.000 Einw.", img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80" },
+  ];
+  const [i,setI] = useState(0);
+  useEffect(()=>{ const t=setInterval(()=>setI(x=>(x+1)%quotes.length),6000); return ()=>clearInterval(t); },[]);
+  const q = quotes[i];
+  return (
+    <div className="hero-art" aria-hidden="true" style={{
+      backgroundImage:`url('${q.img}')`,
+      backgroundSize:"cover",
+      backgroundPosition:"center",
+      transition:"background-image .8s ease",
+    }}>
+      <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg,rgba(31,37,48,0) 30%,rgba(31,37,48,.55) 55%,rgba(31,37,48,.92) 100%)"}}/>
+      <div style={{position:"absolute",left:0,right:0,bottom:0,padding:"32px 28px 24px",zIndex:1,color:"#FCFAF5"}}>
+        <div style={{fontSize:11,letterSpacing:".14em",textTransform:"uppercase",color:"#D4B97E",marginBottom:10,fontWeight:600}}>Wirkung dank Engagierter</div>
+        <p style={{fontFamily:"'Instrument Serif',serif",fontStyle:"italic",fontSize:24,lineHeight:1.3,margin:"0 0 14px",color:"#FCFAF5"}} key={i} className="fade-in">„{q.text}"</p>
+        <div style={{fontSize:13,color:"rgba(252,250,245,.78)",letterSpacing:".02em"}}>{q.source}</div>
+        <div style={{display:"flex",gap:6,marginTop:18}}>
+          {quotes.map((_,j)=>(
+            <button key={j} onClick={()=>setI(j)} aria-label={`Zitat ${j+1}`} style={{
+              width:j===i?22:8,height:3,borderRadius:99,
+              background:j===i?"#FCFAF5":"rgba(252,250,245,.4)",
+              border:0,padding:0,cursor:"pointer",transition:"all .3s"
+            }}/>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StartScreen({ go }){
+  return (
+    <div className="container fade-in">
+      <div className="hero">
+        <div>
+          <span className="eyebrow">Für Bibliotheksleitungen · Kein Login · Pilot läuft</span>
+          <h1 className="display">Ihre Bibliothek wird zum Begegnungsort — mit verlässlichen Engagierten.</h1>
+          <p className="lede">
+            In Ihrer Gemeinde leben Menschen mit Kompetenzen und Erfahrung, die sich einbringen möchten. SISU begleitet Ihre Bibliothek dabei, das passende Format zu finden — organisch, Schritt für Schritt, abgestimmt auf das was bei Ihnen möglich ist.
+          </p>
+          <div className="btn-row">
+            <button className="btn btn-primary btn-lg" onClick={()=>go("q1")}>
+              Mitmach-Planer starten
+            </button>
+            <button className="btn btn-secondary btn-lg" onClick={()=>go("eigenesAngebot")}>
+              Ich weiß schon was ich will →
+            </button>
+          </div>
+          <p className="small-note" style={{marginTop:10}}>Ca. 5 Minuten · Kein Login · Kein Commitment</p>
+        </div>
+
+        <HeroQuotes/>
+      </div>
+
+      <div className="tiles">
+        <div className="tile">
+          <div className="tile-num mono">01</div>
+          <div className="tile-title">Das Engagement-Format das zu Ihnen passt</div>
+          <div className="tile-text">4 Fragen zeigen Ihnen welches Format zu Ihrer Kapazität und Zielgruppe passt.</div>
+        </div>
+        <div className="tile">
+          <div className="tile-num mono">02</div>
+          <div className="tile-title">Aushang, Newsletter, Amtsblatt — fertig</div>
+          <div className="tile-text">SISU generiert die Texte für alle Kanäle. Sie kopieren, passen an, versenden.</div>
+        </div>
+        <div className="tile">
+          <div className="tile-num mono">03</div>
+          <div className="tile-title">Engagierte die kommen und bleiben</div>
+          <div className="tile-text">Engagierte melden sich mit einer klaren Erwartung an. Sie sehen auf einen Blick wer dabei ist.</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   QUESTION SCREEN BASE
+   ============================================================ */
+function QuestionShell({ step, title, sub, children, onBack, onNext, nextLabel, nextDisabled }){
+  return (
+    <>
+      <Progress step={step} total={4} />
+      <div className="container narrow fade-in">
+        <span className="eyebrow">Frage {step} von 4</span>
+        <h2 className="section">{title}</h2>
+        <p className="lede" style={{marginBottom:8}}>{sub}</p>
+        {children}
+        <div className="btn-row between">
+          <button className="btn btn-ghost" onClick={onBack}>← Zurück</button>
+          <button className="btn btn-primary" disabled={nextDisabled} onClick={onNext}>
+            {nextLabel || "Weiter"} →
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   SCREEN: Q1 – topics (multi, max 3)
+   ============================================================ */
+function Q1({ state, set, go }){
+  const [warn,setWarn] = useState(false);
+  const sel = state.topics;
+  function toggle(id){
+    if (sel.includes(id)) {
+      set({ topics: sel.filter(x=>x!==id) });
+      setWarn(false);
+    } else {
+      if (sel.length >= 3) { setWarn(true); return; }
+      set({ topics: [...sel, id] });
+      setWarn(false);
+    }
+  }
+  return (
+    <QuestionShell
+      step={1}
+      title="Was möchten Sie als Nächstes ermöglichen?"
+      sub="Wählen Sie bis zu 3 Themen, die für Ihre Bibliothek aktuell wichtig sind."
+      onBack={()=>go("start")}
+      onNext={()=>go("q2")}
+      nextDisabled={sel.length===0}
+    >
+      {warn && (
+        <div className="warn">
+          <span className="warn-dot"/>
+          <span>Für den Start empfehlen wir Fokus. Bitte wählen Sie maximal 3 Themen.</span>
+        </div>
+      )}
+      <div className="chip-grid">
+        {TOPICS.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">{sel.length} von max. 3 ausgewählt</div>
+    </QuestionShell>
+  );
+}
+
+/* ============================================================
+   SCREEN: Q2 – existing offerings
+   ============================================================ */
+function Q2({ state, set, go }){
+  const sel = state.existing;
+  function toggle(id){
+    set({ existing: sel.includes(id) ? sel.filter(x=>x!==id) : [...sel, id] });
+  }
+  return (
+    <QuestionShell
+      step={2}
+      title="Was gibt es bei Ihnen bereits?"
+      sub="Das hilft SISU zu unterscheiden, ob ein Angebot gesichert, erweitert oder neu gestartet werden sollte."
+      onBack={()=>go("q1")}
+      onNext={()=>go("q3")}
+      nextDisabled={false}
+    >
+      <div className="chip-grid">
+        {EXISTING.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">Mehrfachauswahl möglich · {sel.length} ausgewählt</div>
+    </QuestionShell>
+  );
+}
+
+/* ============================================================
+   SCREEN: Q3 – coordination
+   ============================================================ */
+function Q3({ state, set, go }){
+  const v = state.coord;
+  return (
+    <QuestionShell
+      step={3}
+      title="Wie viel können Sie als Bibliothek selbst beitragen?"
+      sub="Gemeint ist Ihr Aufwand als Bibliothek – nicht der Aufwand der Engagierten."
+      onBack={()=>go("q2")}
+      onNext={()=>go("q4")}
+      nextDisabled={!v}
+    >
+      <div className="card-grid">
+        {COORD_OPTS.map(o=>(
+          <button key={o.id} className="opt-card" data-on={v===o.id} onClick={()=>set({coord:o.id})}>
+            <span className="opt-letter mono">{o.letter}</span>
+            <h4 className="opt-title">{o.title}</h4>
+            <p className="opt-desc">{o.desc}</p>
+          </button>
+        ))}
+      </div>
+    </QuestionShell>
+  );
+}
+
+/* ============================================================
+   SCREEN: Q4 – target audience
+   ============================================================ */
+function Q4({ state, set, go }){
+  const sel = state.targets;
+  function toggle(id){
+    set({ targets: sel.includes(id) ? sel.filter(x=>x!==id) : [...sel, id] });
+  }
+  return (
+    <QuestionShell
+      step={4}
+      title="Für wen soll das Angebot vor allem sein?"
+      sub="Die Zielgruppe beeinflusst, welche Rollen und welcher Rahmen sinnvoll sind."
+      onBack={()=>go("q3")}
+      onNext={()=>go("result")}
+      nextLabel="Empfehlung anzeigen"
+      nextDisabled={sel.length===0}
+    >
+      <div className="chip-grid">
+        {TARGETS.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">Mehrfachauswahl möglich · {sel.length} ausgewählt</div>
+    </QuestionShell>
+  );
+}
+
+/* ============================================================
+   SCREEN: RESULT
+   ============================================================ */
+function ResultScreen({ state, set, go }){
+  const recs = useMemo(()=>scorePackages(state),[state]);
+  const coordInfo = COORD_RESULT[state.coord] || COORD_RESULT.B;
+
+  function openPkg(p){
+    set({ selectedPkg: p.id });
+    go("detail");
+  }
+
+  return (
+    <div className="container fade-in">
+      <div className="summary-card">
+        <div className="summary-mark">↗</div>
+        <div>
+          <span className="eyebrow">Ihre passende Startlogik</span>
+          <h3>{coordInfo.title}</h3>
+          <p>{coordInfo.text}</p>
+        </div>
+      </div>
+
+      <div className="results-head">
+        <h2 className="section">Ihre 3 empfohlenen Mitmachpakete</h2>
+        <p className="small-note">Wir zeigen bewusst nur drei Empfehlungen. So bleibt der nächste Schritt realistisch.</p>
+      </div>
+
+      <div className="pkg-grid">
+        {recs.map((p,i)=>{
+          const isAusbau = state.existing.some(e => EXISTING_TO_PKG[e] === p.id);
+          return (
+          <article key={p.id} className={"pkg "+(i===0?"featured":"")}>
+            <div className="pkg-rank mono">
+              <span className="pkg-rank-num">{i+1}</span>
+              <span>EMPFEHLUNG {i+1} VON 3</span>
+            </div>
+            {isAusbau && (
+              <div style={{marginBottom:8}}>
+                <span className="badge" style={{background:"var(--brand-light,#fdf4e7)",color:"var(--brand)",border:"1px solid var(--brand)",fontWeight:600,fontSize:11,padding:"2px 8px",borderRadius:4}}>
+                  Ausbau-Empfehlung · bereits teilweise vorhanden
+                </span>
+              </div>
+            )}
+            <h3>{p.name}</h3>
+            <p className="pkg-desc">{p.short}</p>
+
+            <dl className="pkg-meta">
+              <div className="pkg-meta-row"><dt>Geeignet für</dt><dd style={{maxWidth:"60%"}}>{p.fitFor}</dd></div>
+              <div className="pkg-meta-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
+              <div className="pkg-meta-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
+              <div className="pkg-meta-row">
+                <dt>Engagement-Potenzial</dt>
+                <dd>
+                  <span className="pot-bar">
+                    <PotentialPips level={p.potentialLevel}/>
+                    <span className="pot-text">erste Einschätzung</span>
+                  </span>
+                </dd>
+              </div>
+            </dl>
+
+            <div className="pkg-why">
+              <span className="pkg-why-label">Warum empfohlen</span>
+              {p.why}
+            </div>
+
+            <button className="btn btn-secondary" onClick={()=>openPkg(p)}>Paket ansehen →</button>
+          </article>
+          );
+        })}
+      </div>
+
+      <div className="footnote">
+        <span className="footnote-icon">i</span>
+        <span>
+          <strong>Hinweis zum Engagement-Potenzial:</strong> Die Potenzialeinschätzung ist eine erste Orientierung
+          und nutzt Dummy-Daten. Ob Menschen tatsächlich mitmachen, zeigt der konkrete Aufruf.
+          Die Empfehlung ersetzt keine Entscheidung der Bibliothek – sie hilft, einen realistischen ersten Schritt zu wählen.
+        </span>
+      </div>
+
+      <div className="btn-row">
+        <button className="btn btn-ghost" onClick={()=>go("q4")}>← Antworten anpassen</button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: DETAIL
+   ============================================================ */
+function DetailScreen({ state, set, go }){
+  const p = PACKAGES[state.selectedPkg] || PACKAGES.begegnung;
+  function pickPilot(){
+    set({ pilotPkg: p.id });
+    go("next");
+  }
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("result")}>
+        ← Zurück zu Empfehlungen
+      </button>
+
+      <div className="detail">
+        <div className="detail-main">
+          <span className="eyebrow">Mitmachpaket</span>
+          <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>{p.name}</h1>
+          <p className="detail-tagline">{p.short}</p>
+
+          <div className="detail-section">
+            <h4>Typische Mitmachrollen für Engagierte mit Erfahrung</h4>
+            <ul className="detail-list">
+              {p.roles.map(r=><li key={r}>{r}</li>)}
+            </ul>
+          </div>
+
+          <div className="detail-section">
+            <h4>Mögliche erste Formate</h4>
+            <ul className="detail-list">
+              {p.formats.map(r=><li key={r}>{r}</li>)}
+            </ul>
+          </div>
+
+          <div className="detail-section">
+            <h4>Was die Bibliothek klären sollte</h4>
+            <ul className="detail-list">
+              {p.clarify.map(r=><li key={r}>{r}</li>)}
+            </ul>
+          </div>
+
+          <div className="test-box">
+            <span className="test-box-label">Guter erster Test</span>
+            <p>„{p.test}“</p>
+          </div>
+
+          <div className="btn-row">
+            <button className="btn btn-primary btn-lg" onClick={pickPilot}>
+              Dieses Paket als Pilot auswählen
+            </button>
+            <button className="btn btn-ghost" onClick={()=>go("result")}>Zurück zu Empfehlungen</button>
+          </div>
+        </div>
+
+        <aside className="detail-side">
+          <h5 style={{margin:"0 0 14px",fontSize:12,letterSpacing:".1em",textTransform:"uppercase",color:"var(--sage-deep)",fontWeight:600}}>Auf einen Blick</h5>
+          <dl style={{margin:0}}>
+            <div className="side-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
+            <div className="side-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
+            <div className="side-row"><dt>Engagement-Potenzial</dt>
+              <dd><span className="pot-bar"><PotentialPips level={p.potentialLevel}/><span className="pot-text mono">{p.potential}</span></span></dd>
+            </div>
+            <div className="side-row"><dt>Geeignet für</dt><dd style={{textAlign:"right",maxWidth:200}}>{p.fitFor}</dd></div>
+          </dl>
+          <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
+            <strong>Engagement-Potenzial:</strong> voraussichtlich {p.potential}. Sollte mit einem konkreten Aufruf
+            getestet werden.
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SENIOR FLOW – SCREENS  (Engagierten-Assistent)
+   Routen: m1 → m2 → m3 → m4 → mResult → mDetail → mConfirm
+   ============================================================ */
+function MShell({ step, title, sub, children, onBack, onNext, nextLabel, nextDisabled }){
+  return (
+    <>
+      <Progress step={step} total={4} />
+      <div className="container narrow fade-in">
+        <span className="eyebrow">Schritt {step} von 4 · Was passt zu mir?</span>
+        <h2 className="section">{title}</h2>
+        <p className="lede" style={{marginBottom:8}}>{sub}</p>
+        {children}
+        <div className="btn-row between">
+          <button className="btn btn-ghost" onClick={onBack}>← Zurück</button>
+          <button className="btn btn-primary" disabled={nextDisabled} onClick={onNext}>
+            {nextLabel || "Weiter"} →
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function M1({ state, set, go }){
+  const [warn,setWarn] = useState(false);
+  const sel = state.motivations || [];
+  function toggle(id){
+    if (sel.includes(id)) { set({ motivations: sel.filter(x=>x!==id) }); setWarn(false); }
+    else { if (sel.length >= 3){ setWarn(true); return; } set({ motivations: [...sel, id] }); setWarn(false); }
+  }
+  return (
+    <MShell
+      step={1}
+      title="Was treibt Sie an?"
+      sub="Was wäre für Sie ein guter Grund, sich einzubringen? Wählen Sie bis zu 3 Punkte."
+      onBack={()=>go("start")}
+      onNext={()=>go("m2")}
+      nextDisabled={sel.length===0}
+    >
+      {warn && (
+        <div className="warn">
+          <span className="warn-dot"/>
+          <span>Für den Anfang reicht Fokus — bitte maximal 3.</span>
+        </div>
+      )}
+      <div className="chip-grid">
+        {MOTIVATIONS.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">{sel.length} von max. 3 ausgewählt</div>
+    </MShell>
+  );
+}
+
+function M2({ state, set, go }){
+  const sel = state.competences || [];
+  function toggle(id){
+    set({ competences: sel.includes(id) ? sel.filter(x=>x!==id) : [...sel, id] });
+  }
+  return (
+    <MShell
+      step={2}
+      title="Was bringen Sie mit?"
+      sub="Was haben Sie über die Jahre gut gemacht, gerne gemacht? Mehrfachauswahl willkommen."
+      onBack={()=>go("m1")}
+      onNext={()=>go("m3")}
+      nextDisabled={false}
+    >
+      <div className="chip-grid">
+        {COMPETENCES.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">Mehrfachauswahl · {sel.length} ausgewählt</div>
+    </MShell>
+  );
+}
+
+function M3({ state, set, go }){
+  const v = state.commit || "";
+  return (
+    <MShell
+      step={3}
+      title="Wie viel möchten Sie sich binden?"
+      sub="Es gibt für jede Form einen guten Platz. Wählen Sie, was sich heute richtig anfühlt – Sie können es immer ändern."
+      onBack={()=>go("m2")}
+      onNext={()=>go("m4")}
+      nextDisabled={!v}
+    >
+      <div className="card-grid">
+        {COMMIT_OPTS.map(o=>(
+          <button key={o.id} className="opt-card" data-on={v===o.id} onClick={()=>set({commit:o.id})}>
+            <span className="opt-letter mono">{o.letter}</span>
+            <h4 className="opt-title">{o.title}</h4>
+            <p className="opt-desc">{o.desc}</p>
+          </button>
+        ))}
+      </div>
+    </MShell>
+  );
+}
+
+function M4({ state, set, go }){
+  const sel = state.contexts || [];
+  function toggle(id){
+    set({ contexts: sel.includes(id) ? sel.filter(x=>x!==id) : [...sel, id] });
+  }
+  return (
+    <MShell
+      step={4}
+      title="Mit wem und wo am liebsten?"
+      sub="Das hilft uns, den richtigen Ort und die richtigen Menschen für Sie zu finden."
+      onBack={()=>go("m3")}
+      onNext={()=>go("mResult")}
+      nextLabel="Passende Rollen anzeigen"
+      nextDisabled={sel.length===0}
+    >
+      <div className="chip-grid">
+        {CONTEXTS.map(t=>(
+          <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
+            <span className="chip-check">✓</span>
+            <span className="chip-text">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="selected-count mono">Mehrfachauswahl · {sel.length} ausgewählt</div>
+    </MShell>
+  );
+}
+
+function MResult({ state, set, go }){
+  const recs = useMemo(()=>scoreRoles({
+    motivations: state.motivations||[],
+    competences: state.competences||[],
+    commit: state.commit||"",
+    contexts: state.contexts||[],
+  }),[state.motivations, state.competences, state.commit, state.contexts]);
+  const commitInfo = COMMIT_RESULT[state.commit] || COMMIT_RESULT.B;
+
+  function openRole(r){
+    set({ selectedRole: r.id });
+    go("mDetail");
+  }
+
+  return (
+    <div className="container fade-in">
+      <div className="summary-card">
+        <div className="summary-mark">↗</div>
+        <div>
+          <span className="eyebrow">Ihre passende Einstiegsform</span>
+          <h3>{commitInfo.title}</h3>
+          <p>{commitInfo.text}</p>
+        </div>
+      </div>
+
+      <div className="results-head">
+        <h2 className="section">Ihre 3 passenden Mitmach-Rollen</h2>
+        <p className="small-note">Drei Vorschläge, abgestimmt auf das, was Sie eingebracht haben. Realistisch starten – nicht alles auf einmal.</p>
+      </div>
+
+      <div className="pkg-grid">
+        {recs.map((r,i)=>(
+          <article key={r.id} className={"pkg "+(i===0?"featured":"")}>
+            <div className="pkg-rank mono">
+              <span className="pkg-rank-num">{i+1}</span>
+              <span>VORSCHLAG {i+1} VON 3</span>
+            </div>
+            <h3>{r.name}</h3>
+            <p className="pkg-desc">{r.short}</p>
+
+            <dl className="pkg-meta">
+              <div className="pkg-meta-row"><dt>Einrichtung</dt><dd style={{maxWidth:"60%"}}>{r.einrichtung}</dd></div>
+              <div className="pkg-meta-row"><dt>Aufgabe</dt><dd style={{maxWidth:"60%"}}>{r.aufgabe}</dd></div>
+              <div className="pkg-meta-row"><dt>Erster Schritt</dt><dd style={{maxWidth:"60%"}}>{r.erster_schritt}</dd></div>
+            </dl>
+
+            <button className="btn btn-secondary" onClick={()=>openRole(r)}>Mehr ansehen →</button>
+          </article>
+        ))}
+      </div>
+
+      <div className="footnote">
+        <span className="footnote-icon">i</span>
+        <span>
+          <strong>Hinweis:</strong> Die Auswahl basiert auf den derzeit verfügbaren Rollen in unserem Pilotnetz (Schwieberdingen, BW).
+          Wenn nichts richtig passt, melden Sie sich trotzdem – wir suchen weiter.
+        </span>
+      </div>
+
+      <div className="btn-row">
+        <button className="btn btn-ghost" onClick={()=>go("m4")}>← Antworten anpassen</button>
+      </div>
+    </div>
+  );
+}
+
+function MDetail({ state, set, go }){
+  const role = ROLES.find(r => r.id === state.selectedRole) || ROLES[0];
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("mResult")}>
+        ← Zurück zu den Vorschlägen
+      </button>
+
+      <div className="detail">
+        <div className="detail-main">
+          <span className="eyebrow">Mitmach-Rolle</span>
+          <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>{role.name}</h1>
+          <p className="detail-tagline">{role.short}</p>
+
+          <div className="detail-section">
+            <h4>Was Sie konkret tun</h4>
+            <p>{role.aufgabe}</p>
+          </div>
+
+          <div className="detail-section">
+            <h4>Wie es startet</h4>
+            <p>{role.erster_schritt}</p>
+          </div>
+
+          <div className="test-box">
+            <span className="test-box-label">Ansprechperson</span>
+            <p>{role.ansprechperson}</p>
+          </div>
+
+          <div className="btn-row">
+            <button className="btn btn-primary btn-lg" onClick={()=>go("mConfirm")}>
+              Ich melde mich daran an
+            </button>
+            <button className="btn btn-ghost" onClick={()=>go("mResult")}>Andere Rolle ansehen</button>
+          </div>
+        </div>
+
+        <aside className="detail-side">
+          <h5 style={{margin:"0 0 14px",fontSize:12,letterSpacing:".1em",textTransform:"uppercase",color:"var(--sage-deep)",fontWeight:600}}>Auf einen Blick</h5>
+          <dl style={{margin:0}}>
+            <div className="side-row"><dt>Einrichtung</dt><dd style={{textAlign:"right",maxWidth:200}}>{role.einrichtung}</dd></div>
+            <div className="side-row"><dt>Einstiegsform</dt><dd>{(COMMIT_RESULT[state.commit]||COMMIT_RESULT.B).title}</dd></div>
+          </dl>
+          <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
+            <strong>SISU begleitet den Start:</strong> Sie müssen nicht alleine ankommen — wir bereiten den ersten Termin mit Ihnen und der Einrichtung vor.
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+function MConfirm({ state, set, go }){
+  const role = ROLES.find(r => r.id === state.selectedRole) || ROLES[0];
+  const [name,setName] = useState("");
+  const [contact,setContact] = useState("");
+  const [note,setNote] = useState("");
+  const [sent,setSent] = useState(false);
+
+  function submit(e){
+    e.preventDefault();
+    setSent(true);
+  }
+
+  if (sent) {
+    return (
+      <div className="container narrow fade-in">
+        <div className="summary-card" style={{marginTop:40}}>
+          <div className="summary-mark">✓</div>
+          <div>
+            <span className="eyebrow">Vielen Dank</span>
+            <h3>Wir melden uns innerhalb von 3 Tagen.</h3>
+            <p>Ihr Interesse für „{role.name}" ist bei uns angekommen. {role.ansprechperson.split(" · ")[0]} bekommt eine kurze Notiz von uns – und wir vereinbaren mit Ihnen den ersten Schritt.</p>
+          </div>
+        </div>
+        <div className="btn-row" style={{marginTop:32}}>
+          <button className="btn btn-secondary" onClick={()=>{ set({motivations:[],competences:[],commit:"",contexts:[],selectedRole:null}); go("portal"); }}>
+            Zurück zum Portal
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container narrow fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("mDetail")}>
+        ← Zurück
+      </button>
+      <span className="eyebrow">Interesse melden · {role.einrichtung}</span>
+      <h2 className="section">Sie möchten {role.name.toLowerCase()} werden.</h2>
+      <p className="lede">Hinterlassen Sie uns kurz Ihren Kontakt — wir melden uns persönlich.</p>
+
+      <form onSubmit={submit} style={{display:"flex",flexDirection:"column",gap:16,marginTop:24}}>
+        <div>
+          <label style={{display:"block",fontSize:13,marginBottom:6,color:"var(--ink-2)"}}>Ihr Name</label>
+          <input value={name} onChange={e=>setName(e.target.value)} required placeholder="Vor- und Nachname"
+            style={{width:"100%",padding:"12px 14px",border:"1px solid var(--line)",borderRadius:10,font:"inherit",background:"var(--paper)"}}/>
+        </div>
+        <div>
+          <label style={{display:"block",fontSize:13,marginBottom:6,color:"var(--ink-2)"}}>E-Mail oder Telefon</label>
+          <input value={contact} onChange={e=>setContact(e.target.value)} required placeholder="Wie erreichen wir Sie?"
+            style={{width:"100%",padding:"12px 14px",border:"1px solid var(--line)",borderRadius:10,font:"inherit",background:"var(--paper)"}}/>
+        </div>
+        <div>
+          <label style={{display:"block",fontSize:13,marginBottom:6,color:"var(--ink-2)"}}>Was hat Sie an dieser Rolle besonders angesprochen? <span style={{color:"var(--ink-3)"}}>(optional)</span></label>
+          <textarea value={note} onChange={e=>setNote(e.target.value)} rows={4} placeholder="Ein, zwei Sätze reichen – hilft uns beim ersten Gespräch."
+            style={{width:"100%",padding:"12px 14px",border:"1px solid var(--line)",borderRadius:10,font:"inherit",background:"var(--paper)",resize:"vertical"}}/>
+        </div>
+        <div className="btn-row" style={{marginTop:8}}>
+          <button type="submit" className="btn btn-primary btn-lg">Interesse abschicken</button>
+        </div>
+        <p className="small-note">Kein Abo. Kein Login. Wir melden uns persönlich.</p>
+      </form>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: PORTAL  (Engagierten-Portal – öffentliche Landing)
+   ============================================================ */
+function Portal({ state, set, go }){
+  const allSlots = DEMO_SLOTS;
+
+  function openSlot(s){
+    set({ slot: s });
+    go("public");
+  }
+
+  return (
+    <div className="container fade-in" style={{paddingTop:20}}>
+      <div style={{marginBottom:20}}>
+        <span className="eyebrow">SISU · Mitmach-Portal</span>
+        <h1 className="display" style={{fontSize:"clamp(30px,4.5vw,48px)",margin:"8px 0 12px"}}>
+          Flexibles Engagement
+        </h1>
+        <div style={{display:"flex",flexWrap:"wrap",gap:"6px 20px",color:"var(--ink-2)",fontSize:16,lineHeight:1.5,maxWidth:"64ch"}}>
+          <span>Geben Sie Ihre Erfahrung weiter.</span>
+          <span style={{color:"var(--sage-deep)",fontWeight:500}}>Flexibel und passend zu Ihrem Alltag.</span>
+        </div>
+      </div>
+
+      <div style={{
+        margin:"0 0 28px",
+        display:"flex",
+        flexWrap:"wrap",
+        gap:"8px 24px",
+        padding:"12px 20px",
+        background:"var(--sage-tint)",
+        border:"1px solid var(--sage-soft)",
+        borderRadius:12,
+        fontSize:14.5,
+        color:"var(--ink-2)",
+        justifyContent:"center",
+      }}>
+        {[
+          "Versichert über Land BW",
+          "Klein starten – jederzeit aufhören",
+          "Keine Vorkenntnisse nötig",
+          "Wir melden uns persönlich",
+        ].map((c,i)=>(
+          <span key={i} style={{display:"inline-flex",alignItems:"center",gap:8}}>
+            <span style={{color:"var(--sage-deep)",fontWeight:700,fontSize:16}}>✓</span>
+            {c}
+          </span>
+        ))}
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line-soft)",paddingTop:24}}>
+        <div style={{marginBottom:20}}>
+          <h2 className="section" style={{margin:"0 0 4px"}}>🌿 Aktuelle Aktionen:</h2>
+          <span className="small-note">Kleine Einsätze. Große Wirkung. Unverbindlich ausprobieren.</span>
+        </div>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",
+          gap:20,
+        }}>
+          {allSlots.map(s => {
+            const free = s.seats==="unbegrenzt"
+              ? "unbegrenzt"
+              : (parseSeats(s.seats) - (s.registrations||[]).length);
+            const freeLabel = s.seats==="unbegrenzt"
+              ? "unbegrenzt Plätze"
+              : (free === 1 ? "1 Platz frei" : `${free} Plätze frei`);
+            return (
+              <article key={s.id || s.title} style={{
+                background:"var(--paper)",
+                border:"1px solid var(--line-soft)",
+                borderRadius:16,
+                overflow:"hidden",
+                display:"flex",flexDirection:"column",
+                boxShadow:"var(--shadow-sm)",
+              }}>
+                {s.img && (
+                  <div style={{
+                    width:"100%",height:160,flexShrink:0,
+                    backgroundImage:`url('${s.img}')`,
+                    backgroundSize:"cover",backgroundPosition:"center",
+                  }}/>
+                )}
+                <div style={{padding:"20px 24px 20px",display:"flex",flexDirection:"column",gap:12,flex:1}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8,fontSize:12,color:"var(--sage-deep)",fontWeight:600,letterSpacing:".08em",textTransform:"uppercase"}}>
+                    <span style={{width:6,height:6,borderRadius:"50%",background:"var(--sage)"}}/>
+                    {s.einrichtung || "Einrichtung"}
+                  </div>
+                  <h3 style={{margin:0,fontSize:21,lineHeight:1.3,fontWeight:600}}>{s.title}</h3>
+                  <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55,flex:1}}>
+                    {(s.desc||"").length > 130 ? s.desc.slice(0,127)+"…" : s.desc}
+                  </p>
+                  <dl style={{margin:0,display:"flex",flexDirection:"column",gap:6,fontSize:13,color:"var(--ink-2)"}}>
+                    <div style={{display:"flex",gap:8}}>
+                      <dt style={{color:"var(--ink-3)",minWidth:78}}>Termin</dt>
+                      <dd style={{margin:0}}>{s.flexible ? "flexibel, nach Absprache" : s.when}</dd>
+                    </div>
+                    <div style={{display:"flex",gap:8}}>
+                      <dt style={{color:"var(--ink-3)",minWidth:78}}>Plätze</dt>
+                      <dd style={{margin:0}} className="mono">{freeLabel}</dd>
+                    </div>
+                    <div style={{display:"flex",gap:8}}>
+                      <dt style={{color:"var(--ink-3)",minWidth:78}}>Kontakt</dt>
+                      <dd style={{margin:0}}>{s.contactName || "Einrichtung"}</dd>
+                    </div>
+                  </dl>
+                  <button className="btn btn-secondary" style={{marginTop:6}} onClick={()=>openSlot(s)}>
+                    Ansehen →
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line-soft)",marginTop:48,paddingTop:32}}>
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(320px,1fr))",
+          gap:20,
+        }}>
+          <div style={{
+            background:"var(--sage-tint)",
+            border:"1px solid var(--sage-soft)",
+            borderRadius:18,
+            padding:"28px 32px",
+            display:"flex",flexDirection:"column",gap:12,
+          }}>
+            <div className="eyebrow" style={{color:"var(--sage-deep)"}}>Beratung &amp; Orientierung</div>
+            <h3 style={{margin:0,fontFamily:"'Instrument Serif',serif",fontWeight:400,fontSize:26,letterSpacing:"-.005em"}}>
+              Sie wissen noch nicht, was passt?
+            </h3>
+            <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55}}>
+              Vier kurze Fragen, zwei Minuten — wir schlagen Ihnen drei Mitmach-Rollen vor,
+              die zu Ihren Interessen und Ihrer Zeit passen.
+            </p>
+            <div style={{marginTop:8}}>
+              <button className="btn btn-primary" onClick={()=>go("m1")}>
+                Was passt zu mir? →
+              </button>
+            </div>
+          </div>
+
+          <div style={{
+            background:"var(--paper)",
+            border:"1px dashed var(--sage)",
+            borderRadius:18,
+            padding:"28px 32px",
+            display:"flex",flexDirection:"column",gap:12,
+          }}>
+            <div className="eyebrow">Mitdenken willkommen</div>
+            <h3 style={{margin:0,fontFamily:"'Instrument Serif',serif",fontWeight:400,fontSize:26,letterSpacing:"-.005em"}}>
+              Sie haben selbst eine Idee?
+            </h3>
+            <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55}}>
+              Erzählen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen —
+              die Einrichtung meldet sich, wenn etwas daraus werden könnte.
+            </p>
+            <div style={{marginTop:8}}>
+              <button className="btn btn-secondary" onClick={()=>go("idea")}>
+                Idee einbringen →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line-soft)",marginTop:48,paddingTop:32}}>
+        <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:24,flexWrap:"wrap",gap:8}}>
+          <h2 className="section" style={{margin:0}}>Stimmen aus dem Pilot</h2>
+          <span className="small-note" style={{fontStyle:"italic"}}>Beispielzitate – echte Stimmen folgen</span>
+        </div>
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
+          gap:20,
+        }}>
+          {TESTIMONIALS.map((t,i)=>(
+            <figure key={i} style={{
+              margin:0,
+              background:"var(--paper)",
+              border:"1px solid var(--line-soft)",
+              borderRadius:14,
+              padding:"26px 28px",
+              display:"flex",flexDirection:"column",gap:16,
+              boxShadow:"var(--shadow-sm)",
+            }}>
+              <span style={{fontSize:32,lineHeight:1,color:"var(--sage)",fontFamily:"'Instrument Serif',serif"}}>„</span>
+              <blockquote style={{
+                margin:0,
+                fontFamily:"'Instrument Serif',serif",
+                fontStyle:"italic",
+                fontSize:19,
+                lineHeight:1.45,
+                color:"var(--ink)",
+                flex:1,
+              }}>{t.quote}</blockquote>
+              <figcaption style={{color:"var(--ink-3)",fontSize:13,letterSpacing:".01em",borderTop:"1px solid var(--line-soft)",paddingTop:12}}>
+                <strong style={{color:"var(--ink-2)",fontWeight:600}}>{t.name}, {t.age}</strong>
+                <span style={{display:"block",marginTop:2}}>{t.role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <div style={{borderTop:"1px solid var(--line-soft)",marginTop:48,paddingTop:32}}>
+        <h2 className="section" style={{margin:"0 0 8px"}}>Häufige Fragen</h2>
+        <p className="small-note" style={{margin:"0 0 24px"}}>Was uns am häufigsten gefragt wird.</p>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>
+          {FAQS.map((f,i)=>(
+            <details key={i} className="faq-item">
+              <summary>
+                <span>{f.q}</span>
+                <span className="faq-toggle">+</span>
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <p className="small-note" style={{textAlign:"center",marginTop:48}}>
+        Kein Login. Kein Abo. Wir melden uns persönlich.
+      </p>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: NEXT STEP
+   ============================================================ */
+function NextScreen({ state, go }){
+  const p = PACKAGES[state.pilotPkg] || PACKAGES.begegnung;
+  return (
+    <div className="container fade-in">
+      <span className="eyebrow">Pilot ausgewählt · {p.name}</span>
+      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Was möchten Sie als Nächstes tun?</h1>
+      <p className="lede">
+        Sie haben das Paket <strong>{p.name}</strong> als Pilot gewählt. Empfehlung: starten Sie mit
+        einem konkreten Mitmach-Termin – das ist der schnellste Weg zu einem realistischen ersten Schritt.
+      </p>
+
+      <div className="next-grid">
+        <div className="next-card recommended">
+          <span className="badge">Empfohlen</span>
+          <h3>Mitmach-Termin anlegen</h3>
+          <p>Legen Sie einen konkreten Termin an, bei dem Engagierte mit Erfahrung unverbindlich schnuppern oder mitmachen können.</p>
+          <button className="btn btn-primary" onClick={()=>go("slotForm")}>Termin anlegen →</button>
+        </div>
+        <div className="next-card">
+          <h3>Aktivierungsaufruf erstellen</h3>
+          <p>
+            Erzeugen Sie Texte für Website, Aushang, Amtsblatt oder Newsletter.
+            {state.slot
+              ? " Mit den Daten Ihres Mitmach-Termins vorausgefüllt."
+              : ' Auch schon ohne konkreten Slot möglich – als allgemeiner „Wir sind Mitmach-Ort"-Aufruf.'}
+          </p>
+          <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Aufruf erstellen →</button>
+        </div>
+        <div className="next-card">
+          <h3>Interessenliste öffnen</h3>
+          <p>Sammeln Sie Menschen, die grundsätzlich Interesse an diesem Paket haben.</p>
+          <button className="btn btn-secondary" disabled style={{opacity:.7}}>Interesse sammeln</button>
+        </div>
+      </div>
+
+      <div className="footnote" style={{marginTop:32}}>
+        <span className="footnote-icon">i</span>
+        <span>
+          <strong>Was ist ein Mitmach-Termin?</strong> Ein Mitmach-Termin ist ein konkreter Einstiegstermin.
+          Engagierte mit Erfahrung können schnuppern, einmalig mitmachen oder Interesse bekunden.
+        </span>
+      </div>
+
+      <div className="btn-row">
+        <button className="btn btn-ghost" onClick={()=>go("detail")}>← Zurück zum Paket</button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: EIGENES ANGEBOT FORM (Bibliothek legt direkt an)
+   ============================================================ */
+function EigenesAngebotForm({ state, set, go }){
+  const [f,setF] = useState({
+    thema:"",
+    title:"",
+    type:"Schnuppern",
+    when:"",
+    flexible:false,
+    seats:"2",
+    desc:"",
+    role:"",
+    library:"Raum, Anmeldung, Material, Ansprechperson, Ablauf",
+    seek:"",
+    contactName:"",
+    contactEmail:"",
+  });
+  function upd(k,v){ setF({...f,[k]:v}); }
+  function publish(){
+    if (!f.title||!f.contactName||!f.contactEmail) return;
+    const slot = { ...f, pkgId:null, customThema:f.thema, id:"slot-"+Date.now(), created:new Date(), registrations:[] };
+    set({ slot, slots:[slot], pilotPkg:null, customOffer:true });
+    go("publishConfirm");
+  }
+  const valid = f.title && f.contactName && f.contactEmail;
+
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("start")}>← Zurück</button>
+      <span className="eyebrow">Eigenes Angebot</span>
+      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Angebot direkt anlegen</h1>
+      <p className="lede">Sie wissen bereits, was Sie ermöglichen möchten – ohne Umweg über den Paket-Finder.</p>
+
+      <div className="form-shell">
+        <div className="form-fields">
+
+          <div className="field">
+            <label>Thema oder Bereich <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
+            <input type="text" value={f.thema} onChange={e=>upd("thema",e.target.value)}
+                   placeholder="z. B. Nähgruppe, Sprachcafé, Gartenworkshop, Erzählcafé" />
+            <span className="hint">Hilft Engagierten bei der ersten Einordnung.</span>
+          </div>
+
+          <div className="field">
+            <label>Titel des Angebots</label>
+            <input type="text" value={f.title} onChange={e=>upd("title",e.target.value)}
+                   placeholder="z. B. Nähgruppe – erster Schnuppertermin" />
+          </div>
+
+          <div className="field">
+            <label>Art des Mitmachens</label>
+            <div className="seg">
+              {["Schnuppern","Einmalig mitmachen","Interesse bekunden"].map(t=>(
+                <button key={t} data-on={f.type===t} onClick={()=>upd("type",t)}>{t}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Datum / Zeitraum</label>
+            <input type="text" value={f.when} disabled={f.flexible} onChange={e=>upd("when",e.target.value)}
+                   placeholder="z. B. 12. März, 18:00–20:30 Uhr" />
+            <label className="check-line">
+              <input type="checkbox" checked={f.flexible} onChange={e=>upd("flexible",e.target.checked)} />
+              Termin wird gemeinsam gefunden
+            </label>
+          </div>
+
+          <div className="field">
+            <label>Anzahl Plätze</label>
+            <div className="seg">
+              {["1","2","3–4","unbegrenzt"].map(s=>(
+                <button key={s} data-on={f.seats===s} onClick={()=>upd("seats",s)}>{s}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Was soll passieren?</label>
+            <textarea value={f.desc} onChange={e=>upd("desc",e.target.value)}
+                      placeholder="Kurze Beschreibung für die öffentliche Seite – was erwartet die Mitmachenden?" />
+          </div>
+
+          <div className="field">
+            <label>Aufgabe der Mitmachenden</label>
+            <textarea value={f.role} onChange={e=>upd("role",e.target.value)}
+                      placeholder="Was übernehmen die Engagierten konkret?" />
+          </div>
+
+          <div className="field">
+            <label>Was übernimmt die Bibliothek?</label>
+            <textarea value={f.library} onChange={e=>upd("library",e.target.value)}
+                      placeholder="z. B. Raum, Anmeldung, Material, Ansprechperson, Ablauf" />
+          </div>
+
+          <div className="field">
+            <label>Wen suchen wir?</label>
+            <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)}
+                      placeholder="z. B. Menschen mit Freude am Nähen, Geduld mit Anfängerinnen" />
+          </div>
+
+          <div className="field">
+            <label>Kontaktperson – Name</label>
+            <input type="text" value={f.contactName} onChange={e=>upd("contactName",e.target.value)}
+                   placeholder="z. B. Anna Hoffmann" />
+          </div>
+          <div className="field">
+            <label>Kontaktperson – E-Mail</label>
+            <input type="email" value={f.contactEmail} onChange={e=>upd("contactEmail",e.target.value)}
+                   placeholder="anna.hoffmann@bibliothek-musterstadt.de" />
+          </div>
+
+          <div className="info-box">
+            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung.
+            Für den gewählten Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
+          </div>
+
+          <div className="btn-row between">
+            <button className="btn btn-ghost" onClick={()=>go("start")}>← Zurück</button>
+            <button className="btn btn-primary btn-lg" disabled={!valid} onClick={publish}>
+              Angebot veröffentlichen →
+            </button>
+          </div>
+        </div>
+
+        <aside className="form-side">
+          <h5>Eigenes Format</h5>
+          <p className="pkg-desc">Sie umgehen den Paket-Finder und beschreiben Ihr Angebot direkt. Aktivierungstexte, öffentliche Slot-Seite und Anmeldungen stehen trotzdem zur Verfügung.</p>
+          <p className="micro">
+            Tipp: Den Paket-Finder können Sie nachträglich nutzen, um passende Rollen und Formate für zukünftige Angebote zu entdecken.
+          </p>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: IDEA (öffentlich – Idee oder Eigenes Angebot einreichen)
+   ============================================================ */
+function IdeaScreen({ state, set, go }){
+  const [f,setF] = useState({
+    kind:"idee", // "idee" | "angebot"
+    topic:"",
+    text:"",
+    first:"", last:"", email:"",
+    consent:false,
+  });
+  const [sent,setSent] = useState(false);
+
+  function upd(k,v){ setF({...f,[k]:v}); }
+  const valid = f.text.trim().length > 5 && f.first && f.email && f.consent;
+  const slot = state.slot;
+
+  function submit(){
+    if (!valid) return;
+    const idea = {
+      id:"idea-"+Date.now(),
+      kind:f.kind,
+      topic:f.topic,
+      text:f.text,
+      first:f.first, last:f.last, email:f.email,
+      relatedSlot: slot?.title || null,
+      pkgId: state.pilotPkg || null,
+      status:"neu",
+      created:new Date(),
+    };
+    set({ ideas: [...(state.ideas||[]), idea] });
+    setSent(true);
+  }
+
+  if (sent) {
+    return (
+      <div className="public-shell fade-in">
+        <div className="public-bar">
+          <div className="breadcrumb"><span>stadtbibliothek-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Idee</span></div>
+        </div>
+        <div className="confirm-card">
+          <div className="confirm-mark">✓</div>
+          <h2 className="section">Danke, {f.first}.</h2>
+          <p>Ihre {f.kind==="idee"?"Idee":"Angebot"} ist bei uns angekommen.
+             Die Bibliothek schaut sich das an und meldet sich – ohne Druck, ohne Verpflichtung.</p>
+          <div className="btn-row" style={{justifyContent:"center"}}>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-ghost" onClick={()=>{ set({ dashboardTab:"ideen" }); go("dashboard"); }}>So sieht die Bibliothek das ↗</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="public-shell fade-in">
+      <div className="public-bar">
+        <div className="breadcrumb"><span>stadtbibliothek-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Idee einbringen</span></div>
+        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>← Zurück</button>
+      </div>
+      <article className="slot-public" style={{maxWidth:680}}>
+        <header className="head">
+          <span className="eyebrow">Mitdenken willkommen</span>
+          <h1 className="display">Was könnte bei uns passieren?</h1>
+          <p style={{margin:"8px 0 0",color:"var(--ink-2)",fontSize:15.5,lineHeight:1.55}}>
+            Sie können einfach eine Idee einbringen – oder selbst etwas anbieten. Beides ist willkommen.
+          </p>
+        </header>
+        <div className="body">
+          <div className="form-fields">
+            <div className="field">
+              <label>Worum geht es?</label>
+              <div className="seg">
+                <button data-on={f.kind==="idee"} onClick={()=>upd("kind","idee")}>Eine Idee einbringen</button>
+                <button data-on={f.kind==="angebot"} onClick={()=>upd("kind","angebot")}>Ich kann selbst etwas anbieten</button>
+              </div>
+              <span className="hint" style={{marginTop:6}}>
+                {f.kind==="idee"
+                  ? "Sie schlagen etwas vor – die Bibliothek prüft, ob und wie es passt."
+                  : "Sie würden gern selbst etwas anleiten, gestalten oder beitragen."}
+              </span>
+            </div>
+
+            <div className="field">
+              <label>Thema in einem Satz <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
+              <input type="text" value={f.topic} onChange={e=>upd("topic",e.target.value)}
+                placeholder={f.kind==="idee" ? "z. B. Sprach-Tandem für Nachbarn" : "z. B. Erzählcafé über Reisen"} />
+            </div>
+
+            <div className="field">
+              <label>{f.kind==="idee" ? "Beschreiben Sie kurz Ihre Idee" : "Was würden Sie gern anbieten?"}</label>
+              <textarea value={f.text} onChange={e=>upd("text",e.target.value)}
+                placeholder="Auch unfertige Gedanken sind willkommen. Max. 400 Zeichen reichen."
+                maxLength={500} />
+              <span className="hint">{f.text.length} / 500 Zeichen</span>
+            </div>
+
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+              <div className="field"><label>Vorname</label><input value={f.first} onChange={e=>upd("first",e.target.value)} /></div>
+              <div className="field"><label>Nachname <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label><input value={f.last} onChange={e=>upd("last",e.target.value)} /></div>
+            </div>
+            <div className="field"><label>E-Mail</label><input type="email" value={f.email} onChange={e=>upd("email",e.target.value)} /></div>
+
+            <label className="check-line" style={{alignItems:"flex-start",gap:12,marginTop:6}}>
+              <input type="checkbox" checked={f.consent} onChange={e=>upd("consent",e.target.checked)} style={{marginTop:3}}/>
+              <span>Ich bin einverstanden, dass meine Angaben für die Rückmeldung gespeichert werden.</span>
+            </label>
+
+            <div className="info-box">
+              <strong>Was passiert dann?</strong> Die Bibliothek liest mit, kann Rückfragen stellen
+              und – wenn es passt – aus Ihrer Idee einen konkreten Mitmach-Termin machen. Sie sind dabei nicht in der Pflicht.
+            </div>
+
+            <div className="btn-row">
+              <button className="btn btn-primary btn-lg" disabled={!valid} onClick={submit}>
+                {f.kind==="idee" ? "Idee senden" : "Angebot senden"} →
+              </button>
+              <button className="btn btn-ghost" onClick={()=>go("public")}>Abbrechen</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: ANZEIGE (Print / PDF poster)
+   ============================================================ */
+function AnzeigeScreen({ state, go }){
+  const p = getCustomPkg(state) || PACKAGES[state.pilotPkg] || (state.selectedPkg ? PACKAGES[state.selectedPkg] : PACKAGES.begegnung);
+  const slot = state.slot;
+  const hasSlot = !!slot;
+  const lib = "Stadtbibliothek Musterstadt";
+  const contact = slot?.contactEmail || "mitmachen@bibliothek-musterstadt.de";
+
+  function print(){
+    document.title = `Anzeige – ${hasSlot ? slot.title : p.name}`;
+    setTimeout(()=>window.print(), 80);
+  }
+
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:14,marginLeft:-12}} onClick={()=>go("dashboard")}>← Zurück zum Backend</button>
+
+      <div className="anzeige-shell">
+        <div className="anzeige-controls">
+          <div>
+            <span className="eyebrow">Anzeige · druckfertig</span>
+            <h2 className="section" style={{margin:"4px 0 4px"}}>Anzeige für {hasSlot ? "Ihren Mitmach-Termin" : p.name}</h2>
+            <p style={{color:"var(--ink-3)",fontSize:14,margin:0}}>
+              {hasSlot
+                ? "Vorausgefüllt mit den Daten Ihres Mitmach-Termins."
+                : "Allgemeine Anzeige zum gewählten Paket. Sobald ein Slot existiert, wird sie konkreter."}
+            </p>
+          </div>
+          <div style={{display:"flex",gap:10}}>
+            <button className="btn btn-primary" onClick={print}>Als PDF speichern / Drucken</button>
+            <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Newsletter / Amtsblatt-Text →</button>
+          </div>
+        </div>
+
+        <article className="anzeige-paper">
+          <div className="brand-row">
+            <span className="mark">s</span>
+            <span>{lib} · Mitmach-Ort</span>
+          </div>
+
+          {hasSlot ? (
+            <>
+              <div className="anz-tag">Mitmachen am {slot.flexible ? "vereinbarten Termin" : slot.when.split(",")[0] || slot.when}</div>
+              <h1>{slot.title}</h1>
+              <p className="anz-lede">{slot.desc}</p>
+
+              <div className="anz-block">
+                <h4>Wann</h4>
+                <p>{slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when}</p>
+              </div>
+              <div className="anz-block">
+                <h4>Wo</h4>
+                <p>{lib} · Lesesaal</p>
+              </div>
+              <div className="anz-block">
+                <h4>Ihre Rolle</h4>
+                <p>{slot.role || "Beim ersten Termin gemeinsam besprochen."}</p>
+              </div>
+              <div className="anz-block">
+                <h4>Die Bibliothek übernimmt</h4>
+                <p>{slot.library}</p>
+              </div>
+              <div className="anz-block">
+                <h4>Plätze</h4>
+                <p>{slot.seats} · {slot.type} · keine langfristige Verpflichtung</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="anz-tag">Wir sind Mitmach-Ort</div>
+              <h1>Mitmachen ab 55. Mit Zeit, Erfahrung oder Neugier.</h1>
+              <p className="anz-lede">
+                Die {lib} öffnet sich für Menschen ab 55, die mit ihrer Erfahrung,
+                Geduld oder Freude an Begegnung einen Beitrag leisten möchten.
+              </p>
+
+              <div className="anz-block">
+                <h4>Aktueller Schwerpunkt</h4>
+                <p><strong>{p.name}.</strong> {p.short}</p>
+              </div>
+              <div className="anz-block">
+                <h4>Worum es nicht geht</h4>
+                <p>Keine langfristige Verpflichtung. Kein Bewerbungsgespräch. Sie schauen vorbei, wir lernen uns kennen, ein konkreter Termin entsteht später.</p>
+              </div>
+              <div className="anz-block">
+                <h4>Mögliche Rollen</h4>
+                <p>{p.roles.slice(0,3).join(" · ")}</p>
+              </div>
+            </>
+          )}
+
+          <div className="anz-foot">
+            <span>Kontakt: {contact}</span>
+            <span>{lib}</span>
+          </div>
+        </article>
+
+        <p style={{color:"var(--ink-3)",fontSize:13,marginTop:18,textAlign:"center"}}>
+          Tipp: Im Druckdialog „Als PDF speichern" wählen. Hintergrundgrafiken aktivieren für die volle Wirkung.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: AUFRUF (Aktivierungsaufruf-Generator)
+   ============================================================ */
+function AufrufScreen({ state, go }){
+  const p = getCustomPkg(state) || PACKAGES[state.pilotPkg] || (state.selectedPkg ? PACKAGES[state.selectedPkg] : PACKAGES.begegnung);
+  const slot = state.slot;
+  const hasSlot = !!slot;
+  const [mode,setMode] = useState(hasSlot ? "konkret" : "allgemein");
+  const [channel,setChannel] = useState("aushang");
+  const [copied,setCopied] = useState(false);
+
+  // Build texts
+  const texts = useMemo(()=>{
+    const lib = "Stadtbibliothek Musterstadt";
+    const contact = slot?.contactEmail || "mitmachen@bibliothek-musterstadt.de";
+    const when = slot ? (slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when) : "—";
+
+    if (mode === "allgemein") {
+      // No slot yet — generic "we are a Mitmach-Ort" call
+      return {
+        aushang:
+`Wir sind Mitmach-Ort.
+
+Die ${lib} öffnet sich für Menschen ab 55,
+die mit ihrer Erfahrung, Geduld oder Neugier
+einen Beitrag leisten möchten.
+
+Aktuell denken wir über folgendes Thema nach:
+${p.name}.
+
+${p.short}
+
+Sie müssen sich nicht festlegen.
+Schauen Sie vorbei, sprechen Sie uns an, lernen Sie uns kennen.
+
+Kontakt: ${contact}`,
+
+        newsletter:
+`Liebe Leserinnen und Leser,
+
+unsere Bibliothek möchte ein Ort werden, an dem Menschen ab 55 mitmachen können – mit ihrer Zeit, ihrem Wissen oder einfach mit Freude an Begegnung.
+
+Als nächsten Schritt beschäftigen wir uns mit dem Thema „${p.name}".
+${p.short}
+
+Wenn Sie das anspricht: Wir freuen uns, Sie kennenzulernen. Ein konkreter Termin entsteht in den nächsten Wochen – Sie können sich vormerken lassen.
+
+Antworten Sie einfach auf diese E-Mail oder schreiben Sie an ${contact}.
+
+Herzliche Grüße
+Ihre ${lib}`,
+
+        amtsblatt:
+`${lib} sucht Mitmachende ab 55
+
+Die ${lib} entwickelt sich zu einem Mitmach-Ort. Im Mittelpunkt stehen kleine, niedrigschwellige Formate, bei denen Menschen ab 55 mit Erfahrung, Zeit oder Interesse beitragen können – ohne langfristige Verpflichtung.
+
+Aktueller Schwerpunkt: ${p.name}. ${p.short}
+
+Interessierte können sich unverbindlich melden unter ${contact}.`,
+      };
+    }
+
+    // Concrete mode — slot exists
+    return {
+      aushang:
+`Mitmachen statt zuschauen.
+
+${slot.title}
+${when}
+${lib}
+
+Was passiert?
+${slot.desc}
+
+Was übernehmen Sie?
+${slot.role || "Wird gemeinsam besprochen."}
+
+Was übernimmt die Bibliothek?
+${slot.library}
+
+Gut geeignet, wenn Sie ${slot.seek?.toLowerCase().replace(/^./, c=>c) || "Freude an Begegnung haben"}.
+
+Mit Ihrer Anmeldung übernehmen Sie keine
+langfristige Verpflichtung.
+
+Kontakt: ${slot.contactName || ""} · ${contact}`,
+
+      newsletter:
+`Liebe Leserinnen und Leser,
+
+wir möchten Sie zu einem konkreten Mitmach-Termin in unserer Bibliothek einladen:
+
+„${slot.title}"
+${when}, ${lib}
+
+${slot.desc}
+
+Ihre Rolle: ${slot.role || "Beim ersten Termin gemeinsam besprochen."}
+Wir kümmern uns um: ${slot.library}.
+
+Sie übernehmen mit der Anmeldung keine langfristige Verpflichtung – es geht um einen ersten Eindruck und ein gutes Gespräch.
+
+Anmeldung und Rückfragen: ${contact}
+
+Herzliche Grüße
+Ihre ${lib}`,
+
+      amtsblatt:
+`${lib}: Mitmachen am ${when.split(",")[0] || when}
+
+Unter dem Titel „${slot.title}" lädt die ${lib} Menschen ab 55 ein, ${slot.type.toLowerCase()}. ${slot.desc}
+
+Termin: ${when}. Plätze: ${slot.seats}. Eine Anmeldung ist erwünscht, aber nicht verbindlich.
+
+Kontakt: ${contact}.`,
+    };
+  },[mode, channel, p, slot]);
+
+  const channels = [
+    { id:"aushang",    label:"Aushang / Plakat" },
+    { id:"newsletter", label:"Newsletter / E-Mail" },
+    { id:"amtsblatt",  label:"Amtsblatt / Presse" },
+  ];
+  const text = texts[channel];
+
+  function copy(){
+    navigator.clipboard?.writeText(text).then(()=>{
+      setCopied(true);
+      setTimeout(()=>setCopied(false), 1800);
+    });
+  }
+
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>← Zurück</button>
+      <span className="eyebrow">Aktivierungsaufruf</span>
+      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>
+        {mode==="allgemein" ? '„Wir sind Mitmach-Ort"' : "Aufruf zu Ihrem Mitmach-Termin"}
+      </h1>
+      <p className="lede">
+        {mode==="allgemein"
+          ? <>Ein erster Aufruf ist auch schon ohne konkreten Slot möglich. Sie machen sichtbar, dass Ihre Bibliothek Engagierte mit Erfahrung einlädt – das Thema ist klar, der Termin entsteht später.</>
+          : <>Mit den Daten Ihres Mitmach-Termins <strong>„{slot?.title}"</strong> vorausgefüllt. Wählen Sie einen Kanal, kopieren Sie den Text, passen Sie ihn an.</>}
+      </p>
+
+      {hasSlot && (
+        <div className="seg" style={{marginBottom:24}}>
+          <button data-on={mode==="allgemein"} onClick={()=>setMode("allgemein")}>Allgemeiner Aufruf</button>
+          <button data-on={mode==="konkret"} onClick={()=>setMode("konkret")}>Konkreter Aufruf · mit Slot</button>
+        </div>
+      )}
+
+      {!hasSlot && (
+        <div className="footnote" style={{marginBottom:24}}>
+          <span className="footnote-icon">i</span>
+          <span>
+            Sobald Sie einen Mitmach-Termin erstellt haben, können Sie hier auch einen konkreten
+            Aufruf mit Termin, Rolle und Anmeldelink generieren.
+            <button className="btn btn-ghost" style={{padding:"2px 10px",marginLeft:8,fontSize:13}} onClick={()=>go("slotForm")}>Termin anlegen →</button>
+          </span>
+        </div>
+      )}
+
+      <div className="form-shell">
+        <div>
+          <div className="seg" style={{marginBottom:14}}>
+            {channels.map(c=>(
+              <button key={c.id} data-on={channel===c.id} onClick={()=>setChannel(c.id)}>{c.label}</button>
+            ))}
+          </div>
+
+          <div style={{
+            background:"var(--paper)",
+            border:"1px solid var(--line-soft)",
+            borderRadius:"var(--radius-card)",
+            padding:"32px 36px",
+            fontFamily:"'Instrument Serif',Georgia,serif",
+            fontSize:18,
+            lineHeight:1.6,
+            color:"var(--ink)",
+            whiteSpace:"pre-wrap",
+            minHeight:360,
+          }}>{text}</div>
+
+          <div className="btn-row">
+            <button className="btn btn-primary" onClick={copy}>
+              {copied ? "✓ Kopiert" : "Text kopieren"}
+            </button>
+            <button className="btn btn-secondary" onClick={()=>window.print()}>Drucken / als PDF</button>
+            {!hasSlot && <button className="btn btn-ghost" onClick={()=>go("slotForm")}>Mitmach-Termin anlegen →</button>}
+          </div>
+        </div>
+
+        <aside className="form-side">
+          <h5>Was Sie versenden</h5>
+          <p className="pkg-name" style={{fontSize:20}}>{channels.find(c=>c.id===channel).label}</p>
+          <p className="pkg-desc">
+            {channel==="aushang"   && "Kurz, ruhig, mit großem Titel. Geeignet für Eingangsbereich, Schwarzes Brett, Schaufenster."}
+            {channel==="newsletter"&& "Ansprache wie ein Brief – persönlich, mit klarer Einladung und Kontakt."}
+            {channel==="amtsblatt" && "Sachlich, knapp, ein Absatz. Für lokale Presse und Amtsblatt."}
+          </p>
+          <dl style={{margin:0}}>
+            <div className="side-row"><dt>Paket</dt><dd>{p.name}</dd></div>
+            <div className="side-row"><dt>Modus</dt><dd>{mode==="allgemein"?"Allgemein":"Konkret"}</dd></div>
+            {hasSlot && mode==="konkret" && <div className="side-row"><dt>Slot</dt><dd style={{maxWidth:180}}>{slot.title}</dd></div>}
+          </dl>
+          <p className="micro">
+            Tipp: Drei Kanäle gleichzeitig zu bespielen erhöht die Chance, dass jemand Engagiertes den Aufruf sieht – Aushang vor Ort, Newsletter an Stammleser:innen, Amtsblatt für die Breite.
+          </p>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: SLOT FORM
+   ============================================================ */
+function SlotForm({ state, set, go }){
+  const p = PACKAGES[state.pilotPkg] || PACKAGES.begegnung;
+  const [f,setF] = useState(state.slot || {
+    title: p.id==="begegnung" ? "Spieleabend-Gastgeber:in schnuppern" : `${p.name} – Schnuppertermin`,
+    type:"Schnuppern",
+    when:"12. März, 18:00–20:30 Uhr",
+    flexible:false,
+    seats:"2",
+    desc: p.formats[0],
+    role:"",
+    library:"Raum, Anmeldung, Material, Ansprechperson, Ablauf",
+    seek:"Menschen mit Freude an Begegnung, Geduld und einer ruhigen Hand",
+    contactName:"",
+    contactEmail:"",
+  });
+  function upd(k,v){ setF({...f,[k]:v}); }
+  function publish(){
+    if (!f.title || !f.contactName || !f.contactEmail) return;
+    const slot = { ...f, pkgId:p.id, id:"slot-"+Date.now(), created:new Date(), registrations:[] };
+    set({ slot, slots:[slot] });
+    go("publishConfirm");
+  }
+  const valid = f.title && f.contactName && f.contactEmail;
+
+  return (
+    <div className="container fade-in">
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>← Zurück</button>
+      <span className="eyebrow">Mitmach-Termin</span>
+      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Mitmach-Termin anlegen</h1>
+      <p className="lede">Machen Sie aus dem Paket einen konkreten, niedrigschwelligen Einstieg.</p>
+
+      <div className="form-shell">
+        <div className="form-fields">
+
+          <div className="field">
+            <label>Titel des Slots</label>
+            <input type="text" value={f.title} onChange={e=>upd("title",e.target.value)}
+                   placeholder="z. B. Spieleabend-Gastgeber:in schnuppern" />
+          </div>
+
+          <div className="field">
+            <label>Paket</label>
+            <input type="text" value={p.name} disabled style={{opacity:.7}} />
+            <span className="hint">Wird automatisch aus Ihrer Auswahl übernommen.</span>
+          </div>
+
+          <div className="field">
+            <label>Art des Mitmachens</label>
+            <div className="seg">
+              {["Schnuppern","Einmalig mitmachen","Interesse bekunden"].map(t=>(
+                <button key={t} data-on={f.type===t} onClick={()=>upd("type",t)}>{t}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Datum / Zeitraum</label>
+            <input type="text" value={f.when} disabled={f.flexible} onChange={e=>upd("when",e.target.value)}
+                   placeholder="z. B. 12. März, 18:00–20:30 Uhr" />
+            <label className="check-line">
+              <input type="checkbox" checked={f.flexible} onChange={e=>upd("flexible",e.target.checked)} />
+              Termin wird gemeinsam gefunden
+            </label>
+          </div>
+
+          <div className="field">
+            <label>Anzahl Plätze</label>
+            <div className="seg">
+              {["1","2","3–4","unbegrenzt"].map(s=>(
+                <button key={s} data-on={f.seats===s} onClick={()=>upd("seats",s)}>{s}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Kurzbeschreibung</label>
+            <textarea value={f.desc} onChange={e=>upd("desc",e.target.value)} placeholder="Was passiert bei diesem Mitmach-Termin?"/>
+          </div>
+
+          <div className="field">
+            <label>Aufgabe der Mitmachenden</label>
+            <textarea value={f.role} onChange={e=>upd("role",e.target.value)} placeholder="Was übernehmen die Engagierten konkret?"/>
+          </div>
+
+          <div className="field">
+            <label>Was übernimmt die Bibliothek?</label>
+            <textarea value={f.library} onChange={e=>upd("library",e.target.value)} placeholder="z. B. Raum, Anmeldung, Material, Ansprechperson, Ablauf"/>
+          </div>
+
+          <div className="field">
+            <label>Wen suchen wir?</label>
+            <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)} placeholder="z. B. Menschen mit Freude an Begegnung, Geduld, Kreativität oder Erfahrung"/>
+          </div>
+
+          <div className="field">
+            <label>Kontaktperson – Name</label>
+            <input type="text" value={f.contactName} onChange={e=>upd("contactName",e.target.value)} placeholder="z. B. Anna Hoffmann"/>
+          </div>
+          <div className="field">
+            <label>Kontaktperson – E-Mail</label>
+            <input type="email" value={f.contactEmail} onChange={e=>upd("contactEmail",e.target.value)} placeholder="anna.hoffmann@bibliothek-musterstadt.de"/>
+          </div>
+
+          <div className="info-box">
+            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung. Für den gewählten
+            Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
+          </div>
+
+          <div className="btn-row between">
+            <button className="btn btn-ghost" onClick={()=>go("next")}>← Zurück</button>
+            <button className="btn btn-primary btn-lg" disabled={!valid} onClick={publish}>
+              Mitmach-Termin veröffentlichen →
+            </button>
+          </div>
+        </div>
+
+        <aside className="form-side">
+          <h5>Pilot-Paket</h5>
+          <p className="pkg-name">{p.name}</p>
+          <p className="pkg-desc">{p.short}</p>
+          <dl style={{margin:0}}>
+            <div className="side-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
+            <div className="side-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
+          </dl>
+          <p className="micro">
+            Veröffentlichen erzeugt eine öffentliche Mitmach-Seite und legt den Slot im Backend an.
+          </p>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+
+/* ============================================================
+   SCREEN: PUBLISH CONFIRM
+   ============================================================ */
+function PublishConfirmScreen({ state, go }){
+  const slot = state.slot;
+  const CHANNELS = [
+    { id:"web",        label:"Bibliotheks-Webseite",       icon:"🌐" },
+    { id:"instagram",  label:"Instagram",                  icon:"📸" },
+    { id:"facebook",   label:"Facebook",                   icon:"👥" },
+    { id:"amtsblatt",  label:"Amtsblatt / Anzeigeblatt",   icon:"📰" },
+  ];
+  const [selected, setSelected] = React.useState(["web"]);
+  function toggle(id){ setSelected(s => s.includes(id) ? s.filter(x=>x!==id) : [...s,id]); }
+  React.useEffect(() => { if (!slot) go("next"); }, []);
+  if (!slot) return null;
+  return (
+    <div className="container fade-in" style={{maxWidth:640}}>
+      <span className="eyebrow">Mitmach-Termin veröffentlichen</span>
+      <h1 className="display" style={{fontSize:"clamp(28px,3.5vw,40px)"}}>Alles bereit?</h1>
+      <p className="lede" style={{marginBottom:32}}>
+        Prüfen Sie, ob alles stimmt — dann wählen Sie, wo Sie den Termin bekannt machen möchten.
+      </p>
+
+      <div className="info-box" style={{marginBottom:24}}>
+        <strong>{slot.title}</strong><br/>
+        <span style={{color:"var(--ink-2)",fontSize:14}}>
+          {slot.flexible ? "Datum flexibel" : slot.when || "Kein Datum angegeben"}
+          {" · "}{slot.seats === "unbegrenzt" ? "Unbegrenzt Plätze" : slot.seats + " Platz / Plätze"}
+        </span>
+        {slot.desc && <p style={{margin:"8px 0 0",fontSize:14}}>{slot.desc}</p>}
+      </div>
+
+      <h4 style={{marginBottom:12}}>Wo möchten Sie diesen Termin teilen?</h4>
+      <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:32}}>
+        {CHANNELS.map(ch=>(
+          <label key={ch.id} style={{display:"flex",alignItems:"center",gap:12,cursor:"pointer",
+            padding:"12px 16px",border:"1px solid",borderColor:selected.includes(ch.id)?"var(--brand)":"var(--line-soft)",
+            borderRadius:8,background:selected.includes(ch.id)?"var(--cream-1)":"var(--cream-bg)",userSelect:"none"}}>
+            <input type="checkbox" checked={selected.includes(ch.id)} onChange={()=>toggle(ch.id)}
+              style={{width:18,height:18,accentColor:"var(--brand)"}}/>
+            <span style={{fontSize:18}}>{ch.icon}</span>
+            <span>{ch.label}</span>
+          </label>
+        ))}
+      </div>
+
+      {selected.includes("instagram") || selected.includes("facebook") ? (
+        <div className="footnote" style={{marginBottom:24}}>
+          <span className="footnote-icon">i</span>
+          <span>Social-Media-Texte finden Sie im <strong>Aktivierungsaufruf</strong> — dort können Sie sie kopieren und anpassen.</span>
+        </div>
+      ) : null}
+
+      <div className="btn-row between">
+        <button className="btn btn-ghost" onClick={()=>go("next")}>← Zurück</button>
+        <button className="btn btn-primary btn-lg" onClick={()=>go("public")}>
+          Jetzt veröffentlichen →
+        </button>
+      </div>
+    </div>
+  );
+}
+/* ============================================================
+   SCREEN: PUBLIC SLOT
+   ============================================================ */
+function PublicSlot({ state, go }){
+  const slot = state.slot;
+  if (!slot) {
+    return (
+      <div className="container fade-in" style={{textAlign:"center",paddingTop:100}}>
+        <h2 className="section">Noch kein Mitmach-Termin ausgewählt</h2>
+        <p className="lede" style={{margin:"0 auto 24px"}}>Schauen Sie sich die offenen Termine im Portal an.</p>
+        <button className="btn btn-primary" onClick={()=>go("portal")}>Zum Mitmach-Portal</button>
+      </div>
+    );
+  }
+  const p = slot.pkgId ? PACKAGES[slot.pkgId] : { name: slot.customThema || "Eigenes Angebot" };
+  const free = slot.seats==="unbegrenzt"
+    ? "unbegrenzt"
+    : (parseSeats(slot.seats) - (slot.registrations||[]).length);
+  const isDemo = !!(slot.id && String(slot.id).startsWith("demo-"));
+  const einrichtung = slot.einrichtung || "Stadtbibliothek Musterstadt · Lesesaal";
+
+  return (
+    <div className="public-shell fade-in">
+      <div className="public-bar">
+        <div className="breadcrumb">
+          {isDemo ? (
+            <>
+              <span>SISU · Mitmach-Portal</span>
+              <span>›</span>
+              <span>{slot.einrichtung}</span>
+            </>
+          ) : (
+            <>
+              <span>stadtbibliothek-musterstadt.de</span>
+              <span>›</span>
+              <span>Mitmachen</span>
+            </>
+          )}
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:12}}>
+          {!isDemo && <span className="mono" style={{background:"var(--brand)",color:"#fff",padding:"2px 10px",borderRadius:4,fontSize:11,fontWeight:700,letterSpacing:".04em"}}>VORSCHAU</span>}
+          <button className="btn btn-ghost" style={{padding:"4px 12px",fontSize:13}} onClick={()=>go(isDemo ? "portal" : "dashboard")}>
+            {isDemo ? "← Zurück zum Portal" : "← Zur Verwaltung"}
+          </button>
+        </div>
+      </div>
+
+      <article className="slot-public">
+        <header className="head">
+          <span className="eyebrow">Mitmachen · {einrichtung}</span>
+          <h1 className="display">{slot.title}</h1>
+          <div className="where">
+            <span><strong>{slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when}</strong></span>
+            <span>{einrichtung}</span>
+          </div>
+        </header>
+
+        <div className="body">
+          <dl className="slot-fact-grid">
+            <div className="slot-fact">
+              <dt>Freie Plätze</dt>
+              <dd className="mono">{free}</dd>
+            </div>
+            <div className="slot-fact">
+              <dt>Verbindlichkeit</dt>
+              <dd>{slot.type}</dd>
+            </div>
+            <div className="slot-fact">
+              <dt>Paket</dt>
+              <dd>{p.name}</dd>
+            </div>
+          </dl>
+
+          <div className="slot-block">
+            <h4>Worum geht es?</h4>
+            <p>{slot.desc}</p>
+          </div>
+          <div className="slot-block">
+            <h4>Ihre Rolle</h4>
+            <p>{slot.role || "Wird beim ersten Termin gemeinsam besprochen."}</p>
+          </div>
+          <div className="slot-block">
+            <h4>Die Bibliothek übernimmt</h4>
+            <p>{slot.library}</p>
+          </div>
+          <div className="slot-block">
+            <h4>Gut geeignet, wenn Sie…</h4>
+            <p>{slot.seek}</p>
+          </div>
+
+          <div className="commitment-note">
+            Mit Ihrer Anmeldung übernehmen Sie keine langfristige Verpflichtung.
+          </div>
+        </div>
+
+        <div className="cta-row">
+          <button className="btn btn-primary btn-lg" onClick={()=>go("register")}>Ich mache unverbindlich mit</button>
+          <button className="btn btn-secondary" onClick={()=>go("register")}>Ich habe erst eine Frage</button>
+          <span style={{marginLeft:"auto",color:"var(--ink-3)",fontSize:13}}>Kontakt: {slot.contactName||"Bibliothek"} · {slot.contactEmail||""}</span>
+        </div>
+      </article>
+
+      <IdeaInvite go={go} />
+    </div>
+  );
+}
+
+function IdeaInvite({ go }){
+  return (
+    <aside style={{
+      maxWidth:780,margin:"24px auto 0",
+      background:"var(--paper)",border:"1px dashed var(--sage)",
+      borderRadius:18,padding:"28px 32px",
+      display:"grid",gridTemplateColumns:"1fr auto",gap:24,alignItems:"center"
+    }}>
+      <div>
+        <div className="eyebrow" style={{marginBottom:8}}>Mitdenken willkommen</div>
+        <h3 style={{fontFamily:"'Instrument Serif',serif",fontWeight:400,fontSize:24,margin:"0 0 6px",letterSpacing:"-.005em"}}>
+          Sie haben selbst eine Idee, was hier passieren könnte?
+        </h3>
+        <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55,maxWidth:"50ch"}}>
+          Erzählen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen –
+          die Einrichtung meldet sich, wenn etwas daraus werden könnte.
+        </p>
+      </div>
+      <button className="btn btn-secondary" onClick={()=>go("idea")}>Idee einbringen →</button>
+    </aside>
+  );
+}
+
+function parseSeats(s){
+  if (s==="1") return 1;
+  if (s==="2") return 2;
+  if (s==="3–4") return 4;
+  return 99;
+}
+
+/* ============================================================
+   SCREEN: REGISTRATION
+   ============================================================ */
+function RegisterScreen({ state, set, go }){
+  const slot = state.slot;
+  const [f,setF] = useState({
+    first:"", last:"", email:"", phone:"",
+    wish:"erst einmal schnuppern",
+    note:"",
+    consent:false,
+  });
+  const [done,setDone] = useState(false);
+
+  function upd(k,v){ setF({...f,[k]:v}); }
+  function submit(){
+    if (!f.first||!f.last||!f.email||!f.consent) return;
+    const reg = {
+      id:"reg-"+Date.now(),
+      slotId: slot?.id,
+      slotTitle: slot?.title,
+      pkgId: slot?.pkgId,
+      first:f.first, last:f.last, email:f.email, phone:f.phone,
+      wish:f.wish, note:f.note,
+      status:"neu",
+      created:new Date(),
+    };
+    const slots = (state.slots||[]).map(s => s.id===slot.id
+      ? {...s, registrations:[...s.registrations, reg]} : s);
+    set({
+      slot: slots.find(s=>s.id===slot.id),
+      slots,
+      registrations: [...(state.registrations||[]), reg]
+    });
+    setDone(true);
+  }
+
+  if (done) {
+    return (
+      <div className="public-shell fade-in">
+        <div className="public-bar">
+          <div className="breadcrumb"><span>stadtbibliothek-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Bestätigung</span></div>
+        </div>
+        <div className="confirm-card">
+          <div className="confirm-mark">✓</div>
+          <h2 className="section">Vielen Dank, {f.first}.</h2>
+          <p>Ihre Interessensbekundung wurde gesendet. Die Bibliothek oder SISU meldet sich
+             bei Ihnen. Sie übernehmen noch keine langfristige Verpflichtung.</p>
+          <div className="btn-row" style={{justifyContent:"center"}}>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-ghost" onClick={()=>go("dashboard")}>So sieht die Bibliothek das ↗</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const valid = f.first && f.last && f.email && f.consent;
+
+  return (
+    <div className="public-shell fade-in">
+      <div className="public-bar">
+        <div className="breadcrumb"><span>stadtbibliothek-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Anmeldung</span></div>
+        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>← Zurück</button>
+      </div>
+      <article className="slot-public" style={{maxWidth:680}}>
+        <header className="head">
+          <span className="eyebrow">Anmeldung</span>
+          <h1 className="display">Schön, dass Sie mitmachen möchten.</h1>
+          <p style={{margin:"8px 0 0",color:"var(--ink-2)",fontSize:15.5}}>
+            Slot: <strong>{slot?.title || "—"}</strong> · {slot?.flexible ? "Termin wird gemeinsam gefunden" : slot?.when}
+          </p>
+        </header>
+        <div className="body">
+          <div className="form-fields">
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+              <div className="field"><label>Vorname</label><input value={f.first} onChange={e=>upd("first",e.target.value)} /></div>
+              <div className="field"><label>Nachname</label><input value={f.last} onChange={e=>upd("last",e.target.value)} /></div>
+            </div>
+            <div className="field"><label>E-Mail</label><input type="email" value={f.email} onChange={e=>upd("email",e.target.value)} /></div>
+            <div className="field"><label>Telefon <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label><input type="tel" value={f.phone} onChange={e=>upd("phone",e.target.value)} /></div>
+
+            <div className="field">
+              <label>Ich möchte</label>
+              <div className="seg" style={{flexWrap:"wrap"}}>
+                {["erst einmal schnuppern","einmalig mitmachen","gerne mehr erfahren","mir regelmäßiges Mitmachen vorstellen"].map(o=>(
+                  <button key={o} data-on={f.wish===o} onClick={()=>upd("wish",o)}>{o}</button>
+                ))}
+              </div>
+            </div>
+
+            <div className="field">
+              <label>Nachricht <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
+              <textarea value={f.note} onChange={e=>upd("note",e.target.value)} placeholder="Gibt es etwas, das wir wissen sollten?"/>
+            </div>
+
+            <label className="check-line" style={{alignItems:"flex-start",gap:12,marginTop:6}}>
+              <input type="checkbox" checked={f.consent} onChange={e=>upd("consent",e.target.checked)} style={{marginTop:3}}/>
+              <span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme für diesen Mitmach-Termin gespeichert werden.</span>
+            </label>
+
+            <div className="btn-row">
+              <button className="btn btn-primary btn-lg" disabled={!valid} onClick={submit}>Interesse senden →</button>
+              <button className="btn btn-ghost" onClick={()=>go("public")}>Abbrechen</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+/* ============================================================
+   SCREEN: BACKEND DASHBOARD
+   ============================================================ */
+function Dashboard({ state, set, go }){
+  const [tab,setTab] = useState(state.dashboardTab || "pakete");
+  useEffect(()=>{ if (state.dashboardTab) set({ dashboardTab: null }); },[]);
+  const slots = state.slots || [];
+  const regs = state.registrations || [];
+  const pilot = state.pilotPkg ? PACKAGES[state.pilotPkg] : getCustomPkg(state);
+
+  function setStatus(regId, status){
+    const newRegs = regs.map(r => r.id===regId ? {...r, status} : r);
+    set({ registrations: newRegs,
+          slots: slots.map(s=>({...s, registrations:s.registrations.map(r=>r.id===regId?{...r,status}:r)}))});
+  }
+
+  return (
+    <div className="container wide fade-in">
+      <div className="dash-head">
+        <div>
+          <span className="eyebrow">SISU Backend</span>
+          <h1>Pilotübersicht</h1>
+          <div className="meta" style={{marginTop:8}}>
+            <span><span className="dot"/> Stadtbibliothek Musterstadt</span>
+            <span>·</span>
+            <span className="mono">Stand: {new Date().toLocaleDateString("de-DE")}</span>
+          </div>
+        </div>
+        <div style={{display:"flex",gap:8}}>
+          <button className="btn btn-ghost" onClick={()=>go("start")}>Zum Paket-Finder</button>
+          {state.slot && <button className="btn btn-secondary" onClick={()=>go("public")}>Öffentliche Ansicht öffnen ↗</button>}
+        </div>
+      </div>
+
+      <div className="dash-tabs">
+        <button className="dash-tab" data-on={tab==="pakete"} onClick={()=>setTab("pakete")}>
+          Pakete <span className="count">{pilot?1:0}</span>
+        </button>
+        <button className="dash-tab" data-on={tab==="slots"} onClick={()=>setTab("slots")}>
+          Mitmach-Termine <span className="count">{slots.length}</span>
+        </button>
+        <button className="dash-tab" data-on={tab==="anm"} onClick={()=>setTab("anm")}>
+          Anmeldungen <span className="count">{regs.length}</span>
+        </button>
+        <button className="dash-tab" data-on={tab==="ideen"} onClick={()=>setTab("ideen")}>
+          Ideen aus der Stadt <span className="count">{(state.ideas||[]).length}</span>
+        </button>
+        <button className="dash-tab" data-on={tab==="status"} onClick={()=>setTab("status")}>
+          Status
+        </button>
+      </div>
+
+      {tab==="pakete" && (
+        <div className="dash-card">
+          <h3>{state.customOffer ? "Eigenes Angebot" : "Gewähltes Paket"}</h3>
+          <div className="sub">{state.customOffer ? "Ein direkt angelegtes Angebot – ohne Paket-Finder." : "Das aktuelle Pilot-Paket Ihrer Bibliothek."}</div>
+          {pilot ? (
+            <table className="dash">
+              <thead><tr><th>{state.customOffer?"Angebot":"Paket"}</th><th>Bibliothek</th><th>Aufwand</th><th>Status</th><th>Aktion</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>{pilot.name}</strong><br/><span style={{color:"var(--ink-3)",fontSize:13}}>{(pilot.short||"").slice(0,80)}{pilot.short?.length>80?"…":""}</span></td>
+                  <td>Stadtbibliothek Musterstadt</td>
+                  <td>{pilot.effort}</td>
+                  <td><span className="pill ok">{state.customOffer?"Eigenes Angebot":"Paket ausgewählt"}</span></td>
+                  <td><div className="row-actions">
+                    {!state.customOffer && <button onClick={()=>go("detail")}>Details</button>}
+                    <button onClick={()=>go("slotForm")}>Termin anlegen</button>
+                    <button onClick={()=>go("anzeige")} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Anzeige erstellen ↗</button>
+                  </div></td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <table className="dash"><tbody><tr className="empty-row"><td colSpan="5">Noch kein Paket ausgewählt – starten Sie den Paket-Finder.</td></tr></tbody></table>
+          )}
+        </div>
+      )}
+
+      {tab==="slots" && (
+        <div className="dash-card">
+          <h3>Mitmach-Termine</h3>
+          <div className="sub">Konkrete Einstiegstermine, die im Pilot veröffentlicht wurden.</div>
+          <table className="dash">
+            <thead><tr><th>Titel</th><th>Paket</th><th>Datum</th><th>Plätze</th><th>Anmeldungen</th><th>Status</th><th>Aktion</th></tr></thead>
+            <tbody>
+              {slots.length === 0 && <tr className="empty-row"><td colSpan="7">Noch keine Mitmach-Termine angelegt.</td></tr>}
+              {slots.map(s=>(
+                <tr key={s.id}>
+                  <td><strong>{s.title}</strong></td>
+                  <td>{PACKAGES[s.pkgId].name}</td>
+                  <td>{s.flexible?"flexibel":s.when}</td>
+                  <td className="mono">{s.seats}</td>
+                  <td className="mono">{s.registrations.length}</td>
+                  <td><span className="pill ok">veröffentlicht</span></td>
+                  <td><div className="row-actions">
+                    <button onClick={()=>go("public")}>Ansehen</button>
+                    <button>Slot wiederholen</button>
+                  </div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {tab==="anm" && (
+        <div className="dash-card">
+          <h3>Neue Anmeldungen</h3>
+          <div className="sub">Interessierte Menschen, die sich auf einen Mitmach-Termin gemeldet haben.</div>
+          <table className="dash">
+            <thead><tr><th>Name</th><th>Slot</th><th>Kontakt</th><th>Wunsch</th><th>Status</th><th>Aktion</th></tr></thead>
+            <tbody>
+              {regs.length === 0 && <tr className="empty-row"><td colSpan="6">Noch keine Anmeldungen. Öffnen Sie die öffentliche Ansicht, um eine Test-Anmeldung zu erzeugen.</td></tr>}
+              {regs.map(r=>(
+                <tr key={r.id}>
+                  <td><strong>{r.first} {r.last}</strong>{r.note && <div style={{color:"var(--ink-3)",fontSize:12.5,marginTop:3,maxWidth:200}}>„{r.note}“</div>}</td>
+                  <td>{r.slotTitle}</td>
+                  <td><div>{r.email}</div>{r.phone && <div style={{color:"var(--ink-3)",fontSize:12.5}}>{r.phone}</div>}</td>
+                  <td>{r.wish}</td>
+                  <td>
+                    <select value={r.status} onChange={e=>setStatus(r.id,e.target.value)}
+                            style={{font:"inherit",fontSize:12.5,padding:"4px 8px",borderRadius:6,border:"1px solid var(--line)",background:"var(--paper)"}}>
+                      {["neu","bestätigt","Rückfrage nötig","passt vielleicht zu anderem Paket","abgesagt","erschienen","möchte weitermachen"].map(o=>(
+                        <option key={o} value={o}>{o}</option>
+                      ))}
+                    </select>
+                  </td>
+                  <td><div className="row-actions">
+                    <button onClick={()=>setStatus(r.id,"bestätigt")}>Anmeldung bestätigen</button>
+                    {r.note && <button>Nachricht anzeigen</button>}
+                  </div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {tab==="ideen" && (
+        <div className="dash-card">
+          <h3>Ideen aus der Stadt</h3>
+          <div className="sub">Eingebracht über die öffentliche Mitmach-Seite. Sie entscheiden, was passt.</div>
+          <table className="dash">
+            <thead><tr><th>Art</th><th>Thema · Beschreibung</th><th>Von</th><th>Status</th><th>Aktion</th></tr></thead>
+            <tbody>
+              {(state.ideas||[]).length === 0 && <tr className="empty-row"><td colSpan="5">Noch keine Ideen eingegangen.</td></tr>}
+              {(state.ideas||[]).map(idea=>(
+                <tr key={idea.id}>
+                  <td><span className={"pill "+(idea.kind==="angebot"?"ok":"new")}>{idea.kind==="angebot"?"Eigenes Angebot":"Idee"}</span></td>
+                  <td>
+                    {idea.topic && <strong>{idea.topic}</strong>}
+                    <div style={{color:"var(--ink-2)",fontSize:13,marginTop:idea.topic?4:0,maxWidth:380,lineHeight:1.5}}>„{idea.text}"</div>
+                  </td>
+                  <td><div>{idea.first} {idea.last}</div><div style={{color:"var(--ink-3)",fontSize:12.5}}>{idea.email}</div></td>
+                  <td>
+                    <select value={idea.status} onChange={e=>{
+                      const st = e.target.value;
+                      set({ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:st}:i)});
+                    }} style={{font:"inherit",fontSize:12.5,padding:"4px 8px",borderRadius:6,border:"1px solid var(--line)",background:"var(--paper)"}}>
+                      {["neu","Rückfrage gestellt","wird Slot","nicht passend","abgesagt"].map(o=><option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </td>
+                  <td>
+                    <div className="row-actions">
+                      <button onClick={()=>{
+                        const seedSlot = {
+                          title: idea.topic || (idea.kind==="angebot"?"Mitmachen mit "+idea.first:"Aus einer Idee"),
+                          type:"Schnuppern",
+                          when:"Termin wird gemeinsam gefunden",
+                          flexible:true,
+                          seats:"2",
+                          desc: idea.text,
+                          role: idea.kind==="angebot" ? `${idea.first} bringt eigenes Angebot ein: ${idea.text}` : "",
+                          library:"Raum, Anmeldung, Material, Ansprechperson",
+                          seek:"Menschen mit Interesse am Thema",
+                          contactName:"", contactEmail:"",
+                          fromIdea: idea.id,
+                        };
+                        set({slot: seedSlot, ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:"wird Slot"}:i)});
+                        go("slotForm");
+                      }} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Aus Idee Slot machen ↗</button>
+                      <button>Antworten</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {tab==="status" && (
+        <div>
+          <div className="dash-card">
+            <h3>Pilot-Fortschritt</h3>
+            <div className="sub">Wo steht Ihre Bibliothek im Mitmach-Pilot?</div>
+            <ol style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:10}}>
+              <StatusStep done={!!pilot} label="Paket ausgewählt" extra={pilot?.name}/>
+              <StatusStep done={slots.length>0} label="Mitmach-Termin angelegt" extra={slots[0]?.title}/>
+              <StatusStep done={regs.length>0} label="Erste Anmeldung erhalten" extra={regs[0] && `${regs[0].first} ${regs[0].last}`}/>
+              <StatusStep done={regs.some(r=>r.status==="bestätigt")} label="Anmeldung bestätigt"/>
+              <StatusStep done={false} label="Erster Termin durchgeführt"/>
+              <StatusStep done={false} label="Feedback gesammelt · Slot wiederholt"/>
+            </ol>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StatusStep({ done, label, extra }){
+  return (
+    <li style={{display:"flex",gap:14,alignItems:"flex-start",padding:"14px 16px",background:"var(--paper-2)",borderRadius:10,border:"1px solid var(--line-soft)"}}>
+      <span style={{
+        width:24,height:24,borderRadius:99,
+        background: done ? "var(--sage-deep)" : "var(--paper)",
+        border:"1px solid "+(done?"var(--sage-deep)":"var(--line)"),
+        color:"#fff",display:"grid",placeItems:"center",
+        fontSize:13,flexShrink:0,marginTop:1
+      }}>{done?"✓":""}</span>
+      <div>
+        <div style={{fontWeight:600,color:done?"var(--ink)":"var(--ink-3)"}}>{label}</div>
+        {extra && <div style={{color:"var(--ink-3)",fontSize:13,marginTop:2}}>{extra}</div>}
+      </div>
+    </li>
+  );
+}
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+function App(){
+  const [screen,setScreen] = useState("start");
+  const [state,setState] = useState({
+    topics:[], existing:[], coord:"", targets:[],
+    selectedPkg:null, pilotPkg:null, customOffer:false,
+    slot:null, slots:[], registrations:[], ideas:[], dashboardTab:null,
+    motivations:[], competences:[], commit:"", contexts:[], selectedRole:null,
+  });
+  function set(patch){ setState(s=>({...s,...patch})); }
+  function go(s){ setScreen(s); window.scrollTo({top:0,behavior:"smooth"}); }
+
+  // Persist lightly so refresh keeps work
+  useEffect(()=>{
+    try {
+      const raw = localStorage.getItem("sisu-state");
+      if (raw){ const p = JSON.parse(raw); if (p.state) setState(p.state); if (p.screen) setScreen(p.screen); }
+    } catch(e){}
+  },[]);
+  useEffect(()=>{
+    try { localStorage.setItem("sisu-state", JSON.stringify({state,screen})); } catch(e){}
+  },[state,screen]);
+
+  const isPublic = ["public","register"].includes(screen);
+
+  return (
+    <div className="app" data-screen-label={screen}>
+      <Topbar go={go} screen={screen} hideNav={false}/>
+      {{
+        start:     <StartScreen go={go}/>,
+        q1:        <Q1 state={state} set={set} go={go}/>,
+        q2:        <Q2 state={state} set={set} go={go}/>,
+        q3:        <Q3 state={state} set={set} go={go}/>,
+        q4:        <Q4 state={state} set={set} go={go}/>,
+        result:    <ResultScreen state={state} set={set} go={go}/>,
+        detail:    <DetailScreen state={state} set={set} go={go}/>,
+        next:      <NextScreen state={state} go={go}/>,
+        slotForm:  <SlotForm state={state} set={set} go={go}/>,
+        publishConfirm: <PublishConfirmScreen state={state} set={set} go={go}/>,
+        aufruf:    <AufrufScreen state={state} go={go}/>,
+        anzeige:   <AnzeigeScreen state={state} go={go}/>,
+        public:    <PublicSlot state={state} go={go}/>,
+        register:  <RegisterScreen state={state} set={set} go={go}/>,
+        idea:           <IdeaScreen state={state} set={set} go={go}/>,
+        eigenesAngebot: <EigenesAngebotForm state={state} set={set} go={go}/>,
+        dashboard:      <Dashboard state={state} set={set} go={go}/>,
+        m1:        <M1 state={state} set={set} go={go}/>,
+        m2:        <M2 state={state} set={set} go={go}/>,
+        m3:        <M3 state={state} set={set} go={go}/>,
+        m4:        <M4 state={state} set={set} go={go}/>,
+        mResult:   <MResult state={state} set={set} go={go}/>,
+        mDetail:   <MDetail state={state} set={set} go={go}/>,
+        mConfirm:  <MConfirm state={state} set={set} go={go}/>,
+        portal:    <Portal state={state} set={set} go={go}/>,
+      }[screen]}
+
+      <footer style={{borderTop:"1px solid var(--line-soft)",padding:"24px 32px",color:"var(--ink-3)",fontSize:13,display:"flex",justifyContent:"space-between",maxWidth:1200,margin:"0 auto",width:"100%"}}>
+        <span>SISU Mitmach-Planer · Prototyp</span>
+        <span>
+          <button onClick={()=>{localStorage.removeItem("sisu-state");location.reload();}}
+                  style={{background:"none",border:0,color:"var(--ink-3)",cursor:"pointer",font:"inherit"}}>
+            Prototyp zurücksetzen
+          </button>
+        </span>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>

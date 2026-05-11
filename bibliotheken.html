@@ -1,0 +1,798 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SISU fÃ¼r Bibliotheken - Mitmach-Formate fÃ¼r den Dritten Ort</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --paper-warm: #f1eadf;
+      --ink: #20242b;
+      --muted: #555b66;
+      --soft: #767b86;
+      --line: #ded8ce;
+      --green: #315c48;
+      --green-soft: #e5efe8;
+      --blue: #244b6a;
+      --blue-soft: #e8eef3;
+      --coral: #a94f3d;
+      --coral-soft: #f3e5df;
+      --white: #ffffff;
+      --shadow: 0 12px 34px rgba(32,36,43,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter Tight", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    h1, h2, h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251,250,246,.92);
+      border-bottom: 1px solid rgba(222,216,206,.86);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-main {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 25px;
+    }
+
+    .brand-sub {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(32,36,43,.12);
+    }
+
+    .btn-primary { background: var(--green); color: var(--white); }
+    .btn-secondary { background: var(--white); color: var(--green); border-color: var(--line); }
+    .btn-dark { background: var(--ink); color: var(--white); }
+
+    .hero {
+      min-height: calc(100vh - 68px);
+      position: relative;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(18,24,25,.84) 0%, rgba(18,24,25,.56) 48%, rgba(18,24,25,.18) 100%),
+        url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1800&q=82") center/cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 120px;
+      background: linear-gradient(0deg, var(--paper), rgba(251,250,246,0));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(780px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 96px 0 124px;
+      transform: translateX(max(-170px, -10vw));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: #dce8df;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(43px, 7vw, 78px);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin-top: 22px;
+      color: rgba(255,255,255,.88);
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.48;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      color: rgba(255,255,255,.86);
+      font-size: 14px;
+    }
+
+    .proof-pill {
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 8px;
+      padding: 8px 11px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .practice-line {
+      max-width: 600px;
+      margin-top: 16px;
+      color: rgba(255,255,255,.8);
+      font-size: 14px;
+    }
+
+    section { padding: 84px 0; }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--coral);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 4.6vw, 54px);
+    }
+
+    .section-head p {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 62ch;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .problem-card,
+    .format-card,
+    .step-card,
+    .signal-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(32,36,43,.04);
+    }
+
+    .problem-card {
+      padding: 26px;
+      min-height: 220px;
+    }
+
+    .problem-card strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 15px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .problem-card h3 {
+      margin-bottom: 12px;
+      font-size: 27px;
+    }
+
+    .problem-card p,
+    .format-card p,
+    .step-card p,
+    .signal-card p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .test-notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .test-note {
+      border-top: 3px solid var(--green);
+      padding: 18px 0 0;
+    }
+
+    .test-note blockquote {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 25px;
+      line-height: 1.2;
+    }
+
+    .test-note p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .band {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .quote-block {
+      padding: 34px;
+      border-left: 5px solid var(--coral);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-image {
+      height: 210px;
+      margin: -34px -34px 28px;
+      overflow: hidden;
+    }
+
+    .quote-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(.92) contrast(.98);
+    }
+
+    .quote-block blockquote {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(27px, 3.2vw, 38px);
+      font-style: italic;
+      line-height: 1.2;
+    }
+
+    .quote-block cite {
+      display: block;
+      margin-top: 18px;
+      color: var(--soft);
+      font-style: normal;
+      font-size: 14px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .check-list span {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-weight: 900;
+    }
+
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .format-card { padding: 24px; }
+
+    .format-media {
+      width: calc(100% + 48px);
+      height: 142px;
+      margin: -24px -24px 20px;
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
+      background: var(--paper-warm);
+    }
+
+    .format-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.9) contrast(.98);
+    }
+
+    .format-tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .format-card h3 {
+      min-height: 62px;
+      margin-bottom: 12px;
+      font-size: 25px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      counter-reset: steps;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 30px;
+      overflow: hidden;
+      counter-increment: steps;
+    }
+
+    .step-card::before {
+      content: "0" counter(steps);
+      display: block;
+      margin-bottom: 38px;
+      color: var(--coral);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .1em;
+    }
+
+    .step-card h3 {
+      margin-bottom: 12px;
+      font-size: 29px;
+    }
+
+    .signals {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .signal-card {
+      padding: 20px;
+      background: var(--green-soft);
+      border-color: #cbded1;
+    }
+
+    .signal-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: 16px;
+    }
+
+    .cta {
+      background: var(--ink);
+      color: var(--white);
+      padding: 82px 0;
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(34px, 4.8vw, 56px);
+    }
+
+    .cta p {
+      max-width: 66ch;
+      margin-top: 16px;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+    }
+
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: stretch;
+    }
+
+    .footer {
+      padding: 28px 0;
+      color: var(--soft);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: var(--green); text-decoration: none; font-weight: 700; }
+
+    @media (max-width: 980px) {
+      .hero-content {
+        transform: none;
+        width: min(860px, calc(100% - 40px));
+      }
+
+      .problem-grid,
+      .formats-grid,
+      .steps-grid,
+      .signals,
+      .test-notes,
+      .split,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .format-card h3 { min-height: 0; }
+      .cta-actions { justify-items: start; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .topbar-inner { min-height: 62px; }
+      .brand-sub { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .hero { min-height: 720px; align-items: center; }
+      .hero-content { padding: 76px 0 84px; }
+      .btn { white-space: normal; text-align: center; }
+      .hero-actions .btn { width: 100%; }
+      section { padding: 58px 0; }
+      .problem-card { min-height: 0; }
+      .quote-block { padding: 26px; }
+      .quote-image { height: 190px; margin: -26px -26px 22px; }
+      .cta-actions, .cta-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#">
+        <span class="brand-main">SISU</span>
+        <span class="brand-sub">fÃ¼r Bibliotheken</span>
+      </a>
+      <nav class="nav-actions" aria-label="Hauptnavigation">
+        <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Demo ansehen</a>
+        <a class="btn btn-primary" href="#kontakt">Bedarfscheck buchen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="SISU fÃ¼r Bibliotheken">
+      <div class="hero-content">
+        <span class="eyebrow">Pilotprogramm 2026 Â· Baden-WÃ¼rttemberg</span>
+        <h1>Machen Sie Ihre Bibliothek zum lebendigen Begegnungsort.</h1>
+        <p>
+          SISU hilft Bibliotheken, passende Mitmach-Formate mit engagierten Menschen aus der Gemeinde zu entwickeln,
+          sichtbar zu machen und zuverlÃ¤ssig zu starten.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#kontakt">30-minÃ¼tigen Bedarfscheck vereinbaren</a>
+          <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Mitmach-Planer ansehen</a>
+        </div>
+        <div class="hero-proof" aria-label="Vertrauenssignale">
+          <span class="proof-pill">Pilot in Schwieberdingen</span>
+          <span class="proof-pill">Kein Login fÃ¼r den Ersttest</span>
+          <span class="proof-pill">Formate statt bloÃŸes Matching</span>
+        </div>
+        <p class="practice-line">Entwickelt mit Bibliotheken und Engagierten aus der Praxis in Baden-WÃ¼rttemberg.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Ausgangslage</span>
+          <h2>Bibliotheken sollen mehr leisten, aber selten mit mehr Personal.</h2>
+          <p>
+            Viele kommunale Bibliotheken wollen Begegnung ermÃ¶glichen, neue Zielgruppen erreichen und ihre Relevanz
+            gegenÃ¼ber Gemeinde und Politik sichtbar machen. Die Ideen sind da. Was fehlt, ist oft die KapazitÃ¤t,
+            aus Ideen ein tragfÃ¤higes Mitmach-Format zu machen.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem-card">
+            <strong>Dritter Ort</strong>
+            <h3>Begegnung muss konkret werden.</h3>
+            <p>Ein Leitbild allein bringt noch kein Angebot. SISU Ã¼bersetzt Ziele in machbare Termine und Rollen.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Personal</strong>
+            <h3>Gute Ideen bleiben liegen.</h3>
+            <p>Das Team kann nicht zusÃ¤tzlich Ehrenamtliche suchen, briefen und jeden neuen Termin von Grund auf planen.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Sichtbarkeit</strong>
+            <h3>Wirkung muss erzÃ¤hlbar sein.</h3>
+            <p>Mitmach-Formate schaffen Angebote, Beteiligung und belastbare Beispiele fÃ¼r Bericht, Presse und Gemeinderat.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Aus dem Nutzertest</span>
+          <h2>Was Bibliotheken im GesprÃ¤ch wichtig war.</h2>
+          <p>
+            Die ersten Tests zeigen: Bibliotheken suchen nicht noch ein abstraktes Tool.
+            Sie brauchen eine einfache Struktur, passende Sprache und Formate, die sie selbst steuern kÃ¶nnen.
+          </p>
+        </div>
+
+        <div class="test-notes">
+          <article class="test-note">
+            <blockquote>"Bibliotheken mÃ¼ssen ihre Daseinsberechtigung begrÃ¼nden."</blockquote>
+            <p>Der stÃ¤rkste Treiber ist nicht Effizienz, sondern sichtbare Relevanz fÃ¼r Gemeinde und Ã–ffentlichkeit.</p>
+          </article>
+          <article class="test-note">
+            <blockquote>"Die Bibliothek kann ihre Themen-Pakete selbst bestimmen."</blockquote>
+            <p>SISU soll den Rahmen geben, ohne der Bibliothek ein fertiges Programm Ã¼berzustÃ¼lpen.</p>
+          </article>
+          <article class="test-note">
+            <blockquote>"Die Idee ist super. Es war mÃ¶glichst einfach."</blockquote>
+            <p>Im kommunalen Alltag zÃ¤hlt, ob ein erster Mitmach-Termin ohne lange Vorbereitung wirklich startbar ist.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container split">
+        <div>
+          <div class="section-head">
+            <span class="section-kicker">Was SISU anders macht</span>
+            <h2>Aus einer Idee wird ein machbarer Mitmach-Termin.</h2>
+            <p>
+              Viele Bibliotheken haben gute Ideen, aber wenig Zeit fÃ¼r die Umsetzung.
+              SISU hilft, aus einem vagen Wunsch ein klares Format zu machen:
+              mit passender Aufgabe, verstÃ¤ndlichem Aufruf und einem Einstieg, der Engagierte nicht Ã¼berfordert.
+            </p>
+          </div>
+          <ul class="check-list">
+            <li><span>âœ“</span><p>GefÃ¼hrter Mitmach-Planer fÃ¼r passende Engagement-Pakete</p></li>
+            <li><span>âœ“</span><p>Fertige Texte fÃ¼r Aushang, Newsletter, Website und Amtsblatt</p></li>
+            <li><span>âœ“</span><p>Klare Rollen fÃ¼r Engagierte: schnuppern, mitmachen, spÃ¤ter bleiben</p></li>
+            <li><span>âœ“</span><p>PersÃ¶nliche Begleitung im Pilot, bevor daraus ein dauerhaftes Angebot wird</p></li>
+          </ul>
+        </div>
+
+        <aside class="quote-block">
+          <div class="quote-image">
+            <img src="https://images.unsplash.com/photo-1635862624756-2f64dd64fd68?auto=format&fit=crop&w=900&q=72" alt="Frau steht vor BÃ¼cherregalen in einer Bibliothek" loading="lazy"/>
+          </div>
+          <blockquote>
+            "Ihr wollt mehr Begegnung und zu einem dritten Ort werden, habt zu wenig Personal - dann ist das der geeignete Weg."
+          </blockquote>
+          <cite>Bibliothekarin im SISU-Nutzertest, Mai 2026</cite>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Mitmach-Formate</span>
+          <h2>Konkrete Angebote, die eine Bibliothek klein testen kann.</h2>
+          <p>
+            Der Pilot beginnt nicht mit einer groÃŸen Plattform, sondern mit einem ersten passenden Format.
+            Danach wird gemessen, ob Engagierte kommen, ob das Team entlastet wird und ob daraus ein wiederholbares Angebot entsteht.
+          </p>
+        </div>
+
+        <div class="formats-grid">
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1764173039570-537dc1c8bb3a?auto=format&fit=crop&w=900&q=72" alt="Zwei Ã¤ltere Menschen besprechen gemeinsam ein Buch in einer Bibliothek" loading="lazy"/>
+            </div>
+            <span class="format-tag">Lesen & Geschichten</span>
+            <h3>Vorlesen, ErzÃ¤hlen, Erinnern</h3>
+            <p>FÃ¼r Kinder, Familien oder Ã¤ltere Besucher:innen. Niedrigschwellig, sichtbar und gut kommunizierbar.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1675179181597-ae9e76ccbca9?auto=format&fit=crop&w=900&q=72" alt="Ã„ltere Frau nutzt ein digitales GerÃ¤t auf einem Tisch" loading="lazy"/>
+            </div>
+            <span class="format-tag">Digital & Medien</span>
+            <h3>Smartphone-Sprechstunde</h3>
+            <p>Erfahrene Engagierte helfen bei digitalen Alltagsfragen. Die Bibliothek bleibt Lernort fÃ¼r alle Generationen.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1762955911310-f068a0622703?auto=format&fit=crop&w=900&q=72" alt="HÃ¤nde mit bunter Wolle und Strickmaterial" loading="lazy"/>
+            </div>
+            <span class="format-tag">Begegnung</span>
+            <h3>Strickrunde, Spiel, GesprÃ¤ch</h3>
+            <p>Formate, die Menschen regelmÃ¤ÃŸig zusammenbringen, ohne das Bibliotheksteam dauerhaft zu Ã¼berlasten.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1764173039318-75d362d60af8?auto=format&fit=crop&w=900&q=72" alt="Drei Menschen sitzen gemeinsam an einem Tisch in einer Bibliothek" loading="lazy"/>
+            </div>
+            <span class="format-tag">Wissen & KÃ¶nnen</span>
+            <h3>Fachwissen aus der Gemeinde</h3>
+            <p>Menschen im Ruhestand bringen Berufserfahrung, Handwerk, Sprache oder KreativitÃ¤t als klare Mitmach-Rolle ein.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Pilotablauf</span>
+          <h2>Ein Ã¼berschaubarer Weg vom Bedarf zum ersten Termin.</h2>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <h3>Bedarf klÃ¤ren</h3>
+            <p>In 30 Minuten prÃ¼fen wir, welche Zielgruppe, RÃ¤ume und KapazitÃ¤ten bei Ihnen realistisch sind.</p>
+          </article>
+          <article class="step-card">
+            <h3>Format festlegen</h3>
+            <p>Der Mitmach-Planer schlÃ¤gt passende Pakete vor. Sie entscheiden, was zu Ihrer Bibliothek passt.</p>
+          </article>
+          <article class="step-card">
+            <h3>Engagierte aktivieren</h3>
+            <p>SISU liefert Aufruftexte und eine einfache Anmeldestrecke. Sie behalten den Ãœberblick und starten klein.</p>
+          </article>
+        </div>
+
+        <div class="signals">
+          <article class="signal-card">
+            <strong>Ihr Aufwand</strong>
+            <p>Ein GesprÃ¤ch, ein Format, ein erster Termin.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r Engagierte</strong>
+            <p>Klare Aufgabe statt unklarer Ehrenamtsrolle.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r die Gemeinde</strong>
+            <p>Sichtbare Beteiligung und konkrete Wirkung.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r den Start</strong>
+            <p>Der Bedarfscheck ist kostenfrei.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="kontakt">
+      <div class="container cta-inner">
+        <div>
+          <span class="section-kicker">NÃ¤chster Schritt</span>
+          <h2>Finden wir ein erstes Format, das zu Ihrer Bibliothek passt.</h2>
+          <p>
+            Der beste Einstieg ist ein konkreter Anlass: ein offener Treff, ein Leseformat, eine digitale Sprechstunde
+            oder eine Idee, die schon lÃ¤nger in Ihrer Bibliothek liegt.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="mailto:jeanera@gmx.net?subject=SISU%20Bedarfscheck%20Bibliothek&body=Guten%20Tag%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20einen%20SISU-Bedarfscheck%20f%C3%BCr%20unsere%20Bibliothek.%0A%0ABibliothek%2FOrt%3A%20%0AName%3A%20%0AErste%20Idee%20oder%20Frage%3A%20%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen">Bedarfscheck anfragen</a>
+          <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Demo Ã¶ffnen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>SISU - Engagement neu denken fÃ¼r Zukunftsorte</span>
+      <span>Ein Projekt der <a href="https://www.impactschmiede.de">Impactschmiede</a></span>
+    </div>
+  </footer>
+</body>
+</html>
+

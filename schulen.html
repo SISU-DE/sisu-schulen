@@ -1,0 +1,760 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SISU fÃ¼r Schulen - Erfahrungswissen fÃ¼r Ganztag und BÃ¼rgerschule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --paper-warm: #efe9dd;
+      --ink: #20242b;
+      --muted: #555b66;
+      --soft: #767b86;
+      --line: #ded8ce;
+      --green: #315c48;
+      --green-soft: #e5efe8;
+      --blue: #244b6a;
+      --blue-soft: #e8eef3;
+      --coral: #a94f3d;
+      --coral-soft: #f3e5df;
+      --white: #ffffff;
+      --shadow: 0 12px 34px rgba(32,36,43,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter Tight", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    h1, h2, h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251,250,246,.92);
+      border-bottom: 1px solid rgba(222,216,206,.86);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-main {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 25px;
+    }
+
+    .brand-sub {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(32,36,43,.12);
+    }
+
+    .btn-primary { background: var(--green); color: var(--white); }
+    .btn-secondary { background: var(--white); color: var(--green); border-color: var(--line); }
+
+    .hero {
+      min-height: calc(100vh - 68px);
+      position: relative;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(18,24,25,.86) 0%, rgba(18,24,25,.56) 50%, rgba(18,24,25,.18) 100%),
+        url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=82") center/cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 120px;
+      background: linear-gradient(0deg, var(--paper), rgba(251,250,246,0));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(780px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 96px 0 124px;
+      transform: translateX(max(-170px, -10vw));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: #dce8df;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(43px, 7vw, 78px);
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin-top: 22px;
+      color: rgba(255,255,255,.88);
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.48;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      color: rgba(255,255,255,.86);
+      font-size: 14px;
+    }
+
+    .proof-pill {
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 8px;
+      padding: 8px 11px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .practice-line {
+      max-width: 650px;
+      margin-top: 16px;
+      color: rgba(255,255,255,.8);
+      font-size: 14px;
+    }
+
+    section { padding: 84px 0; }
+
+    .section-head {
+      max-width: 740px;
+      margin-bottom: 38px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--coral);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 4.6vw, 54px);
+    }
+
+    .section-head p {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 64ch;
+    }
+
+    .problem-grid,
+    .formats-grid,
+    .steps-grid,
+    .signals {
+      display: grid;
+      gap: 18px;
+    }
+
+    .problem-grid { grid-template-columns: repeat(3, 1fr); }
+    .formats-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid { grid-template-columns: repeat(3, 1fr); counter-reset: steps; }
+    .signals { grid-template-columns: repeat(4, 1fr); margin-top: 36px; gap: 14px; }
+
+    .problem-card,
+    .format-card,
+    .step-card,
+    .signal-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(32,36,43,.04);
+    }
+
+    .problem-card {
+      padding: 26px;
+      min-height: 220px;
+    }
+
+    .problem-card strong,
+    .signal-card strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .problem-card h3,
+    .step-card h3 {
+      margin-bottom: 12px;
+      font-size: 27px;
+    }
+
+    .problem-card p,
+    .format-card p,
+    .step-card p,
+    .signal-card p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .band {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .note-box {
+      padding: 34px;
+      border-left: 5px solid var(--blue);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .note-image {
+      height: 210px;
+      margin: -34px -34px 28px;
+      overflow: hidden;
+    }
+
+    .note-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(.9) contrast(.98);
+    }
+
+    .note-box h3 {
+      margin-bottom: 16px;
+      font-size: clamp(28px, 3.2vw, 40px);
+    }
+
+    .note-box p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .check-list span {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-weight: 900;
+    }
+
+    .format-card { padding: 24px; }
+
+    .format-media {
+      width: calc(100% + 48px);
+      height: 142px;
+      margin: -24px -24px 20px;
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
+      background: var(--paper-warm);
+    }
+
+    .format-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.9) contrast(.98);
+    }
+
+    .format-tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .format-card h3 {
+      min-height: 62px;
+      margin-bottom: 12px;
+      font-size: 25px;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 30px;
+      overflow: hidden;
+      counter-increment: steps;
+    }
+
+    .step-card::before {
+      content: "0" counter(steps);
+      display: block;
+      margin-bottom: 38px;
+      color: var(--coral);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .1em;
+    }
+
+    .signal-card {
+      padding: 20px;
+      background: var(--green-soft);
+      border-color: #cbded1;
+    }
+
+    .signal-card strong {
+      margin-bottom: 6px;
+      color: var(--green);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .cta {
+      background: var(--ink);
+      color: var(--white);
+      padding: 82px 0;
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(34px, 4.8vw, 56px);
+    }
+
+    .cta p {
+      max-width: 66ch;
+      margin-top: 16px;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+    }
+
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: stretch;
+    }
+
+    .footer {
+      padding: 28px 0;
+      color: var(--soft);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: var(--green); text-decoration: none; font-weight: 700; }
+
+    @media (max-width: 980px) {
+      .hero-content {
+        transform: none;
+        width: min(860px, calc(100% - 40px));
+      }
+
+      .problem-grid,
+      .formats-grid,
+      .steps-grid,
+      .signals,
+      .split,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .format-card h3 { min-height: 0; }
+      .cta-actions { justify-items: start; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .topbar-inner { min-height: 62px; }
+      .brand-sub { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .hero { min-height: 720px; align-items: center; }
+      .hero-content { padding: 76px 0 84px; }
+      .btn { white-space: normal; text-align: center; }
+      .hero-actions .btn { width: 100%; }
+      section { padding: 58px 0; }
+      .problem-card { min-height: 0; }
+      .note-box { padding: 26px; }
+      .note-image { height: 190px; margin: -26px -26px 22px; }
+      .cta-actions, .cta-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#">
+        <span class="brand-main">SISU</span>
+        <span class="brand-sub">fÃ¼r Schulen</span>
+      </a>
+      <nav class="nav-actions" aria-label="Hauptnavigation">
+        <a class="btn btn-secondary" href="./mitmach-planer-schulen.html">Demo ansehen</a>
+        <a class="btn btn-primary" href="#kontakt">Format besprechen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="SISU fÃ¼r Schulen">
+      <div class="hero-content">
+        <span class="eyebrow">FÃ¼r BÃ¼rgerschulen, Grundschule und Ganztag</span>
+        <h1>Erfahrungswissen aus der Gemeinde fÃ¼r Schule und Hort nutzbar machen.</h1>
+        <p>
+          SISU hilft Schulleitung und Team, aus guten Ideen klare Mitmach-Formate zu entwickeln:
+          fÃ¼r Ganztag, Hort, Lernbegleitung, Natur, Handwerk und Berufswege.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#kontakt">Erstes Mitmach-Format finden</a>
+          <a class="btn btn-secondary" href="./mitmach-planer-schulen.html">Mitmach-Planer ansehen</a>
+        </div>
+        <div class="hero-proof" aria-label="Vertrauenssignale">
+          <span class="proof-pill">BÃ¼rgerschule anschlussfÃ¤hig</span>
+          <span class="proof-pill">Erste Schulprojekte erprobt</span>
+          <span class="proof-pill">Klare Rollen statt Zusatzaufwand</span>
+        </div>
+        <p class="practice-line">FÃ¼r Schulen, die engagierte Menschen aus der Gemeinde strukturiert und verlÃ¤sslich einbinden wollen.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Ausgangslage</span>
+          <h2>Ganztag und Hort brauchen mehr als zusÃ¤tzliche PlÃ¤tze.</h2>
+          <p>
+            Ab dem Schuljahr 2026/2027 wÃ¤chst der Anspruch auf Ganztagesbetreuung im Grundschulalter.
+            FÃ¼r Schulen und kommunale Betreuung heiÃŸt das: mehr Kinder, mehr Zeitfenster, mehr sinnvolle Angebote.
+            Gleichzeitig darf das Lehr- und Betreuungsteam nicht noch mehr Koordination tragen.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem-card">
+            <strong>Ganztag</strong>
+            <h3>Nachmittage brauchen Inhalt.</h3>
+            <p>Nicht jedes Angebot muss Unterricht sein. Kinder profitieren von Projekten, Bewegung, Natur, Lesen und praktischem Tun.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Team</strong>
+            <h3>Gute Ideen brauchen Struktur.</h3>
+            <p>LehrkrÃ¤fte und Betreuung haben Ideen, aber wenig Zeit, externe Menschen zu suchen, einzuarbeiten und Formate zu planen.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Gemeinde</strong>
+            <h3>BÃ¼rgerschule lebt von Beteiligung.</h3>
+            <p>Menschen aus der Gemeinde bringen Berufserfahrung, Handwerk, Gartenwissen, Lesefreude und Lebenspraxis in den Schulalltag.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container split">
+        <div>
+          <div class="section-head">
+            <span class="section-kicker">Was SISU anders macht</span>
+            <h2>Aus einer guten Idee wird ein schulisch machbares Format.</h2>
+            <p>
+              SISU startet nicht mit einer offenen Suche nach Engagierten.
+              Wir klÃ¤ren zuerst, was zur Schule, zur Klasse, zum Hort und zur verfÃ¼gbaren Begleitung passt.
+              Daraus entsteht ein Format mit klarer Aufgabe, Zeitraum und Rollenverteilung.
+            </p>
+          </div>
+          <ul class="check-list">
+            <li><span>âœ“</span><p>Projektformat gemeinsam mit Schulleitung, Lehrkraft oder Betreuungsteam klÃ¤ren</p></li>
+            <li><span>âœ“</span><p>Passende Rollen fÃ¼r Engagierte beschreiben: Projektpat:in, Lesementor:in, Berufs-ErzÃ¤hler:in</p></li>
+            <li><span>âœ“</span><p>Aufwand, Material, Begleitung und erster Termin werden vorab realistisch gemacht</p></li>
+            <li><span>âœ“</span><p>Engagierte ergÃ¤nzen Schule und Hort. Sie ersetzen keine Lehr- oder BetreuungskrÃ¤fte.</p></li>
+          </ul>
+        </div>
+
+        <aside class="note-box">
+          <div class="note-image">
+            <img src="https://images.unsplash.com/photo-1771765754567-e7b5bbf6a3b3?auto=format&fit=crop&w=900&q=72" alt="Erwachsene Begleitung arbeitet mit Kindern an einem Tisch" loading="lazy"/>
+          </div>
+          <h3>Wichtig fÃ¼r Schulen</h3>
+          <p>
+            SISU ist kein Ersatz fÃ¼r Aufsicht, pÃ¤dagogische FachkrÃ¤fte oder schulische Verantwortung.
+            Der Wert liegt in der Vorbereitung: ein klares Format, verlÃ¤ssliche Erwartungen und ein Einstieg,
+            der fÃ¼r Schule, Kinder und Engagierte tragfÃ¤hig ist.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="formate">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Projektformate</span>
+          <h2>Konkrete Formate fÃ¼r Grundschule, Hort und Ganztag.</h2>
+          <p>
+            Die ersten Formate sollten Ã¼berschaubar sein: wenige Termine, klare Aufgabe, sichtbares Ergebnis.
+            Genau dort kÃ¶nnen engagierte Menschen aus der Gemeinde ihre Erfahrung sinnvoll einbringen.
+          </p>
+        </div>
+
+        <div class="formats-grid">
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1757838661170-186930ac95db?auto=format&fit=crop&w=900&q=72" alt="Hochbeete mit jungen Pflanzen in einem Garten" loading="lazy"/>
+            </div>
+            <span class="format-tag">Natur & Garten</span>
+            <h3>Hochbeet und Gartenprojekt</h3>
+            <p>Ein Beet bauen, bepflanzen und Ã¼ber mehrere Termine pflegen. Praktisch, sichtbar und gut fÃ¼r Hort oder Grundschule.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1650907195186-8a41fb31494b?auto=format&fit=crop&w=900&q=72" alt="Vogelnest mit Eiern zwischen Zweigen" loading="lazy"/>
+            </div>
+            <span class="format-tag">Handwerk</span>
+            <h3>NistkÃ¤sten bauen oder pflegen</h3>
+            <p>Kinder erleben Natur und Handwerk konkret. Engagierte bringen Anleitung, Geduld und praktisches KÃ¶nnen mit.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=72" alt="Aufgeschlagenes Buch in ruhiger Leseumgebung" loading="lazy"/>
+            </div>
+            <span class="format-tag">Lesen</span>
+            <h3>Vorlese-Pat:innen und Lesementor:innen</h3>
+            <p>RegelmÃ¤ÃŸige Lesezeit mit vertrauten Erwachsenen. Besonders passend fÃ¼r Grundschule, Hort und SprachfÃ¶rderung.</p>
+          </article>
+          <article class="format-card">
+            <div class="format-media">
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=72" alt="Menschen sitzen gemeinsam an einem Tisch im GesprÃ¤ch" loading="lazy"/>
+            </div>
+            <span class="format-tag">Erfahrung</span>
+            <h3>Berufs- und Lebenswege erzÃ¤hlen</h3>
+            <p>Menschen aus der Gemeinde erzÃ¤hlen von Arbeit, Umwegen und KÃ¶nnen. Das macht Berufsorientierung lebensnÃ¤her.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Aus der Praxis</span>
+          <h2>LehrkrÃ¤fte sehen den Wert, wenn Erfahrung von auÃŸen wirklich ankommt.</h2>
+          <p>
+            Aus ersten Schulprojekten wird deutlich: BeitrÃ¤ge von auÃŸen sind besonders wertvoll,
+            wenn sie nicht zusÃ¤tzlich Arbeit erzeugen, sondern als Lebenswissen, praktisches KÃ¶nnen
+            und konkrete UnterstÃ¼tzung in den Schulalltag passen.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem-card">
+            <strong>RÃ¼ckmeldung</strong>
+            <h3>"So ein Projekt wÃ¼rden wir wieder machen."</h3>
+            <p>Ein Lehrer mÃ¶chte erneut mit den Hochbeetbauern arbeiten, weil das Projekt sichtbar, praktisch und gut anschlussfÃ¤hig war.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Lebenswissen</strong>
+            <h3>"Jeder Beitrag von auÃŸen bringt etwas Eigenes mit."</h3>
+            <p>LehrkrÃ¤fte erleben es als Bereicherung, wenn Menschen aus der Gemeinde ihr Wissen, ihre Erfahrung und ihre Ruhe einbringen.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Struktur</strong>
+            <h3>"Es funktioniert, wenn der Rahmen klar ist."</h3>
+            <p>Mehrere Termine sind dann machbar, wenn Aufgabe, Begleitung, Material und Verantwortung vorher gut abgestimmt sind.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Pilotablauf</span>
+          <h2>Ein Ã¼berschaubarer Weg vom Bedarf zum ersten Projekt.</h2>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <h3>Bedarf klÃ¤ren</h3>
+            <p>Wir besprechen mit Schulleitung und Team, wo ein externes Mitmach-Format wirklich hilft.</p>
+          </article>
+          <article class="step-card">
+            <h3>Format festlegen</h3>
+            <p>Aus Thema, Altersgruppe, Zeitfenster und Begleitung entsteht ein klarer Projektsteckbrief.</p>
+          </article>
+          <article class="step-card">
+            <h3>Engagierte einbinden</h3>
+            <p>SISU hilft bei Ansprache und RollenklÃ¤rung. Der Start bleibt klein, konkret und Ã¼berprÃ¼fbar.</p>
+          </article>
+        </div>
+
+        <div class="signals">
+          <article class="signal-card">
+            <strong>FÃ¼r Kinder</strong>
+            <p>Praktisches Lernen mit Menschen aus der Gemeinde.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r das Team</strong>
+            <p>Klare Vorbereitung statt zusÃ¤tzlicher Organisationslast.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r Engagierte</strong>
+            <p>Eine konkrete Aufgabe mit Anfang, Ende und Wirkung.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r den Start</strong>
+            <p>Ein erstes Projektformat lÃ¤sst sich in 30 Minuten prÃ¼fen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="kontakt">
+      <div class="container cta-inner">
+        <div>
+          <span class="section-kicker">NÃ¤chster Schritt</span>
+          <h2>Finden wir ein erstes Format, das zu Ihrer Schule passt.</h2>
+          <p>
+            Der beste Einstieg ist ein konkreter Anlass: ein Hortangebot, eine Grundschulklasse,
+            ein Gartenprojekt, ein Leseformat oder ein Ganztagsfenster, das sinnvoll gefÃ¼llt werden soll.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="mailto:jeanera@gmx.net?subject=SISU%20Projektformat%20Schule&body=Guten%20Tag%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20ein%20SISU-Projektformat%20f%C3%BCr%20unsere%20Schule%20oder%20Betreuung.%0A%0ASchule%2FOrt%3A%20%0AName%3A%20%0AErste%20Idee%20oder%20Frage%3A%20%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen">Format anfragen</a>
+          <a class="btn btn-secondary" href="./bibliotheken.html">Bibliotheksseite ansehen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>SISU - Engagement neu denken fÃ¼r Zukunftsorte</span>
+      <span>Ein Projekt der <a href="https://www.impactschmiede.de">Impactschmiede</a></span>
+    </div>
+  </footer>
+</body>
+</html>
+
+
