@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SISU Mitmach-Planer f�r Schulen</title>
+<title>SISU Mitmach-Planer für Schulen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
   .nav button:hover{background:var(--paper-2);color:var(--ink)}
   .nav button.active{background:var(--bluegrey);color:#fff}
 
-  /* Engagierten-Portal Tab - visuell abgesetzt, rechtsb�ndig */
+  /* Engagierten-Portal Tab – visuell abgesetzt, rechtsbündig */
   .nav button.portal-tab{
     margin-left:auto;
     background:var(--sage-tint);
@@ -755,80 +755,80 @@ const { useState, useMemo, useEffect, useRef } = React;
 const PACKAGES = {
   natur: {
     id:"natur", name:"Natur & Nachhaltigkeit",
-    short:"Engagierte bringen Umweltwissen und praktisches Tun in Schule, Hort oder Ganztag - zum Beispiel mit Hochbeet, Garten, Nistk�sten oder Insektenhotel.",
+    short:"Engagierte bringen Umweltwissen und praktisches Tun in Schule, Hort oder Ganztag – zum Beispiel mit Hochbeet, Garten, Nistkästen oder Insektenhotel.",
     fitFor:"BNE, Schulgarten, Hort, Grundschule, handlungsorientiertes Lernen.",
-    effort:"Mittel", effortLevel:2, stage:"3-4 Termine bis Projektreihe", potential:"hoch", potentialLevel:3,
-    why:"Dieses Format passt, wenn Kinder Nachhaltigkeit nicht nur besprechen, sondern selbst bauen, pflanzen, beobachten und Verantwortung �bernehmen sollen.",
+    effort:"Mittel", effortLevel:2, stage:"3–4 Termine bis Projektreihe", potential:"hoch", potentialLevel:3,
+    why:"Dieses Format passt, wenn Kinder Nachhaltigkeit nicht nur besprechen, sondern selbst bauen, pflanzen, beobachten und Verantwortung übernehmen sollen.",
     roles:["Garten-Pat:in","Naturbegleiter:in","Hochbeet-Team","Nistkasten-Pat:in"],
-    formats:["Hochbeet bauen und bepflanzen","Nistk�sten bauen oder pflegen","3-4 Termine Gartenprojekt","Insektenhotel oder Kompost praktisch erkl�ren"],
-    clarify:["Welche Klasse oder Hortgruppe ist beteiligt?","Wer �bernimmt Aufsicht und p�dagogische Verantwortung?","Welche Materialien und Werkzeuge werden gebraucht?","Wo kann das Projekt sichtbar bleiben?"],
+    formats:["Hochbeet bauen und bepflanzen","Nistkästen bauen oder pflegen","3–4 Termine Gartenprojekt","Insektenhotel oder Kompost praktisch erklären"],
+    clarify:["Welche Klasse oder Hortgruppe ist beteiligt?","Wer übernimmt Aufsicht und pädagogische Verantwortung?","Welche Materialien und Werkzeuge werden gebraucht?","Wo kann das Projekt sichtbar bleiben?"],
     test:"Ein einzelner Garten- oder Nistkasten-Termin mit klarer Materialliste, Begleitung durch Schule/Hort und kurzem Feedback danach."
   },
   handwerk: {
     id:"handwerk", name:"Handwerk & Machen",
-    short:"Menschen mit praktischem K�nnen unterst�tzen kleine Werkstattformate: bauen, reparieren, gestalten, ausprobieren - mit sicherem Rahmen.",
+    short:"Menschen mit praktischem Können unterstützen kleine Werkstattformate: bauen, reparieren, gestalten, ausprobieren – mit sicherem Rahmen.",
     fitFor:"Werkstatt, Technik, Upcycling, praktisches Lernen, kleine Gruppen.",
-    effort:"Mittel bis h�her", effortLevel:3, stage:"Mitmachen bis Projektreihe", potential:"mittel bis hoch", potentialLevel:2,
-    why:"Dieses Format eignet sich, wenn Kinder etwas mit den H�nden tun und ein sichtbares Ergebnis erleben sollen.",
-    roles:["Werkstatt-Pat:in","Materialbegleiter:in","Upcycling-Anleiter:in","Technik-Erkl�rer:in"],
+    effort:"Mittel bis höher", effortLevel:3, stage:"Mitmachen bis Projektreihe", potential:"mittel bis hoch", potentialLevel:2,
+    why:"Dieses Format eignet sich, wenn Kinder etwas mit den Händen tun und ein sichtbares Ergebnis erleben sollen.",
+    roles:["Werkstatt-Pat:in","Materialbegleiter:in","Upcycling-Anleiter:in","Technik-Erklärer:in"],
     formats:["Kleiner Bau-Workshop","Upcycling-Termin im Ganztag","Werkzeug sicher kennenlernen","Reparieren oder Gestalten in Kleingruppen"],
-    clarify:["Welche Sicherheitsregeln gelten?","Welche Werkzeuge sind erlaubt?","Wie gro� darf die Gruppe sein?","Wer bereitet Material und Raum vor?"],
-    test:"Ein 60- bis 90-min�tiger Werkstatt-Termin mit kleiner Gruppe, vorbereiteten Materialien und klarer Rollenverteilung."
+    clarify:["Welche Sicherheitsregeln gelten?","Welche Werkzeuge sind erlaubt?","Wie groß darf die Gruppe sein?","Wer bereitet Material und Raum vor?"],
+    test:"Ein 60- bis 90-minütiger Werkstatt-Termin mit kleiner Gruppe, vorbereiteten Materialien und klarer Rollenverteilung."
   },
   lesen: {
     id:"lesen", name:"Lesen & Sprache",
-    short:"Engagierte unterst�tzen Vorlesen, Lesementoring oder ruhige Lesezeiten - besonders passend f�r Grundschule, Hort und Sprachf�rderung.",
-    fitFor:"Lesef�rderung, Grundschule, Hort, Sprachf�rderung, ruhige Kleingruppen.",
-    effort:"Niedrig bis mittel", effortLevel:1, stage:"Schnuppern bis regelm��ig", potential:"hoch", potentialLevel:3,
-    why:"Dieses Format ist ein guter Einstieg, weil es wenig Material braucht und Kindern verl�ssliche zus�tzliche Lesezeit erm�glicht.",
+    short:"Engagierte unterstützen Vorlesen, Lesementoring oder ruhige Lesezeiten – besonders passend für Grundschule, Hort und Sprachförderung.",
+    fitFor:"Leseförderung, Grundschule, Hort, Sprachförderung, ruhige Kleingruppen.",
+    effort:"Niedrig bis mittel", effortLevel:1, stage:"Schnuppern bis regelmäßig", potential:"hoch", potentialLevel:3,
+    why:"Dieses Format ist ein guter Einstieg, weil es wenig Material braucht und Kindern verlässliche zusätzliche Lesezeit ermöglicht.",
     roles:["Vorlese-Pat:in","Lese-Mentor:in","Sprachspiel-Begleiter:in","Hort-Lesezeit-Pat:in"],
-    formats:["Vorlesezeit im Hort","Lesementoring f�r Kleingruppen","Bilderbuch oder Sachbuch entdecken","Sprachspiele mit ruhigem Einstieg"],
-    clarify:["Welche Kinder oder Klassen profitieren?","Wer w�hlt Texte und B�cher aus?","Findet es einzeln, in Kleingruppen oder in der Klasse statt?","Wie wird Kontinuit�t hergestellt?"],
-    test:"Eine 30- bis 45-min�tige Lesezeit mit klarer Gruppe, Ansprechperson und kurzem Austausch danach."
+    formats:["Vorlesezeit im Hort","Lesementoring für Kleingruppen","Bilderbuch oder Sachbuch entdecken","Sprachspiele mit ruhigem Einstieg"],
+    clarify:["Welche Kinder oder Klassen profitieren?","Wer wählt Texte und Bücher aus?","Findet es einzeln, in Kleingruppen oder in der Klasse statt?","Wie wird Kontinuität hergestellt?"],
+    test:"Eine 30- bis 45-minütige Lesezeit mit klarer Gruppe, Ansprechperson und kurzem Austausch danach."
   },
   gemeinschaft: {
     id:"gemeinschaft", name:"Gemeinschaft & Soziales",
-    short:"Engagierte unterst�tzen Formate, die Gemeinschaft, Beteiligung und gutes Miteinander st�rken - vom Pausenspiel bis zum Generationendialog.",
+    short:"Engagierte unterstützen Formate, die Gemeinschaft, Beteiligung und gutes Miteinander stärken – vom Pausenspiel bis zum Generationendialog.",
     fitFor:"Klassengemeinschaft, Beteiligung, soziale Projekte, ruhige Gruppenangebote.",
     effort:"Niedrig bis mittel", effortLevel:1, stage:"Schnuppern bis Dranbleiben", potential:"mittel", potentialLevel:2,
-    why:"Dieses Format passt, wenn Schule oder Hort mehr gemeinsames Tun und Beteiligung erm�glichen m�chte, ohne ein gro�es Projekt aufzusetzen.",
-    roles:["Spiele-Pat:in","Mitmach-Begleiter:in","Generationen-Br�ckenbauer:in","Projektpate f�r Beteiligung"],
-    formats:["Pausenspiele oder Gesellschaftsspiele","Generationenbegegnung","Kinder planen eine kleine Aktion","Ruhiger Gespr�chs- oder Kreativkreis"],
-    clarify:["Welche Gruppe braucht welches Ma� an Struktur?","Wer moderiert?","Welche Regeln gelten?","Wie wird �berforderung bei Kindern und Engagierten vermieden?"],
-    test:"Ein einzelnes Mitmachformat mit �berschaubarer Gruppe und klarer Begleitung durch Schule oder Betreuung."
+    why:"Dieses Format passt, wenn Schule oder Hort mehr gemeinsames Tun und Beteiligung ermöglichen möchte, ohne ein großes Projekt aufzusetzen.",
+    roles:["Spiele-Pat:in","Mitmach-Begleiter:in","Generationen-Brückenbauer:in","Projektpate für Beteiligung"],
+    formats:["Pausenspiele oder Gesellschaftsspiele","Generationenbegegnung","Kinder planen eine kleine Aktion","Ruhiger Gesprächs- oder Kreativkreis"],
+    clarify:["Welche Gruppe braucht welches Maß an Struktur?","Wer moderiert?","Welche Regeln gelten?","Wie wird Überforderung bei Kindern und Engagierten vermieden?"],
+    test:"Ein einzelnes Mitmachformat mit überschaubarer Gruppe und klarer Begleitung durch Schule oder Betreuung."
   },
   bewegung: {
     id:"bewegung", name:"Bewegung & Gesundheit",
-    short:"Engagierte bringen einfache Bewegungs-, Drau�en- oder Gesundheitsimpulse ein - niedrigschwellig, alltagsnah und passend zum Ganztag.",
-    fitFor:"Hort, Ganztag, Bewegungspausen, Gesundheit, Drau�enangebote.",
+    short:"Engagierte bringen einfache Bewegungs-, Draußen- oder Gesundheitsimpulse ein – niedrigschwellig, alltagsnah und passend zum Ganztag.",
+    fitFor:"Hort, Ganztag, Bewegungspausen, Gesundheit, Draußenangebote.",
     effort:"Niedrig bis mittel", effortLevel:1, stage:"Einzeltermin bis Reihe", potential:"mittel", potentialLevel:2,
     why:"Dieses Format passt, wenn Kinder im Tagesverlauf Bewegung, Ausgleich und neue Impulse brauchen.",
     roles:["Bewegungsbegleiter:in","Spaziergang-Pat:in","Gesundheits-Impulsgeber:in","Pausenangebot-Begleiter:in"],
-    formats:["Bewegungsspiel im Hort","Drau�enrunde mit Beobachtungsauftrag","Entspannungs- oder Atemimpuls","Gesunde Pause praktisch gestalten"],
-    clarify:["Welche Bewegungsform ist altersgerecht?","Welche R�ume oder Au�enfl�chen sind nutzbar?","Wer �bernimmt Aufsicht?","Was ist bei Wetter oder Krankheit der Plan B?"],
-    test:"Ein kurzer Bewegungs- oder Drau�en-Termin mit klarer Gruppe, einfacher Anleitung und sicherem Rahmen."
+    formats:["Bewegungsspiel im Hort","Draußenrunde mit Beobachtungsauftrag","Entspannungs- oder Atemimpuls","Gesunde Pause praktisch gestalten"],
+    clarify:["Welche Bewegungsform ist altersgerecht?","Welche Räume oder Außenflächen sind nutzbar?","Wer übernimmt Aufsicht?","Was ist bei Wetter oder Krankheit der Plan B?"],
+    test:"Ein kurzer Bewegungs- oder Draußen-Termin mit klarer Gruppe, einfacher Anleitung und sicherem Rahmen."
   },
   wissen: {
     id:"wissen", name:"Berufs- & Lebenswissen",
-    short:"Menschen aus der Gemeinde erz�hlen von Arbeit, Umwegen, K�nnen und Lebenserfahrung - als Impuls f�r Neugier, Berufsorientierung und Weltwissen.",
+    short:"Menschen aus der Gemeinde erzählen von Arbeit, Umwegen, Können und Lebenserfahrung – als Impuls für Neugier, Berufsorientierung und Weltwissen.",
     fitFor:"Berufsorientierung, Ganztag, Projektwoche, Sachunterricht, Generationendialog.",
-    effort:"Niedrig", effortLevel:1, stage:"Ein Impuls bis Gespr�chsreihe", potential:"hoch", potentialLevel:3,
+    effort:"Niedrig", effortLevel:1, stage:"Ein Impuls bis Gesprächsreihe", potential:"hoch", potentialLevel:3,
     why:"Dieses Format ist niedrigschwellig und stark, wenn Kinder oder Jugendliche echte Menschen und konkrete Lebenswege kennenlernen sollen.",
-    roles:["Berufs-Erz�hler:in","Erfahrungsgeber:in","Themenpat:in","Praxis-Impulsgeber:in"],
-    formats:["30-Minuten-Berufsimpuls","Lebenswege erz�hlen","Werkzeug oder Gegenstand aus dem Beruf mitbringen","Fragerunde mit Klasse oder Kleingruppe"],
-    clarify:["Welche Altersgruppe h�rt zu?","Welcher Bezug zum Unterricht oder Ganztag besteht?","Wer moderiert die Fragen?","Wie lang ist ein Impuls realistisch?"],
-    test:"Ein 30-Minuten-Impuls mit vorbereiteten Sch�lerfragen und kurzer Reflexion danach."
+    roles:["Berufs-Erzähler:in","Erfahrungsgeber:in","Themenpat:in","Praxis-Impulsgeber:in"],
+    formats:["30-Minuten-Berufsimpuls","Lebenswege erzählen","Werkzeug oder Gegenstand aus dem Beruf mitbringen","Fragerunde mit Klasse oder Kleingruppe"],
+    clarify:["Welche Altersgruppe hört zu?","Welcher Bezug zum Unterricht oder Ganztag besteht?","Wer moderiert die Fragen?","Wie lang ist ein Impuls realistisch?"],
+    test:"Ein 30-Minuten-Impuls mit vorbereiteten Schülerfragen und kurzer Reflexion danach."
   },
 };
 
 const TOPICS = [
   { id:"natur", label:"Umwelt und Nachhaltigkeit praktisch machen" },
-  { id:"handwerk", label:"Handwerk, Bauen oder Kreativit�t erm�glichen" },
-  { id:"lesen", label:"Lesen und Sprache st�rken" },
-  { id:"gemeinschaft", label:"Gemeinschaft und soziales Miteinander f�rdern" },
+  { id:"handwerk", label:"Handwerk, Bauen oder Kreativität ermöglichen" },
+  { id:"lesen", label:"Lesen und Sprache stärken" },
+  { id:"gemeinschaft", label:"Gemeinschaft und soziales Miteinander fördern" },
   { id:"bewegung", label:"Bewegung und Gesundheit einbringen" },
   { id:"wissen", label:"Berufs- und Lebenswissen sichtbar machen" },
-  { id:"beteiligung", label:"Beteiligung und Verantwortung st�rken" },
+  { id:"beteiligung", label:"Beteiligung und Verantwortung stärken" },
   { id:"unsicher", label:"Wir wissen es noch nicht genau" },
 ];
 
@@ -836,39 +836,39 @@ const EXISTING = [
   { id:"ganztag", label:"AGs oder Ganztagsangebote" },
   { id:"hort", label:"Hort- oder Betreuungsangebote" },
   { id:"garten", label:"Schulgarten / Hochbeete / Naturprojekt" },
-  { id:"lesen", label:"Lesef�rderung / Vorlesen / Sprachf�rderung" },
+  { id:"lesen", label:"Leseförderung / Vorlesen / Sprachförderung" },
   { id:"jugendbegleiter", label:"Jugendbegleiter:innen oder externe Engagierte" },
-  { id:"verein", label:"Kooperationen mit Vereinen oder au�erschulischen Partnern" },
+  { id:"verein", label:"Kooperationen mit Vereinen oder außerschulischen Partnern" },
   { id:"bo", label:"Berufsorientierung / Praxisimpulse" },
   { id:"bewegung", label:"Bewegungs-, Pausen- oder Gesundheitsangebote" },
-  { id:"wenig", label:"Noch wenig regelm��ige Angebote" },
+  { id:"wenig", label:"Noch wenig regelmäßige Angebote" },
 ];
 
 const COORD_OPTS = [
   { id:"A", letter:"A", title:"Sehr wenig", desc:"Nur klar vorbereitete Einzeltermine sind realistisch." },
   { id:"B", letter:"B", title:"Etwas",      desc:"Eine Lehrkraft oder Betreuungsperson kann einzelne Termine begleiten." },
-  { id:"C", letter:"C", title:"Mittel",     desc:"3-4 Termine sind m�glich, wenn Rollen und Material klar sind." },
-  { id:"D", letter:"D", title:"Hoch",       desc:"Ein regelm��iges Angebot oder eine AG ist grunds�tzlich denkbar." },
+  { id:"C", letter:"C", title:"Mittel",     desc:"3–4 Termine sind möglich, wenn Rollen und Material klar sind." },
+  { id:"D", letter:"D", title:"Hoch",       desc:"Ein regelmäßiges Angebot oder eine AG ist grundsätzlich denkbar." },
 ];
 
 const COORD_RESULT = {
   A: { title:"Niedrigschwellig starten",
-       text:"Ihre Schule sollte mit einem klar begrenzten Einzeltermin beginnen. SISU empfiehlt Formate mit wenig Vorlauf und sehr klarer Rollenkl�rung." },
-  B: { title:"Erste Rollen m�glich",
+       text:"Ihre Schule sollte mit einem klar begrenzten Einzeltermin beginnen. SISU empfiehlt Formate mit wenig Vorlauf und sehr klarer Rollenklärung." },
+  B: { title:"Erste Rollen möglich",
        text:"Ihre Schule kann erste Mitmachrollen gut testen, wenn Aufgabe, Termin, Begleitung und Verantwortlichkeiten vorab definiert sind." },
-  C: { title:"Kleine Projektreihe m�glich",
-       text:"Ihre Schule kann Formate �ber mehrere Termine aufbauen, wenn Material, Aufsicht, Begleitung und Feedback einfach geregelt sind." },
-  D: { title:"Ausbau zum B�rgerschul-Format m�glich",
+  C: { title:"Kleine Projektreihe möglich",
+       text:"Ihre Schule kann Formate über mehrere Termine aufbauen, wenn Material, Aufsicht, Begleitung und Feedback einfach geregelt sind." },
+  D: { title:"Ausbau zum Bürgerschul-Format möglich",
        text:"Ihre Schule kann Engagierte nicht nur punktuell einbinden, sondern gemeinsam mit ihnen ein wiederholbares Ganztags- oder Projektformat entwickeln." },
 };
 
 const TARGETS = [
-  { id:"klasse12", label:"Grundschule Klasse 1-2" },
-  { id:"klasse34", label:"Grundschule Klasse 3-4" },
+  { id:"klasse12", label:"Grundschule Klasse 1–2" },
+  { id:"klasse34", label:"Grundschule Klasse 3–4" },
   { id:"hort", label:"Hort / Betreuung" },
-  { id:"gts56", label:"Ganztag Klasse 5-6" },
-  { id:"gts78", label:"Ganztag Klasse 7-8" },
-  { id:"foerder", label:"Kinder mit besonderem F�rder- oder Ruhebedarf" },
+  { id:"gts56", label:"Ganztag Klasse 5–6" },
+  { id:"gts78", label:"Ganztag Klasse 7–8" },
+  { id:"foerder", label:"Kinder mit besonderem Förder- oder Ruhebedarf" },
   { id:"generation", label:"Generationenbegegnung" },
   { id:"offen", label:"offen / noch unklar" },
 ];
@@ -896,7 +896,7 @@ function scorePackages({ topics, existing, coord, targets }) {
   if (topics.includes("beteiligung")){ s.gemeinschaft+=2; s.natur+=1; s.wissen+=1; }
   if (topics.includes("unsicher"))   { s.gemeinschaft+=2; s.lesen+=1; s.wissen+=1; }
 
-  // Q2 - existing items are deprioritised (already covered); adjacent packages gain
+  // Q2 — existing items are deprioritised (already covered); adjacent packages gain
   if (existing.includes("ganztag"))  { s.gemeinschaft+=1; s.bewegung+=1; s.wissen+=1; }
   if (existing.includes("hort"))     { s.lesen+=1; s.bewegung+=1; s.natur+=1; }
   if (existing.includes("garten"))   { s.natur-=2; s.handwerk+=1; s.gemeinschaft+=1; }
@@ -939,11 +939,11 @@ function scorePackages({ topics, existing, coord, targets }) {
 
 function getCustomPkg(state){
   if (!state.customOffer || !state.slot) return null;
-  return { name: state.slot.customThema || state.slot.title || "Eigenes Angebot", short: state.slot.desc || "", effort:"-", roles:[], id:"custom" };
+  return { name: state.slot.customThema || state.slot.title || "Eigenes Angebot", short: state.slot.desc || "", effort:"—", roles:[], id:"custom" };
 }
 
 /* ============================================================
-   SENIOR FLOW - DATA  (Engagierten-Assistent)
+   SENIOR FLOW – DATA  (Engagierten-Assistent)
    ============================================================ */
 const MOTIVATIONS = [
   { id:"sinn",     label:"Etwas Sinnvolles bewirken" },
@@ -951,62 +951,62 @@ const MOTIVATIONS = [
   { id:"wissen",   label:"Wissen und Erfahrung weitergeben" },
   { id:"aktiv",    label:"In Bewegung und aktiv bleiben" },
   { id:"neu",      label:"Mich neu orientieren, etwas anderes machen" },
-  { id:"hand",     label:"Etwas mit den H�nden tun" },
+  { id:"hand",     label:"Etwas mit den Händen tun" },
   { id:"kind",     label:"Mit Kindern und Jugendlichen arbeiten" },
   { id:"struktur", label:"Einen strukturierten Alltag haben" },
-  { id:"unklar",   label:"Noch unklar - ich m�chte erst reinschauen" },
+  { id:"unklar",   label:"Noch unklar – ich möchte erst reinschauen" },
 ];
 
 const COMPETENCES = [
   { id:"organisieren", label:"Organisieren, planen, koordinieren" },
-  { id:"erklaeren",    label:"Erkl�ren, lehren, anleiten" },
+  { id:"erklaeren",    label:"Erklären, lehren, anleiten" },
   { id:"handwerk_k",   label:"Handwerk und Praktisches" },
-  { id:"kreativ_k",    label:"Kreativ gestalten - Schreiben, Kunst, Musik" },
-  { id:"zuhoeren",     label:"Zuh�ren, beraten, begleiten" },
+  { id:"kreativ_k",    label:"Kreativ gestalten – Schreiben, Kunst, Musik" },
+  { id:"zuhoeren",     label:"Zuhören, beraten, begleiten" },
   { id:"sprache",      label:"Sprache(n) und Schreiben" },
   { id:"digital_k",    label:"Digital, IT, Smartphone" },
-  { id:"natur_k",      label:"Natur, Garten, drau�en sein" },
+  { id:"natur_k",      label:"Natur, Garten, draußen sein" },
   { id:"erfahrung",    label:"Berufserfahrung allgemein einbringen" },
 ];
 
 const COMMIT_OPTS = [
-  { id:"A", letter:"A", title:"Reinschnuppern",   desc:"Ein einzelner Termin - unverbindlich, einmal mitmachen." },
-  { id:"B", letter:"B", title:"Eine kurze Reihe", desc:"3-5 Termine mit klarem Ende. Sie entscheiden danach weiter." },
-  { id:"C", letter:"C", title:"Regelm��ig",       desc:"1-2 Mal im Monat �ber l�ngere Zeit, in festem Rhythmus." },
-  { id:"D", letter:"D", title:"Mitgestalten",     desc:"Verantwortung �bernehmen, l�ngerfristig dranbleiben." },
+  { id:"A", letter:"A", title:"Reinschnuppern",   desc:"Ein einzelner Termin – unverbindlich, einmal mitmachen." },
+  { id:"B", letter:"B", title:"Eine kurze Reihe", desc:"3–5 Termine mit klarem Ende. Sie entscheiden danach weiter." },
+  { id:"C", letter:"C", title:"Regelmäßig",       desc:"1–2 Mal im Monat über längere Zeit, in festem Rhythmus." },
+  { id:"D", letter:"D", title:"Mitgestalten",     desc:"Verantwortung übernehmen, längerfristig dranbleiben." },
 ];
 
 const COMMIT_RESULT = {
   A: { title:"Erstmal hineinschnuppern",
-       text:"Sie beginnen mit einem einzelnen Termin - kein Druck, kein Commitment. Sie sp�ren in Ruhe, ob es passt." },
+       text:"Sie beginnen mit einem einzelnen Termin — kein Druck, kein Commitment. Sie spüren in Ruhe, ob es passt." },
   B: { title:"Eine kurze, klare Reihe",
-       text:"Sie steigen mit wenigen Terminen ein. Klares Ende, klare Wirkung - und Sie entscheiden danach, wie weiter." },
-  C: { title:"Regelm��ig dabei",
-       text:"Sie kommen verl�sslich, in �berschaubarem Rhythmus. Vertrauen und Kontinuit�t bauen sich auf." },
+       text:"Sie steigen mit wenigen Terminen ein. Klares Ende, klare Wirkung — und Sie entscheiden danach, wie weiter." },
+  C: { title:"Regelmäßig dabei",
+       text:"Sie kommen verlässlich, in überschaubarem Rhythmus. Vertrauen und Kontinuität bauen sich auf." },
   D: { title:"Mitgestalten und dranbleiben",
-       text:"Sie �bernehmen Verantwortung, pr�gen mit. Hier z�hlt nicht nur Mithilfe - sondern Ihre Handschrift." },
+       text:"Sie übernehmen Verantwortung, prägen mit. Hier zählt nicht nur Mithilfe — sondern Ihre Handschrift." },
 };
 
 const CONTEXTS = [
   { id:"kinder_c",    label:"Mit Kindern und Familien" },
-  { id:"jugend_c",    label:"Mit Jugendlichen / Sch�ler:innen" },
+  { id:"jugend_c",    label:"Mit Jugendlichen / Schüler:innen" },
   { id:"erwachsen_c", label:"Mit Erwachsenen" },
-  { id:"aelter_c",    label:"Mit �lteren" },
-  { id:"generation",  label:"Generations�bergreifend" },
-  { id:"drinnen",     label:"Drinnen - in einer Einrichtung" },
-  { id:"draussen",    label:"Drau�en - Natur, Quartier" },
-  { id:"offen_c",     label:"Bin offen - passe mich an" },
+  { id:"aelter_c",    label:"Mit Älteren" },
+  { id:"generation",  label:"Generationsübergreifend" },
+  { id:"drinnen",     label:"Drinnen — in einer Einrichtung" },
+  { id:"draussen",    label:"Draußen — Natur, Quartier" },
+  { id:"offen_c",     label:"Bin offen – passe mich an" },
 ];
 
 const ROLES = [
   {
     id:"vorlesen-pate",
-    name:"Vorlese-Pat:in f�r Kinder",
-    short:"Eine ruhige Lesezeit - ein paar Kinder, ein gutes Buch, ein klarer Rahmen.",
+    name:"Vorlese-Pat:in für Kinder",
+    short:"Eine ruhige Lesezeit – ein paar Kinder, ein gutes Buch, ein klarer Rahmen.",
     einrichtung:"Grundschule Musterstadt",
-    aufgabe:"Im Hort oder in einer Kleingruppe vorlesen, danach kurz dar�ber sprechen.",
-    erster_schritt:"Ein erster Termin im Juni - wir bereiten alles vor.",
-    ansprechperson:"Frau Becker � Grundschule Musterstadt",
+    aufgabe:"Im Hort oder in einer Kleingruppe vorlesen, danach kurz darüber sprechen.",
+    erster_schritt:"Ein erster Termin im Juni — wir bereiten alles vor.",
+    ansprechperson:"Frau Becker · Grundschule Musterstadt",
     fit:{
       motivations:["wissen","kind","sinn"],
       competences:["erklaeren","kreativ_k","sprache"],
@@ -1017,11 +1017,11 @@ const ROLES = [
   {
     id:"hochbeet-team",
     name:"Hochbeet-Pat:in",
-    short:"Mit Kindern pflanzen, beobachten und ein Beet �ber mehrere Termine begleiten.",
+    short:"Mit Kindern pflanzen, beobachten und ein Beet über mehrere Termine begleiten.",
     einrichtung:"Hort Musterstadt",
-    aufgabe:"Hochbeet bepflanzen, einfache Pflege erkl�ren, Kinder praktisch einbinden.",
+    aufgabe:"Hochbeet bepflanzen, einfache Pflege erklären, Kinder praktisch einbinden.",
     erster_schritt:"Ein erster Gartentermin mit Betreuungsteam und kleiner Gruppe.",
-    ansprechperson:"Frau Weber � Hort Musterstadt",
+    ansprechperson:"Frau Weber · Hort Musterstadt",
     fit:{
       motivations:["menschen","hand","struktur"],
       competences:["handwerk_k","zuhoeren","kreativ_k"],
@@ -1032,11 +1032,11 @@ const ROLES = [
   {
     id:"bewegung-pause",
     name:"Bewegungsbegleiter:in",
-    short:"Ein einfaches Bewegungs- oder Drau�enangebot im Ganztag begleiten.",
+    short:"Ein einfaches Bewegungs- oder Draußenangebot im Ganztag begleiten.",
     einrichtung:"Ganztag Musterstadt",
-    aufgabe:"Kurze Bewegungsspiele, Spaziergang oder ruhige Drau�enrunde mit vorbereiteter Gruppe.",
+    aufgabe:"Kurze Bewegungsspiele, Spaziergang oder ruhige Draußenrunde mit vorbereiteter Gruppe.",
     erster_schritt:"Ein erster Termin im Tandem mit Betreuung oder Lehrkraft.",
-    ansprechperson:"Herr Schneider � Ganztag Musterstadt",
+    ansprechperson:"Herr Schneider · Ganztag Musterstadt",
     fit:{
       motivations:["wissen","sinn","menschen"],
       competences:["erklaeren","zuhoeren","natur_k"],
@@ -1046,12 +1046,12 @@ const ROLES = [
   },
   {
     id:"berufs-erzaehler",
-    name:"Berufs-Erz�hler:in f�r Schulklassen",
+    name:"Berufs-Erzähler:in für Schulklassen",
     short:"Eine Stunde, eine Geschichte: Wie war Ihr Berufsleben wirklich?",
     einrichtung:"Gemeinschaftsschule Musterstadt",
-    aufgabe:"Einzeltermin in einer Klasse 8-10 - was Sie gemacht haben, was Sie gepr�gt hat.",
-    erster_schritt:"Vorgespr�ch mit der Lehrkraft - wir bereiten den Rahmen vor.",
-    ansprechperson:"Herr Becker � Gemeinschaftsschule Musterstadt",
+    aufgabe:"Einzeltermin in einer Klasse 8–10 — was Sie gemacht haben, was Sie geprägt hat.",
+    erster_schritt:"Vorgespräch mit der Lehrkraft — wir bereiten den Rahmen vor.",
+    ansprechperson:"Herr Becker · Gemeinschaftsschule Musterstadt",
     fit:{
       motivations:["wissen","neu","kind"],
       competences:["erfahrung","erklaeren"],
@@ -1062,11 +1062,11 @@ const ROLES = [
   {
     id:"lese-mentor",
     name:"Lese-Mentor:in",
-    short:"Mit einem Kind lesen �ben - eine Stunde pro Woche, ein Jahr lang.",
+    short:"Mit einem Kind lesen üben — eine Stunde pro Woche, ein Jahr lang.",
     einrichtung:"Grundschule Musterstadt",
     aufgabe:"1:1-Lesebegleitung mit einem Kind, das beim Lesen unsicher ist.",
     erster_schritt:"Ein erstes Kennenlernen mit Kind und Lehrkraft.",
-    ansprechperson:"Frau Becker � Grundschule Musterstadt",
+    ansprechperson:"Frau Becker · Grundschule Musterstadt",
     fit:{
       motivations:["wissen","kind","sinn","struktur"],
       competences:["erklaeren","zuhoeren","sprache"],
@@ -1077,11 +1077,11 @@ const ROLES = [
   {
     id:"naturpfad",
     name:"Naturpfad-Pat:in",
-    short:"Anpacken, Pfade pflegen, Familien durch die Natur f�hren.",
+    short:"Anpacken, Pfade pflegen, Familien durch die Natur führen.",
     einrichtung:"Grundschule Musterstadt",
-    aufgabe:"Nistk�sten pflegen, Naturwissen erkl�ren und Kinder beim Beobachten begleiten.",
+    aufgabe:"Nistkästen pflegen, Naturwissen erklären und Kinder beim Beobachten begleiten.",
     erster_schritt:"Eine erste Natur-Aktion mit Lehrkraft oder Betreuungsteam mitmachen.",
-    ansprechperson:"Herr Klein � Grundschule Musterstadt",
+    ansprechperson:"Herr Klein · Grundschule Musterstadt",
     fit:{
       motivations:["hand","sinn","aktiv","struktur"],
       competences:["handwerk_k","natur_k"],
@@ -1092,11 +1092,11 @@ const ROLES = [
   {
     id:"verein-copilot",
     name:"Vereins-Co-Pilot:in",
-    short:"Ein Verein braucht Struktur - Sie haben ein Leben lang welche aufgebaut.",
+    short:"Ein Verein braucht Struktur — Sie haben ein Leben lang welche aufgebaut.",
     einrichtung:"Gemeinschaftsschule Musterstadt",
-    aufgabe:"Eine Sch�lergruppe bei Planung, Material und Umsetzung eines kleinen Beteiligungsprojekts begleiten.",
-    erster_schritt:"Treffen mit Lehrkraft und Sch�lergruppe - wir kl�ren gemeinsam, wo Sie reinpassen.",
-    ansprechperson:"Herr Klein � Gemeinschaftsschule Musterstadt",
+    aufgabe:"Eine Schülergruppe bei Planung, Material und Umsetzung eines kleinen Beteiligungsprojekts begleiten.",
+    erster_schritt:"Treffen mit Lehrkraft und Schülergruppe — wir klären gemeinsam, wo Sie reinpassen.",
+    ansprechperson:"Herr Klein · Gemeinschaftsschule Musterstadt",
     fit:{
       motivations:["sinn","struktur","neu"],
       competences:["organisieren","erfahrung","digital_k"],
@@ -1106,12 +1106,12 @@ const ROLES = [
   },
   {
     id:"erzaehl-werkstatt",
-    name:"Erz�hl-Werkstatt-Pat:in",
-    short:"Menschen �60 schreiben ihre Lebensgeschichten - Sie geben den Rahmen.",
+    name:"Erzähl-Werkstatt-Pat:in",
+    short:"Menschen Ü60 schreiben ihre Lebensgeschichten — Sie geben den Rahmen.",
     einrichtung:"Schule Musterstadt",
     aufgabe:"Kinder oder Jugendliche sammeln Geschichten aus Familie, Ort oder eigener Erfahrung.",
     erster_schritt:"Wir entwickeln zusammen einen ersten Termin-Aufbau.",
-    ansprechperson:"Frau Becker � Schule Musterstadt",
+    ansprechperson:"Frau Becker · Schule Musterstadt",
     fit:{
       motivations:["wissen","menschen","neu"],
       competences:["kreativ_k","erklaeren","sprache"],
@@ -1125,16 +1125,16 @@ const DEMO_SLOTS = [
   {
     id:"demo-lese-mentor",
     pkgId:"lesen",
-    title:"Lese-Mentor:in f�r ein Schulkind",
+    title:"Lese-Mentor:in für ein Schulkind",
     flexible:true,
-    when:"Wochentag flexibel � 60 Minuten pro Woche � ab September",
-    seats:"3-4",
+    when:"Wochentag flexibel · 60 Minuten pro Woche · ab September",
+    seats:"3–4",
     registrations:[],
-    type:"Reihe �ber ein Schuljahr - nach einem Probetermin",
-    desc:"Eine Stunde pro Woche mit einem Kind, das beim Lesen unsicher ist. Geduldig, regelm��ig, mit sichtbarer Wirkung nach Monaten.",
-    role:"Mit dem Kind in Ruhe Texte lesen, W�rter besprechen, kleine Erfolge feiern.",
-    library:"Kind-Auswahl mit Lehrkraft, Materialien, Raum, Versicherung �ber Land BW.",
-    seek:"Gern mit Kindern arbeiten und sich auf einen Menschen einlassen k�nnen.",
+    type:"Reihe über ein Schuljahr – nach einem Probetermin",
+    desc:"Eine Stunde pro Woche mit einem Kind, das beim Lesen unsicher ist. Geduldig, regelmäßig, mit sichtbarer Wirkung nach Monaten.",
+    role:"Mit dem Kind in Ruhe Texte lesen, Wörter besprechen, kleine Erfolge feiern.",
+    library:"Kind-Auswahl mit Lehrkraft, Materialien, Raum, Versicherung über Land BW.",
+    seek:"Gern mit Kindern arbeiten und sich auf einen Menschen einlassen können.",
     contactName:"Frau Becker",
     contactEmail:"becker@grundschule-musterstadt.de",
     einrichtung:"Grundschule Musterstadt",
@@ -1145,14 +1145,14 @@ const DEMO_SLOTS = [
     pkgId:"natur",
     title:"Hochbeet bepflanzen im Hort",
     flexible:false,
-    when:"jeden Dienstag, 10:00-11:30 (ab 1. Juni)",
+    when:"jeden Dienstag, 10:00–11:30 (ab 1. Juni)",
     seats:"unbegrenzt",
     registrations:[],
-    type:"Wiederkehrender Termin - nach Absprache regelm��ig",
-    desc:"Gemeinsam ein Hochbeet bepflanzen, beobachten und �ber mehrere Termine pflegen.",
+    type:"Wiederkehrender Termin – nach Absprache regelmäßig",
+    desc:"Gemeinsam ein Hochbeet bepflanzen, beobachten und über mehrere Termine pflegen.",
     role:"Sie bringen Gartenwissen, Ruhe und Freude am praktischen Tun mit.",
     library:"Schule/Hort stellt Gruppe, Aufsicht, Ort, Material und eine feste Ansprechperson.",
-    seek:"Gern drau�en sind, erkl�ren k�nnen und Freude am Arbeiten mit Kindern haben.",
+    seek:"Gern draußen sind, erklären können und Freude am Arbeiten mit Kindern haben.",
     contactName:"Frau Becker",
     contactEmail:"becker@schule-musterstadt.de",
     einrichtung:"Grundschule Musterstadt",
@@ -1161,16 +1161,16 @@ const DEMO_SLOTS = [
   {
     id:"demo-natur",
     pkgId:"wissen",
-    title:"Berufswege erz�hlen",
+    title:"Berufswege erzählen",
     flexible:true,
-    when:"flexible Termine - etwa monatlich, samstags vormittags",
-    seats:"3-4",
+    when:"flexible Termine – etwa monatlich, samstags vormittags",
+    seats:"3–4",
     registrations:[],
-    type:"Reihe mit 4-6 Terminen - Sie entscheiden, ob Sie weitermachen",
-    desc:"Eine Person aus der Gemeinde erz�hlt von Beruf, Umwegen, Werkzeugen und Entscheidungen im Arbeitsleben.",
-    role:"Sie erz�hlen aus Ihrer Erfahrung und beantworten Fragen der Sch�ler:innen.",
+    type:"Reihe mit 4–6 Terminen – Sie entscheiden, ob Sie weitermachen",
+    desc:"Eine Person aus der Gemeinde erzählt von Beruf, Umwegen, Werkzeugen und Entscheidungen im Arbeitsleben.",
+    role:"Sie erzählen aus Ihrer Erfahrung und beantworten Fragen der Schüler:innen.",
     library:"Schule bereitet Fragen, Raum, Aufsicht und zeitlichen Rahmen vor.",
-    seek:"Berufserfahrung einbringen m�chten und Jugendlichen lebensnah erz�hlen k�nnen.",
+    seek:"Berufserfahrung einbringen möchten und Jugendlichen lebensnah erzählen können.",
     contactName:"Herr Schneider",
     contactEmail:"schneider@schule-musterstadt.de",
     einrichtung:"Ganztag Musterstadt",
@@ -1184,32 +1184,32 @@ const TESTIMONIALS = [
     quote:"Ich war unsicher, ob ich genug Zeit habe. Beim ersten Termin habe ich gemerkt: zwei Stunden im Monat reichen schon, um etwas zu bewirken.",
   },
   {
-    name:"Klaus", age:68, role:"Berufs-Erz�hler in der Schule",
-    quote:"Ich dachte, mein Beruf w�re langweilig f�r Sch�ler. Stattdessen kamen so viele Fragen, dass die Stunde zu kurz war.",
+    name:"Klaus", age:68, role:"Berufs-Erzähler in der Schule",
+    quote:"Ich dachte, mein Beruf wäre langweilig für Schüler. Stattdessen kamen so viele Fragen, dass die Stunde zu kurz war.",
   },
   {
     name:"Margarete", age:71, role:"Strickrunde-Gastgeberin",
-    quote:"Es ist kein Geben und Nehmen - es ist Begegnung. Und die fehlt mir seit meinem Ruhestand am meisten.",
+    quote:"Es ist kein Geben und Nehmen — es ist Begegnung. Und die fehlt mir seit meinem Ruhestand am meisten.",
   },
 ];
 
 const FAQS = [
   { q:"Wie kann ich mitmachen?",
-    a:"W�hlen Sie einfach ein Projekt aus oder beschreiben Sie kurz, was Sie interessiert. Wir melden uns, besprechen gemeinsam den passenden Einsatz und begleiten den Start." },
+    a:"Wählen Sie einfach ein Projekt aus oder beschreiben Sie kurz, was Sie interessiert. Wir melden uns, besprechen gemeinsam den passenden Einsatz und begleiten den Start." },
   { q:"Wie viel Zeit muss ich einplanen?",
-    a:"Sie entscheiden selbst, wie viel Zeit Sie geben m�chten. Viele Eins�tze dauern nur wenige Stunden oder finden flexibel nach Wunsch 1-2 Stunden pro Woche statt." },
+    a:"Sie entscheiden selbst, wie viel Zeit Sie geben möchten. Viele Einsätze dauern nur wenige Stunden oder finden flexibel nach Wunsch 1–2 Stunden pro Woche statt." },
   { q:"Kann ich jemanden mitbringen?",
     a:"Ja, sehr gerne! Viele Projekte lassen sich gut zu zweit oder im Tandem umsetzen." },
   { q:"Entstehen mir Kosten?",
-    a:"Materialkosten werden in der Regel von der Schule, dem Verein oder der Gemeinde �bernommen. Manche Einrichtungen bieten zus�tzlich eine Ehrenamtspauschale an - das kl�ren wir vorab gemeinsam mit Ihnen." },
+    a:"Materialkosten werden in der Regel von der Schule, dem Verein oder der Gemeinde übernommen. Manche Einrichtungen bieten zusätzlich eine Ehrenamtspauschale an — das klären wir vorab gemeinsam mit Ihnen." },
   { q:"Brauche ich spezielle Vorkenntnisse?",
     a:"Nein. Ihre Lebenserfahrung, Geduld und Freude am Mitmachen sind das Wichtigste." },
   { q:"Bin ich versichert?",
-    a:"Ja. Alle Engagierten sind �ber das Land Baden-W�rttemberg haftpflicht- und unfallversichert, sobald sie sich freiwillig engagieren." },
-  { q:"Muss ich ein F�hrungszeugnis vorlegen?",
-    a:"Bei regelm��iger Arbeit mit Kindern kann ein erweitertes F�hrungszeugnis erforderlich sein. Schule, Betreuung oder Tr�ger kl�ren vorab, was f�r das konkrete Format gilt." },
+    a:"Ja. Alle Engagierten sind über das Land Baden-Württemberg haftpflicht- und unfallversichert, sobald sie sich freiwillig engagieren." },
+  { q:"Muss ich ein Führungszeugnis vorlegen?",
+    a:"Bei regelmäßiger Arbeit mit Kindern kann ein erweitertes Führungszeugnis erforderlich sein. Schule, Betreuung oder Träger klären vorab, was für das konkrete Format gilt." },
   { q:"Kann ich einfach ausprobieren?",
-    a:"Ja, selbstverst�ndlich. Sie k�nnen klein starten und jederzeit aufh�ren." },
+    a:"Ja, selbstverständlich. Sie können klein starten und jederzeit aufhören." },
 ];
 
 function scoreRoles({motivations=[], competences=[], commit="", contexts=[]}){
@@ -1233,7 +1233,7 @@ function scoreRoles({motivations=[], competences=[], commit="", contexts=[]}){
    ============================================================ */
 function Brand({ onClick, screen }){
   const portalScreens = ["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"];
-  const sub = portalScreens.includes(screen) ? "Mitmach-Portal" : "Mitmach-Planer f�r Schulen";
+  const sub = portalScreens.includes(screen) ? "Mitmach-Portal" : "Mitmach-Planer für Schulen";
   return (
     <div className="brand" onClick={onClick}>
       <div className="brand-mark">s</div>
@@ -1255,7 +1255,7 @@ function Topbar({ go, screen, hideNav }){
             <button className={["start"].includes(screen)?"active":""} onClick={()=>go("start")}>Start</button>
             <button className={["q1","q2","q3","q4","result","detail","eigenesAngebot"].includes(screen)?"active":""} onClick={()=>go("q1")}>Mitmach-Planer</button>
             <button className={["dashboard"].includes(screen)?"active":""} onClick={()=>go("dashboard")}>Backend</button>
-            <button className={"portal-tab "+(["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"].includes(screen)?"active":"")} onClick={()=>go("portal")}>F�r Engagierte ?</button>
+            <button className={"portal-tab "+(["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"].includes(screen)?"active":"")} onClick={()=>go("portal")}>Für Engagierte →</button>
           </nav>
         )}
       </div>
@@ -1269,7 +1269,7 @@ function Progress({ step, total }){
     <div className="progress">
       <span className="progress-label mono">Frage {step} von {total}</span>
       <div className="progress-track"><div className="progress-fill" style={{width:`${pct}%`}}/></div>
-      <span className="progress-label">ca. 5-7 Minuten</span>
+      <span className="progress-label">ca. 5–7 Minuten</span>
     </div>
   );
 }
@@ -1289,8 +1289,8 @@ function PotentialPips({ level }){
    ============================================================ */
 function HeroQuotes(){
   const quotes = [
-    { text:"So ein Projekt w�rden wir wieder machen.", source:"R�ckmeldung aus einem Hochbeet-Projekt", img:"https://images.unsplash.com/photo-1757838661170-186930ac95db?auto=format&fit=crop&w=1200&q=80" },
-    { text:"Jeder Beitrag von au�en bringt etwas Eigenes mit.", source:"Lehrerperspektive auf Lebenswissen in der Schule", img:"https://images.unsplash.com/photo-1771765754567-e7b5bbf6a3b3?auto=format&fit=crop&w=1200&q=80" },
+    { text:"So ein Projekt würden wir wieder machen.", source:"Rückmeldung aus einem Hochbeet-Projekt", img:"https://images.unsplash.com/photo-1757838661170-186930ac95db?auto=format&fit=crop&w=1200&q=80" },
+    { text:"Jeder Beitrag von außen bringt etwas Eigenes mit.", source:"Lehrerperspektive auf Lebenswissen in der Schule", img:"https://images.unsplash.com/photo-1771765754567-e7b5bbf6a3b3?auto=format&fit=crop&w=1200&q=80" },
     { text:"Es funktioniert, wenn der Rahmen klar ist.", source:"Erfahrung aus ersten Schulprojekten", img:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80" },
   ];
   const [i,setI] = useState(0);
@@ -1306,7 +1306,7 @@ function HeroQuotes(){
       <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg,rgba(31,37,48,0) 30%,rgba(31,37,48,.55) 55%,rgba(31,37,48,.92) 100%)"}}/>
       <div style={{position:"absolute",left:0,right:0,bottom:0,padding:"32px 28px 24px",zIndex:1,color:"#FCFAF5"}}>
         <div style={{fontSize:11,letterSpacing:".14em",textTransform:"uppercase",color:"#D4B97E",marginBottom:10,fontWeight:600}}>Aus der Schulpraxis</div>
-        <p style={{fontFamily:"'Instrument Serif',serif",fontStyle:"italic",fontSize:24,lineHeight:1.3,margin:"0 0 14px",color:"#FCFAF5"}} key={i} className="fade-in">"{q.text}"</p>
+        <p style={{fontFamily:"'Instrument Serif',serif",fontStyle:"italic",fontSize:24,lineHeight:1.3,margin:"0 0 14px",color:"#FCFAF5"}} key={i} className="fade-in">„{q.text}"</p>
         <div style={{fontSize:13,color:"rgba(252,250,245,.78)",letterSpacing:".02em"}}>{q.source}</div>
         <div style={{display:"flex",gap:6,marginTop:18}}>
           {quotes.map((_,j)=>(
@@ -1327,20 +1327,20 @@ function StartScreen({ go }){
     <div className="container fade-in">
       <div className="hero">
         <div>
-          <span className="eyebrow">F�r Schulleitung, Lehrkr�fte und Ganztag � Kein Login</span>
-          <h1 className="display">Aus guten Ideen werden machbare Mitmach-Angebote f�r Schule und Hort.</h1>
+          <span className="eyebrow">Für Schulleitung, Lehrkräfte und Ganztag · Kein Login</span>
+          <h1 className="display">Aus guten Ideen werden machbare Mitmach-Angebote für Schule und Hort.</h1>
           <p className="lede">
-            In Ihrer Gemeinde leben Menschen mit Kompetenzen und Erfahrung, die sich einbringen m�chten. SISU hilft Ihrer Schule, daraus klare Formate zu entwickeln - organisch, abgestimmt auf Kinder, Teamkapazit�t und schulische Verantwortung.
+            In Ihrer Gemeinde leben Menschen mit Kompetenzen und Erfahrung, die sich einbringen möchten. SISU hilft Ihrer Schule, daraus klare Formate zu entwickeln — organisch, abgestimmt auf Kinder, Teamkapazität und schulische Verantwortung.
           </p>
           <div className="btn-row">
             <button className="btn btn-primary btn-lg" onClick={()=>go("q1")}>
               Mitmach-Planer starten
             </button>
             <button className="btn btn-secondary btn-lg" onClick={()=>go("eigenesAngebot")}>
-              Ich wei� schon was ich will ?
+              Ich weiß schon was ich will →
             </button>
           </div>
-          <p className="small-note" style={{marginTop:10}}>Ca. 5 Minuten � Kein Login � Kein Commitment</p>
+          <p className="small-note" style={{marginTop:10}}>Ca. 5 Minuten · Kein Login · Kein Commitment</p>
         </div>
 
         <HeroQuotes/>
@@ -1354,13 +1354,13 @@ function StartScreen({ go }){
         </div>
         <div className="tile">
           <div className="tile-num mono">02</div>
-          <div className="tile-title">Aufgabe, Rahmen und erster Termin - klar</div>
+          <div className="tile-title">Aufgabe, Rahmen und erster Termin — klar</div>
           <div className="tile-text">SISU strukturiert Rolle, Material, Begleitung und Erwartung, bevor Engagierte angesprochen werden.</div>
         </div>
         <div className="tile">
           <div className="tile-num mono">03</div>
-          <div className="tile-title">Engagierte, die erg�nzen statt ersetzen</div>
-          <div className="tile-text">Engagierte bringen Lebenswissen ein. Schule und Hort behalten Verantwortung, Aufsicht und p�dagogischen Rahmen.</div>
+          <div className="tile-title">Engagierte, die ergänzen statt ersetzen</div>
+          <div className="tile-text">Engagierte bringen Lebenswissen ein. Schule und Hort behalten Verantwortung, Aufsicht und pädagogischen Rahmen.</div>
         </div>
       </div>
     </div>
@@ -1380,9 +1380,9 @@ function QuestionShell({ step, title, sub, children, onBack, onNext, nextLabel, 
         <p className="lede" style={{marginBottom:8}}>{sub}</p>
         {children}
         <div className="btn-row between">
-          <button className="btn btn-ghost" onClick={onBack}>? Zur�ck</button>
+          <button className="btn btn-ghost" onClick={onBack}>← Zurück</button>
           <button className="btn btn-primary" disabled={nextDisabled} onClick={onNext}>
-            {nextLabel || "Weiter"} ?
+            {nextLabel || "Weiter"} →
           </button>
         </div>
       </div>
@@ -1391,7 +1391,7 @@ function QuestionShell({ step, title, sub, children, onBack, onNext, nextLabel, 
 }
 
 /* ============================================================
-   SCREEN: Q1 - topics (multi, max 3)
+   SCREEN: Q1 – topics (multi, max 3)
    ============================================================ */
 function Q1({ state, set, go }){
   const [warn,setWarn] = useState(false);
@@ -1409,8 +1409,8 @@ function Q1({ state, set, go }){
   return (
     <QuestionShell
       step={1}
-      title="Was m�chten Sie als N�chstes erm�glichen?"
-      sub="W�hlen Sie bis zu 3 Themen, die f�r Ihre Schule, Ihren Hort oder den Ganztag aktuell wichtig sind."
+      title="Was möchten Sie als Nächstes ermöglichen?"
+      sub="Wählen Sie bis zu 3 Themen, die für Ihre Schule, Ihren Hort oder den Ganztag aktuell wichtig sind."
       onBack={()=>go("start")}
       onNext={()=>go("q2")}
       nextDisabled={sel.length===0}
@@ -1418,24 +1418,24 @@ function Q1({ state, set, go }){
       {warn && (
         <div className="warn">
           <span className="warn-dot"/>
-          <span>F�r den Start empfehlen wir Fokus. Bitte w�hlen Sie maximal 3 Themen.</span>
+          <span>Für den Start empfehlen wir Fokus. Bitte wählen Sie maximal 3 Themen.</span>
         </div>
       )}
       <div className="chip-grid">
         {TOPICS.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">{sel.length} von max. 3 ausgew�hlt</div>
+      <div className="selected-count mono">{sel.length} von max. 3 ausgewählt</div>
     </QuestionShell>
   );
 }
 
 /* ============================================================
-   SCREEN: Q2 - existing offerings
+   SCREEN: Q2 – existing offerings
    ============================================================ */
 function Q2({ state, set, go }){
   const sel = state.existing;
@@ -1454,18 +1454,18 @@ function Q2({ state, set, go }){
       <div className="chip-grid">
         {EXISTING.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">Mehrfachauswahl m�glich � {sel.length} ausgew�hlt</div>
+      <div className="selected-count mono">Mehrfachauswahl möglich · {sel.length} ausgewählt</div>
     </QuestionShell>
   );
 }
 
 /* ============================================================
-   SCREEN: Q3 - coordination
+   SCREEN: Q3 – coordination
    ============================================================ */
 function Q3({ state, set, go }){
   const v = state.coord;
@@ -1473,7 +1473,7 @@ function Q3({ state, set, go }){
     <QuestionShell
       step={3}
       title="Wie viel Begleitung kann Ihr Team leisten?"
-      sub="Gemeint ist der Rahmen durch Schule, Hort oder Ganztag - nicht der Aufwand der Engagierten."
+      sub="Gemeint ist der Rahmen durch Schule, Hort oder Ganztag – nicht der Aufwand der Engagierten."
       onBack={()=>go("q2")}
       onNext={()=>go("q4")}
       nextDisabled={!v}
@@ -1492,7 +1492,7 @@ function Q3({ state, set, go }){
 }
 
 /* ============================================================
-   SCREEN: Q4 - target audience
+   SCREEN: Q4 – target audience
    ============================================================ */
 function Q4({ state, set, go }){
   const sel = state.targets;
@@ -1502,7 +1502,7 @@ function Q4({ state, set, go }){
   return (
     <QuestionShell
       step={4}
-      title="F�r wen soll das Angebot vor allem sein?"
+      title="Für wen soll das Angebot vor allem sein?"
       sub="Die Zielgruppe beeinflusst, welche Rollen und welcher Rahmen sinnvoll sind."
       onBack={()=>go("q3")}
       onNext={()=>go("result")}
@@ -1512,12 +1512,12 @@ function Q4({ state, set, go }){
       <div className="chip-grid">
         {TARGETS.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">Mehrfachauswahl m�glich � {sel.length} ausgew�hlt</div>
+      <div className="selected-count mono">Mehrfachauswahl möglich · {sel.length} ausgewählt</div>
     </QuestionShell>
   );
 }
@@ -1537,7 +1537,7 @@ function ResultScreen({ state, set, go }){
   return (
     <div className="container fade-in">
       <div className="summary-card">
-        <div className="summary-mark">?</div>
+        <div className="summary-mark">↗</div>
         <div>
           <span className="eyebrow">Ihre passende Startlogik</span>
           <h3>{coordInfo.title}</h3>
@@ -1547,7 +1547,7 @@ function ResultScreen({ state, set, go }){
 
       <div className="results-head">
         <h2 className="section">Ihre 3 empfohlenen Mitmach-Formate</h2>
-        <p className="small-note">Wir zeigen bewusst nur drei Empfehlungen. So bleibt der n�chste Schritt realistisch.</p>
+        <p className="small-note">Wir zeigen bewusst nur drei Empfehlungen. So bleibt der nächste Schritt realistisch.</p>
       </div>
 
       <div className="pkg-grid">
@@ -1562,7 +1562,7 @@ function ResultScreen({ state, set, go }){
             {isAusbau && (
               <div style={{marginBottom:8}}>
                 <span className="badge" style={{background:"var(--brand-light,#fdf4e7)",color:"var(--brand)",border:"1px solid var(--brand)",fontWeight:600,fontSize:11,padding:"2px 8px",borderRadius:4}}>
-                  Ausbau-Empfehlung � bereits teilweise vorhanden
+                  Ausbau-Empfehlung · bereits teilweise vorhanden
                 </span>
               </div>
             )}
@@ -1570,7 +1570,7 @@ function ResultScreen({ state, set, go }){
             <p className="pkg-desc">{p.short}</p>
 
             <dl className="pkg-meta">
-              <div className="pkg-meta-row"><dt>Geeignet f�r</dt><dd style={{maxWidth:"60%"}}>{p.fitFor}</dd></div>
+              <div className="pkg-meta-row"><dt>Geeignet für</dt><dd style={{maxWidth:"60%"}}>{p.fitFor}</dd></div>
               <div className="pkg-meta-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
               <div className="pkg-meta-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
               <div className="pkg-meta-row">
@@ -1578,7 +1578,7 @@ function ResultScreen({ state, set, go }){
                 <dd>
                   <span className="pot-bar">
                     <PotentialPips level={p.potentialLevel}/>
-                    <span className="pot-text">erste Einsch�tzung</span>
+                    <span className="pot-text">erste Einschätzung</span>
                   </span>
                 </dd>
               </div>
@@ -1589,7 +1589,7 @@ function ResultScreen({ state, set, go }){
               {p.why}
             </div>
 
-            <button className="btn btn-secondary" onClick={()=>openPkg(p)}>Format ansehen ?</button>
+            <button className="btn btn-secondary" onClick={()=>openPkg(p)}>Format ansehen →</button>
           </article>
           );
         })}
@@ -1598,14 +1598,14 @@ function ResultScreen({ state, set, go }){
       <div className="footnote">
         <span className="footnote-icon">i</span>
         <span>
-          <strong>Hinweis zum Engagement-Potenzial:</strong> Die Potenzialeinsch�tzung ist eine erste Orientierung
-          und nutzt Dummy-Daten. Ob Menschen tats�chlich mitmachen, zeigt der konkrete Aufruf.
-          Die Empfehlung ersetzt keine schulische Entscheidung - sie hilft, einen realistischen ersten Schritt zu w�hlen.
+          <strong>Hinweis zum Engagement-Potenzial:</strong> Die Potenzialeinschätzung ist eine erste Orientierung
+          und nutzt Dummy-Daten. Ob Menschen tatsächlich mitmachen, zeigt der konkrete Aufruf.
+          Die Empfehlung ersetzt keine schulische Entscheidung – sie hilft, einen realistischen ersten Schritt zu wählen.
         </span>
       </div>
 
       <div className="btn-row">
-        <button className="btn btn-ghost" onClick={()=>go("q4")}>? Antworten anpassen</button>
+        <button className="btn btn-ghost" onClick={()=>go("q4")}>← Antworten anpassen</button>
       </div>
     </div>
   );
@@ -1623,7 +1623,7 @@ function DetailScreen({ state, set, go }){
   return (
     <div className="container fade-in">
       <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("result")}>
-        ? Zur�ck zu Empfehlungen
+        ← Zurück zu Empfehlungen
       </button>
 
       <div className="detail">
@@ -1633,21 +1633,21 @@ function DetailScreen({ state, set, go }){
           <p className="detail-tagline">{p.short}</p>
 
           <div className="detail-section">
-            <h4>Typische Mitmachrollen f�r Engagierte mit Erfahrung</h4>
+            <h4>Typische Mitmachrollen für Engagierte mit Erfahrung</h4>
             <ul className="detail-list">
               {p.roles.map(r=><li key={r}>{r}</li>)}
             </ul>
           </div>
 
           <div className="detail-section">
-            <h4>M�gliche erste Formate</h4>
+            <h4>Mögliche erste Formate</h4>
             <ul className="detail-list">
               {p.formats.map(r=><li key={r}>{r}</li>)}
             </ul>
           </div>
 
           <div className="detail-section">
-            <h4>Was Schule, Hort oder Ganztag kl�ren sollten</h4>
+            <h4>Was Schule, Hort oder Ganztag klären sollten</h4>
             <ul className="detail-list">
               {p.clarify.map(r=><li key={r}>{r}</li>)}
             </ul>
@@ -1655,14 +1655,14 @@ function DetailScreen({ state, set, go }){
 
           <div className="test-box">
             <span className="test-box-label">Guter erster Test</span>
-            <p>"{p.test}"</p>
+            <p>„{p.test}“</p>
           </div>
 
           <div className="btn-row">
             <button className="btn btn-primary btn-lg" onClick={pickPilot}>
-              Dieses Format als ersten Test ausw�hlen
+              Dieses Format als ersten Test auswählen
             </button>
-            <button className="btn btn-ghost" onClick={()=>go("result")}>Zur�ck zu Empfehlungen</button>
+            <button className="btn btn-ghost" onClick={()=>go("result")}>Zurück zu Empfehlungen</button>
           </div>
         </div>
 
@@ -1674,7 +1674,7 @@ function DetailScreen({ state, set, go }){
             <div className="side-row"><dt>Engagement-Potenzial</dt>
               <dd><span className="pot-bar"><PotentialPips level={p.potentialLevel}/><span className="pot-text mono">{p.potential}</span></span></dd>
             </div>
-            <div className="side-row"><dt>Geeignet f�r</dt><dd style={{textAlign:"right",maxWidth:200}}>{p.fitFor}</dd></div>
+            <div className="side-row"><dt>Geeignet für</dt><dd style={{textAlign:"right",maxWidth:200}}>{p.fitFor}</dd></div>
           </dl>
           <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
             <strong>Engagement-Potenzial:</strong> voraussichtlich {p.potential}. Sollte mit einem konkreten Aufruf
@@ -1687,22 +1687,22 @@ function DetailScreen({ state, set, go }){
 }
 
 /* ============================================================
-   SENIOR FLOW - SCREENS  (Engagierten-Assistent)
-   Routen: m1 ? m2 ? m3 ? m4 ? mResult ? mDetail ? mConfirm
+   SENIOR FLOW – SCREENS  (Engagierten-Assistent)
+   Routen: m1 → m2 → m3 → m4 → mResult → mDetail → mConfirm
    ============================================================ */
 function MShell({ step, title, sub, children, onBack, onNext, nextLabel, nextDisabled }){
   return (
     <>
       <Progress step={step} total={4} />
       <div className="container narrow fade-in">
-        <span className="eyebrow">Schritt {step} von 4 � Was passt zu mir?</span>
+        <span className="eyebrow">Schritt {step} von 4 · Was passt zu mir?</span>
         <h2 className="section">{title}</h2>
         <p className="lede" style={{marginBottom:8}}>{sub}</p>
         {children}
         <div className="btn-row between">
-          <button className="btn btn-ghost" onClick={onBack}>? Zur�ck</button>
+          <button className="btn btn-ghost" onClick={onBack}>← Zurück</button>
           <button className="btn btn-primary" disabled={nextDisabled} onClick={onNext}>
-            {nextLabel || "Weiter"} ?
+            {nextLabel || "Weiter"} →
           </button>
         </div>
       </div>
@@ -1721,7 +1721,7 @@ function M1({ state, set, go }){
     <MShell
       step={1}
       title="Was treibt Sie an?"
-      sub="Was w�re f�r Sie ein guter Grund, sich einzubringen? W�hlen Sie bis zu 3 Punkte."
+      sub="Was wäre für Sie ein guter Grund, sich einzubringen? Wählen Sie bis zu 3 Punkte."
       onBack={()=>go("start")}
       onNext={()=>go("m2")}
       nextDisabled={sel.length===0}
@@ -1729,18 +1729,18 @@ function M1({ state, set, go }){
       {warn && (
         <div className="warn">
           <span className="warn-dot"/>
-          <span>F�r den Anfang reicht Fokus - bitte maximal 3.</span>
+          <span>Für den Anfang reicht Fokus — bitte maximal 3.</span>
         </div>
       )}
       <div className="chip-grid">
         {MOTIVATIONS.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">{sel.length} von max. 3 ausgew�hlt</div>
+      <div className="selected-count mono">{sel.length} von max. 3 ausgewählt</div>
     </MShell>
   );
 }
@@ -1754,7 +1754,7 @@ function M2({ state, set, go }){
     <MShell
       step={2}
       title="Was bringen Sie mit?"
-      sub="Was haben Sie �ber die Jahre gut gemacht, gerne gemacht? Mehrfachauswahl willkommen."
+      sub="Was haben Sie über die Jahre gut gemacht, gerne gemacht? Mehrfachauswahl willkommen."
       onBack={()=>go("m1")}
       onNext={()=>go("m3")}
       nextDisabled={false}
@@ -1762,12 +1762,12 @@ function M2({ state, set, go }){
       <div className="chip-grid">
         {COMPETENCES.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">Mehrfachauswahl � {sel.length} ausgew�hlt</div>
+      <div className="selected-count mono">Mehrfachauswahl · {sel.length} ausgewählt</div>
     </MShell>
   );
 }
@@ -1777,8 +1777,8 @@ function M3({ state, set, go }){
   return (
     <MShell
       step={3}
-      title="Wie viel m�chten Sie sich binden?"
-      sub="Es gibt f�r jede Form einen guten Platz. W�hlen Sie, was sich heute richtig anf�hlt - Sie k�nnen es immer �ndern."
+      title="Wie viel möchten Sie sich binden?"
+      sub="Es gibt für jede Form einen guten Platz. Wählen Sie, was sich heute richtig anfühlt – Sie können es immer ändern."
       onBack={()=>go("m2")}
       onNext={()=>go("m4")}
       nextDisabled={!v}
@@ -1805,7 +1805,7 @@ function M4({ state, set, go }){
     <MShell
       step={4}
       title="Mit wem und wo am liebsten?"
-      sub="Das hilft uns, den richtigen Ort und die richtigen Menschen f�r Sie zu finden."
+      sub="Das hilft uns, den richtigen Ort und die richtigen Menschen für Sie zu finden."
       onBack={()=>go("m3")}
       onNext={()=>go("mResult")}
       nextLabel="Passende Rollen anzeigen"
@@ -1814,12 +1814,12 @@ function M4({ state, set, go }){
       <div className="chip-grid">
         {CONTEXTS.map(t=>(
           <button key={t.id} className="chip" data-on={sel.includes(t.id)} onClick={()=>toggle(t.id)}>
-            <span className="chip-check">?</span>
+            <span className="chip-check">✓</span>
             <span className="chip-text">{t.label}</span>
           </button>
         ))}
       </div>
-      <div className="selected-count mono">Mehrfachauswahl � {sel.length} ausgew�hlt</div>
+      <div className="selected-count mono">Mehrfachauswahl · {sel.length} ausgewählt</div>
     </MShell>
   );
 }
@@ -1841,7 +1841,7 @@ function MResult({ state, set, go }){
   return (
     <div className="container fade-in">
       <div className="summary-card">
-        <div className="summary-mark">?</div>
+        <div className="summary-mark">↗</div>
         <div>
           <span className="eyebrow">Ihre passende Einstiegsform</span>
           <h3>{commitInfo.title}</h3>
@@ -1851,7 +1851,7 @@ function MResult({ state, set, go }){
 
       <div className="results-head">
         <h2 className="section">Ihre 3 passenden Mitmach-Rollen</h2>
-        <p className="small-note">Drei Vorschl�ge, abgestimmt auf das, was Sie eingebracht haben. Realistisch starten - nicht alles auf einmal.</p>
+        <p className="small-note">Drei Vorschläge, abgestimmt auf das, was Sie eingebracht haben. Realistisch starten – nicht alles auf einmal.</p>
       </div>
 
       <div className="pkg-grid">
@@ -1870,7 +1870,7 @@ function MResult({ state, set, go }){
               <div className="pkg-meta-row"><dt>Erster Schritt</dt><dd style={{maxWidth:"60%"}}>{r.erster_schritt}</dd></div>
             </dl>
 
-            <button className="btn btn-secondary" onClick={()=>openRole(r)}>Mehr ansehen ?</button>
+            <button className="btn btn-secondary" onClick={()=>openRole(r)}>Mehr ansehen →</button>
           </article>
         ))}
       </div>
@@ -1878,13 +1878,13 @@ function MResult({ state, set, go }){
       <div className="footnote">
         <span className="footnote-icon">i</span>
         <span>
-          <strong>Hinweis:</strong> Die Auswahl basiert auf Beispielrollen f�r Schule, Hort und Ganztag.
-          Wenn nichts richtig passt, melden Sie sich trotzdem - wir suchen weiter.
+          <strong>Hinweis:</strong> Die Auswahl basiert auf Beispielrollen für Schule, Hort und Ganztag.
+          Wenn nichts richtig passt, melden Sie sich trotzdem – wir suchen weiter.
         </span>
       </div>
 
       <div className="btn-row">
-        <button className="btn btn-ghost" onClick={()=>go("m4")}>? Antworten anpassen</button>
+        <button className="btn btn-ghost" onClick={()=>go("m4")}>← Antworten anpassen</button>
       </div>
     </div>
   );
@@ -1895,7 +1895,7 @@ function MDetail({ state, set, go }){
   return (
     <div className="container fade-in">
       <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("mResult")}>
-        ? Zur�ck zu den Vorschl�gen
+        ← Zurück zu den Vorschlägen
       </button>
 
       <div className="detail">
@@ -1934,7 +1934,7 @@ function MDetail({ state, set, go }){
             <div className="side-row"><dt>Einstiegsform</dt><dd>{(COMMIT_RESULT[state.commit]||COMMIT_RESULT.B).title}</dd></div>
           </dl>
           <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
-            <strong>SISU begleitet den Start:</strong> Sie m�ssen nicht alleine ankommen - wir bereiten den ersten Termin mit Ihnen und der Einrichtung vor.
+            <strong>SISU begleitet den Start:</strong> Sie müssen nicht alleine ankommen — wir bereiten den ersten Termin mit Ihnen und der Einrichtung vor.
           </div>
         </aside>
       </div>
@@ -1958,16 +1958,16 @@ function MConfirm({ state, set, go }){
     return (
       <div className="container narrow fade-in">
         <div className="summary-card" style={{marginTop:40}}>
-          <div className="summary-mark">?</div>
+          <div className="summary-mark">✓</div>
           <div>
             <span className="eyebrow">Vielen Dank</span>
             <h3>Wir melden uns innerhalb von 3 Tagen.</h3>
-            <p>Ihr Interesse f�r "{role.name}" ist bei uns angekommen. {role.ansprechperson.split(" � ")[0]} bekommt eine kurze Notiz von uns - und wir vereinbaren mit Ihnen den ersten Schritt.</p>
+            <p>Ihr Interesse für „{role.name}" ist bei uns angekommen. {role.ansprechperson.split(" · ")[0]} bekommt eine kurze Notiz von uns – und wir vereinbaren mit Ihnen den ersten Schritt.</p>
           </div>
         </div>
         <div className="btn-row" style={{marginTop:32}}>
           <button className="btn btn-secondary" onClick={()=>{ set({motivations:[],competences:[],commit:"",contexts:[],selectedRole:null}); go("portal"); }}>
-            Zur�ck zum Portal
+            Zurück zum Portal
           </button>
         </div>
       </div>
@@ -1977,11 +1977,11 @@ function MConfirm({ state, set, go }){
   return (
     <div className="container narrow fade-in">
       <button className="btn btn-ghost" style={{marginBottom:24,marginLeft:-12}} onClick={()=>go("mDetail")}>
-        ? Zur�ck
+        ← Zurück
       </button>
-      <span className="eyebrow">Interesse melden � {role.einrichtung}</span>
-      <h2 className="section">Sie m�chten {role.name.toLowerCase()} werden.</h2>
-      <p className="lede">Hinterlassen Sie uns kurz Ihren Kontakt - wir melden uns pers�nlich.</p>
+      <span className="eyebrow">Interesse melden · {role.einrichtung}</span>
+      <h2 className="section">Sie möchten {role.name.toLowerCase()} werden.</h2>
+      <p className="lede">Hinterlassen Sie uns kurz Ihren Kontakt — wir melden uns persönlich.</p>
 
       <form onSubmit={submit} style={{display:"flex",flexDirection:"column",gap:16,marginTop:24}}>
         <div>
@@ -1996,20 +1996,20 @@ function MConfirm({ state, set, go }){
         </div>
         <div>
           <label style={{display:"block",fontSize:13,marginBottom:6,color:"var(--ink-2)"}}>Was hat Sie an dieser Rolle besonders angesprochen? <span style={{color:"var(--ink-3)"}}>(optional)</span></label>
-          <textarea value={note} onChange={e=>setNote(e.target.value)} rows={4} placeholder="Ein, zwei S�tze reichen - hilft uns beim ersten Gespr�ch."
+          <textarea value={note} onChange={e=>setNote(e.target.value)} rows={4} placeholder="Ein, zwei Sätze reichen – hilft uns beim ersten Gespräch."
             style={{width:"100%",padding:"12px 14px",border:"1px solid var(--line)",borderRadius:10,font:"inherit",background:"var(--paper)",resize:"vertical"}}/>
         </div>
         <div className="btn-row" style={{marginTop:8}}>
           <button type="submit" className="btn btn-primary btn-lg">Interesse abschicken</button>
         </div>
-        <p className="small-note">Kein Abo. Kein Login. Wir melden uns pers�nlich.</p>
+        <p className="small-note">Kein Abo. Kein Login. Wir melden uns persönlich.</p>
       </form>
     </div>
   );
 }
 
 /* ============================================================
-   SCREEN: PORTAL  (Engagierten-Portal - �ffentliche Landing)
+   SCREEN: PORTAL  (Engagierten-Portal – öffentliche Landing)
    ============================================================ */
 function Portal({ state, set, go }){
   const allSlots = DEMO_SLOTS;
@@ -2022,7 +2022,7 @@ function Portal({ state, set, go }){
   return (
     <div className="container fade-in" style={{paddingTop:20}}>
       <div style={{marginBottom:20}}>
-        <span className="eyebrow">SISU � Mitmach-Portal</span>
+        <span className="eyebrow">SISU · Mitmach-Portal</span>
         <h1 className="display" style={{fontSize:"clamp(30px,4.5vw,48px)",margin:"8px 0 12px"}}>
           Flexibles Engagement
         </h1>
@@ -2046,13 +2046,13 @@ function Portal({ state, set, go }){
         justifyContent:"center",
       }}>
         {[
-          "Versichert �ber Land BW",
-          "Klein starten - jederzeit aufh�ren",
-          "Keine Vorkenntnisse n�tig",
-          "Wir melden uns pers�nlich",
+          "Versichert über Land BW",
+          "Klein starten – jederzeit aufhören",
+          "Keine Vorkenntnisse nötig",
+          "Wir melden uns persönlich",
         ].map((c,i)=>(
           <span key={i} style={{display:"inline-flex",alignItems:"center",gap:8}}>
-            <span style={{color:"var(--sage-deep)",fontWeight:700,fontSize:16}}>?</span>
+            <span style={{color:"var(--sage-deep)",fontWeight:700,fontSize:16}}>✓</span>
             {c}
           </span>
         ))}
@@ -2060,8 +2060,8 @@ function Portal({ state, set, go }){
 
       <div style={{borderTop:"1px solid var(--line-soft)",paddingTop:24}}>
         <div style={{marginBottom:20}}>
-          <h2 className="section" style={{margin:"0 0 4px"}}>?? Aktuelle Aktionen:</h2>
-          <span className="small-note">Kleine Eins�tze. Gro�e Wirkung. Unverbindlich ausprobieren.</span>
+          <h2 className="section" style={{margin:"0 0 4px"}}>🌿 Aktuelle Aktionen:</h2>
+          <span className="small-note">Kleine Einsätze. Große Wirkung. Unverbindlich ausprobieren.</span>
         </div>
 
         <div style={{
@@ -2074,8 +2074,8 @@ function Portal({ state, set, go }){
               ? "unbegrenzt"
               : (parseSeats(s.seats) - (s.registrations||[]).length);
             const freeLabel = s.seats==="unbegrenzt"
-              ? "unbegrenzt Pl�tze"
-              : (free === 1 ? "1 Platz frei" : `${free} Pl�tze frei`);
+              ? "unbegrenzt Plätze"
+              : (free === 1 ? "1 Platz frei" : `${free} Plätze frei`);
             return (
               <article key={s.id || s.title} style={{
                 background:"var(--paper)",
@@ -2099,7 +2099,7 @@ function Portal({ state, set, go }){
                   </div>
                   <h3 style={{margin:0,fontSize:21,lineHeight:1.3,fontWeight:600}}>{s.title}</h3>
                   <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55,flex:1}}>
-                    {(s.desc||"").length > 130 ? s.desc.slice(0,127)+"." : s.desc}
+                    {(s.desc||"").length > 130 ? s.desc.slice(0,127)+"…" : s.desc}
                   </p>
                   <dl style={{margin:0,display:"flex",flexDirection:"column",gap:6,fontSize:13,color:"var(--ink-2)"}}>
                     <div style={{display:"flex",gap:8}}>
@@ -2107,7 +2107,7 @@ function Portal({ state, set, go }){
                       <dd style={{margin:0}}>{s.flexible ? "flexibel, nach Absprache" : s.when}</dd>
                     </div>
                     <div style={{display:"flex",gap:8}}>
-                      <dt style={{color:"var(--ink-3)",minWidth:78}}>Pl�tze</dt>
+                      <dt style={{color:"var(--ink-3)",minWidth:78}}>Plätze</dt>
                       <dd style={{margin:0}} className="mono">{freeLabel}</dd>
                     </div>
                     <div style={{display:"flex",gap:8}}>
@@ -2116,7 +2116,7 @@ function Portal({ state, set, go }){
                     </div>
                   </dl>
                   <button className="btn btn-secondary" style={{marginTop:6}} onClick={()=>openSlot(s)}>
-                    Ansehen ?
+                    Ansehen →
                   </button>
                 </div>
               </article>
@@ -2143,12 +2143,12 @@ function Portal({ state, set, go }){
               Sie wissen noch nicht, was passt?
             </h3>
             <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55}}>
-              Vier kurze Fragen, zwei Minuten - wir schlagen Ihnen drei Mitmach-Rollen vor,
+              Vier kurze Fragen, zwei Minuten — wir schlagen Ihnen drei Mitmach-Rollen vor,
               die zu Ihren Interessen und Ihrer Zeit passen.
             </p>
             <div style={{marginTop:8}}>
               <button className="btn btn-primary" onClick={()=>go("m1")}>
-                Was passt zu mir? ?
+                Was passt zu mir? →
               </button>
             </div>
           </div>
@@ -2165,12 +2165,12 @@ function Portal({ state, set, go }){
               Sie haben selbst eine Idee?
             </h3>
             <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55}}>
-              Erz�hlen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen -
-              die Einrichtung meldet sich, wenn etwas daraus werden k�nnte.
+              Erzählen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen —
+              die Einrichtung meldet sich, wenn etwas daraus werden könnte.
             </p>
             <div style={{marginTop:8}}>
               <button className="btn btn-secondary" onClick={()=>go("idea")}>
-                Idee einbringen ?
+                Idee einbringen →
               </button>
             </div>
           </div>
@@ -2180,7 +2180,7 @@ function Portal({ state, set, go }){
       <div style={{borderTop:"1px solid var(--line-soft)",marginTop:48,paddingTop:32}}>
         <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:24,flexWrap:"wrap",gap:8}}>
           <h2 className="section" style={{margin:0}}>Stimmen aus dem Pilot</h2>
-          <span className="small-note" style={{fontStyle:"italic"}}>Beispielzitate - echte Stimmen folgen</span>
+          <span className="small-note" style={{fontStyle:"italic"}}>Beispielzitate – echte Stimmen folgen</span>
         </div>
         <div style={{
           display:"grid",
@@ -2197,7 +2197,7 @@ function Portal({ state, set, go }){
               display:"flex",flexDirection:"column",gap:16,
               boxShadow:"var(--shadow-sm)",
             }}>
-              <span style={{fontSize:32,lineHeight:1,color:"var(--sage)",fontFamily:"'Instrument Serif',serif"}}>"</span>
+              <span style={{fontSize:32,lineHeight:1,color:"var(--sage)",fontFamily:"'Instrument Serif',serif"}}>„</span>
               <blockquote style={{
                 margin:0,
                 fontFamily:"'Instrument Serif',serif",
@@ -2217,8 +2217,8 @@ function Portal({ state, set, go }){
       </div>
 
       <div style={{borderTop:"1px solid var(--line-soft)",marginTop:48,paddingTop:32}}>
-        <h2 className="section" style={{margin:"0 0 8px"}}>H�ufige Fragen</h2>
-        <p className="small-note" style={{margin:"0 0 24px"}}>Was uns am h�ufigsten gefragt wird.</p>
+        <h2 className="section" style={{margin:"0 0 8px"}}>Häufige Fragen</h2>
+        <p className="small-note" style={{margin:"0 0 24px"}}>Was uns am häufigsten gefragt wird.</p>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {FAQS.map((f,i)=>(
             <details key={i} className="faq-item">
@@ -2233,7 +2233,7 @@ function Portal({ state, set, go }){
       </div>
 
       <p className="small-note" style={{textAlign:"center",marginTop:48}}>
-        Kein Login. Kein Abo. Wir melden uns pers�nlich.
+        Kein Login. Kein Abo. Wir melden uns persönlich.
       </p>
     </div>
   );
@@ -2246,33 +2246,33 @@ function NextScreen({ state, go }){
   const p = PACKAGES[state.pilotPkg] || PACKAGES.gemeinschaft;
   return (
     <div className="container fade-in">
-      <span className="eyebrow">Pilot ausgew�hlt � {p.name}</span>
-      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Was m�chten Sie als N�chstes tun?</h1>
+      <span className="eyebrow">Pilot ausgewählt · {p.name}</span>
+      <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Was möchten Sie als Nächstes tun?</h1>
       <p className="lede">
-        Sie haben das Format <strong>{p.name}</strong> als ersten Test gew�hlt. Empfehlung: starten Sie mit
-        einem konkreten Mitmach-Termin - das ist der schnellste Weg zu einem realistischen ersten Schritt.
+        Sie haben das Format <strong>{p.name}</strong> als ersten Test gewählt. Empfehlung: starten Sie mit
+        einem konkreten Mitmach-Termin – das ist der schnellste Weg zu einem realistischen ersten Schritt.
       </p>
 
       <div className="next-grid">
         <div className="next-card recommended">
           <span className="badge">Empfohlen</span>
           <h3>Mitmach-Termin anlegen</h3>
-          <p>Legen Sie einen konkreten Termin an, bei dem Engagierte mit Erfahrung unverbindlich schnuppern oder mitmachen k�nnen.</p>
-          <button className="btn btn-primary" onClick={()=>go("slotForm")}>Termin anlegen ?</button>
+          <p>Legen Sie einen konkreten Termin an, bei dem Engagierte mit Erfahrung unverbindlich schnuppern oder mitmachen können.</p>
+          <button className="btn btn-primary" onClick={()=>go("slotForm")}>Termin anlegen →</button>
         </div>
         <div className="next-card">
           <h3>Aktivierungsaufruf erstellen</h3>
           <p>
-            Erzeugen Sie Texte f�r Website, Aushang, Amtsblatt oder Newsletter.
+            Erzeugen Sie Texte für Website, Aushang, Amtsblatt oder Newsletter.
             {state.slot
-              ? " Mit den Daten Ihres Mitmach-Termins vorausgef�llt."
-              : ' Auch schon ohne konkreten Termin m�glich - als allgemeiner "Wir �ffnen Schule f�r Mitmachen"-Aufruf.'}
+              ? " Mit den Daten Ihres Mitmach-Termins vorausgefüllt."
+              : ' Auch schon ohne konkreten Termin möglich – als allgemeiner „Wir öffnen Schule für Mitmachen"-Aufruf.'}
           </p>
-          <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Aufruf erstellen ?</button>
+          <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Aufruf erstellen →</button>
         </div>
         <div className="next-card">
-          <h3>Interessenliste �ffnen</h3>
-          <p>Sammeln Sie Menschen, die grunds�tzlich Interesse an diesem Format haben.</p>
+          <h3>Interessenliste öffnen</h3>
+          <p>Sammeln Sie Menschen, die grundsätzlich Interesse an diesem Format haben.</p>
           <button className="btn btn-secondary" disabled style={{opacity:.7}}>Interesse sammeln</button>
         </div>
       </div>
@@ -2281,12 +2281,12 @@ function NextScreen({ state, go }){
         <span className="footnote-icon">i</span>
         <span>
           <strong>Was ist ein Mitmach-Termin?</strong> Ein Mitmach-Termin ist ein konkreter Einstiegstermin.
-          Engagierte mit Erfahrung k�nnen schnuppern, einmalig mitmachen oder Interesse bekunden.
+          Engagierte mit Erfahrung können schnuppern, einmalig mitmachen oder Interesse bekunden.
         </span>
       </div>
 
       <div className="btn-row">
-        <button className="btn btn-ghost" onClick={()=>go("detail")}>? Zur�ck zum Format</button>
+        <button className="btn btn-ghost" onClick={()=>go("detail")}>← Zurück zum Format</button>
       </div>
     </div>
   );
@@ -2321,25 +2321,25 @@ function EigenesAngebotForm({ state, set, go }){
 
   return (
     <div className="container fade-in">
-      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("start")}>? Zur�ck</button>
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("start")}>← Zurück</button>
       <span className="eyebrow">Eigenes Angebot</span>
       <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Angebot direkt anlegen</h1>
-      <p className="lede">Sie wissen bereits, was Sie erm�glichen m�chten - ohne Umweg �ber den Mitmach-Planer.</p>
+      <p className="lede">Sie wissen bereits, was Sie ermöglichen möchten – ohne Umweg über den Mitmach-Planer.</p>
 
       <div className="form-shell">
         <div className="form-fields">
 
           <div className="field">
-            <label>Thema oder Bereich <span style={{color:"var(--ink-3)",fontWeight:400}}>- optional</span></label>
+            <label>Thema oder Bereich <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
             <input type="text" value={f.thema} onChange={e=>upd("thema",e.target.value)}
-                   placeholder="z. B. N�hgruppe, Sprachcaf�, Gartenworkshop, Erz�hlcaf�" />
+                   placeholder="z. B. Nähgruppe, Sprachcafé, Gartenworkshop, Erzählcafé" />
             <span className="hint">Hilft Engagierten bei der ersten Einordnung.</span>
           </div>
 
           <div className="field">
             <label>Titel des Angebots</label>
             <input type="text" value={f.title} onChange={e=>upd("title",e.target.value)}
-                   placeholder="z. B. N�hgruppe - erster Schnuppertermin" />
+                   placeholder="z. B. Nähgruppe – erster Schnuppertermin" />
           </div>
 
           <div className="field">
@@ -2354,7 +2354,7 @@ function EigenesAngebotForm({ state, set, go }){
           <div className="field">
             <label>Datum / Zeitraum</label>
             <input type="text" value={f.when} disabled={f.flexible} onChange={e=>upd("when",e.target.value)}
-                   placeholder="z. B. 12. M�rz, 18:00-20:30 Uhr" />
+                   placeholder="z. B. 12. März, 18:00–20:30 Uhr" />
             <label className="check-line">
               <input type="checkbox" checked={f.flexible} onChange={e=>upd("flexible",e.target.checked)} />
               Termin wird gemeinsam gefunden
@@ -2362,9 +2362,9 @@ function EigenesAngebotForm({ state, set, go }){
           </div>
 
           <div className="field">
-            <label>Anzahl Pl�tze</label>
+            <label>Anzahl Plätze</label>
             <div className="seg">
-              {["1","2","3-4","unbegrenzt"].map(s=>(
+              {["1","2","3–4","unbegrenzt"].map(s=>(
                 <button key={s} data-on={f.seats===s} onClick={()=>upd("seats",s)}>{s}</button>
               ))}
             </div>
@@ -2373,17 +2373,17 @@ function EigenesAngebotForm({ state, set, go }){
           <div className="field">
             <label>Was soll passieren?</label>
             <textarea value={f.desc} onChange={e=>upd("desc",e.target.value)}
-                      placeholder="Kurze Beschreibung f�r die �ffentliche Seite - was erwartet die Mitmachenden?" />
+                      placeholder="Kurze Beschreibung für die öffentliche Seite – was erwartet die Mitmachenden?" />
           </div>
 
           <div className="field">
             <label>Aufgabe der Mitmachenden</label>
             <textarea value={f.role} onChange={e=>upd("role",e.target.value)}
-                      placeholder="Was �bernehmen die Engagierten konkret?" />
+                      placeholder="Was übernehmen die Engagierten konkret?" />
           </div>
 
           <div className="field">
-            <label>Was �bernimmt Schule oder Hort?</label>
+            <label>Was übernimmt Schule oder Hort?</label>
             <textarea value={f.library} onChange={e=>upd("library",e.target.value)}
                       placeholder="z. B. Raum, Anmeldung, Material, Ansprechperson, Ablauf" />
           </div>
@@ -2391,38 +2391,38 @@ function EigenesAngebotForm({ state, set, go }){
           <div className="field">
             <label>Wen suchen wir?</label>
             <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)}
-                      placeholder="z. B. Menschen mit Freude am N�hen, Geduld mit Anf�ngerinnen" />
+                      placeholder="z. B. Menschen mit Freude am Nähen, Geduld mit Anfängerinnen" />
           </div>
 
           <div className="field">
-            <label>Kontaktperson - Name</label>
+            <label>Kontaktperson – Name</label>
             <input type="text" value={f.contactName} onChange={e=>upd("contactName",e.target.value)}
                    placeholder="z. B. Anna Hoffmann" />
           </div>
           <div className="field">
-            <label>Kontaktperson - E-Mail</label>
+            <label>Kontaktperson – E-Mail</label>
             <input type="email" value={f.contactEmail} onChange={e=>upd("contactEmail",e.target.value)}
                    placeholder="anna.hoffmann@schule-musterstadt.de" />
           </div>
 
           <div className="info-box">
             <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung.
-            F�r den gew�hlten Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
+            Für den gewählten Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
           </div>
 
           <div className="btn-row between">
-            <button className="btn btn-ghost" onClick={()=>go("start")}>? Zur�ck</button>
+            <button className="btn btn-ghost" onClick={()=>go("start")}>← Zurück</button>
             <button className="btn btn-primary btn-lg" disabled={!valid} onClick={publish}>
-              Angebot ver�ffentlichen ?
+              Angebot veröffentlichen →
             </button>
           </div>
         </div>
 
         <aside className="form-side">
           <h5>Eigenes Format</h5>
-          <p className="pkg-desc">Sie umgehen den Mitmach-Planer und beschreiben Ihr Angebot direkt. Aktivierungstexte, �ffentliche Termin-Seite und Anmeldungen stehen trotzdem zur Verf�gung.</p>
+          <p className="pkg-desc">Sie umgehen den Mitmach-Planer und beschreiben Ihr Angebot direkt. Aktivierungstexte, öffentliche Termin-Seite und Anmeldungen stehen trotzdem zur Verfügung.</p>
           <p className="micro">
-            Tipp: Den Mitmach-Planer k�nnen Sie nachtr�glich nutzen, um passende Rollen und Formate f�r zuk�nftige Angebote zu entdecken.
+            Tipp: Den Mitmach-Planer können Sie nachträglich nutzen, um passende Rollen und Formate für zukünftige Angebote zu entdecken.
           </p>
         </aside>
       </div>
@@ -2431,7 +2431,7 @@ function EigenesAngebotForm({ state, set, go }){
 }
 
 /* ============================================================
-   SCREEN: IDEA (�ffentlich - Idee oder Eigenes Angebot einreichen)
+   SCREEN: IDEA (öffentlich – Idee oder Eigenes Angebot einreichen)
    ============================================================ */
 function IdeaScreen({ state, set, go }){
   const [f,setF] = useState({
@@ -2468,16 +2468,16 @@ function IdeaScreen({ state, set, go }){
     return (
       <div className="public-shell fade-in">
         <div className="public-bar">
-          <div className="breadcrumb"><span>schule-musterstadt.de</span><span>></span><span>Mitmachen</span><span>></span><span>Idee</span></div>
+          <div className="breadcrumb"><span>schule-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Idee</span></div>
         </div>
         <div className="confirm-card">
-          <div className="confirm-mark">?</div>
+          <div className="confirm-mark">✓</div>
           <h2 className="section">Danke, {f.first}.</h2>
           <p>Ihre {f.kind==="idee"?"Idee":"Angebot"} ist bei uns angekommen.
-             Die Schule schaut sich das an und meldet sich - ohne Druck, ohne Verpflichtung.</p>
+             Die Schule schaut sich das an und meldet sich – ohne Druck, ohne Verpflichtung.</p>
           <div className="btn-row" style={{justifyContent:"center"}}>
-            <button className="btn btn-secondary" onClick={()=>go("public")}>Zur�ck zur Slot-Seite</button>
-            <button className="btn btn-ghost" onClick={()=>{ set({ dashboardTab:"ideen" }); go("dashboard"); }}>So sieht die Schule das ?</button>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-ghost" onClick={()=>{ set({ dashboardTab:"ideen" }); go("dashboard"); }}>So sieht die Schule das ↗</button>
           </div>
         </div>
       </div>
@@ -2487,15 +2487,15 @@ function IdeaScreen({ state, set, go }){
   return (
     <div className="public-shell fade-in">
       <div className="public-bar">
-        <div className="breadcrumb"><span>schule-musterstadt.de</span><span>></span><span>Mitmachen</span><span>></span><span>Idee einbringen</span></div>
-        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>? Zur�ck</button>
+        <div className="breadcrumb"><span>schule-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Idee einbringen</span></div>
+        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>← Zurück</button>
       </div>
       <article className="slot-public" style={{maxWidth:680}}>
         <header className="head">
           <span className="eyebrow">Mitdenken willkommen</span>
-          <h1 className="display">Was k�nnte bei uns passieren?</h1>
+          <h1 className="display">Was könnte bei uns passieren?</h1>
           <p style={{margin:"8px 0 0",color:"var(--ink-2)",fontSize:15.5,lineHeight:1.55}}>
-            Sie k�nnen einfach eine Idee einbringen - oder selbst etwas anbieten. Beides ist willkommen.
+            Sie können einfach eine Idee einbringen – oder selbst etwas anbieten. Beides ist willkommen.
           </p>
         </header>
         <div className="body">
@@ -2508,19 +2508,19 @@ function IdeaScreen({ state, set, go }){
               </div>
               <span className="hint" style={{marginTop:6}}>
                 {f.kind==="idee"
-                  ? "Sie schlagen etwas vor - die Schule pr�ft, ob und wie es passt."
-                  : "Sie w�rden gern selbst etwas anleiten, gestalten oder beitragen."}
+                  ? "Sie schlagen etwas vor – die Schule prüft, ob und wie es passt."
+                  : "Sie würden gern selbst etwas anleiten, gestalten oder beitragen."}
               </span>
             </div>
 
             <div className="field">
-              <label>Thema in einem Satz <span style={{color:"var(--ink-3)",fontWeight:400}}>- optional</span></label>
+              <label>Thema in einem Satz <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
               <input type="text" value={f.topic} onChange={e=>upd("topic",e.target.value)}
-                placeholder={f.kind==="idee" ? "z. B. Sprach-Tandem f�r Nachbarn" : "z. B. Erz�hlcaf� �ber Reisen"} />
+                placeholder={f.kind==="idee" ? "z. B. Sprach-Tandem für Nachbarn" : "z. B. Erzählcafé über Reisen"} />
             </div>
 
             <div className="field">
-              <label>{f.kind==="idee" ? "Beschreiben Sie kurz Ihre Idee" : "Was w�rden Sie gern anbieten?"}</label>
+              <label>{f.kind==="idee" ? "Beschreiben Sie kurz Ihre Idee" : "Was würden Sie gern anbieten?"}</label>
               <textarea value={f.text} onChange={e=>upd("text",e.target.value)}
                 placeholder="Auch unfertige Gedanken sind willkommen. Max. 400 Zeichen reichen."
                 maxLength={500} />
@@ -2529,23 +2529,23 @@ function IdeaScreen({ state, set, go }){
 
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
               <div className="field"><label>Vorname</label><input value={f.first} onChange={e=>upd("first",e.target.value)} /></div>
-              <div className="field"><label>Nachname <span style={{color:"var(--ink-3)",fontWeight:400}}>- optional</span></label><input value={f.last} onChange={e=>upd("last",e.target.value)} /></div>
+              <div className="field"><label>Nachname <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label><input value={f.last} onChange={e=>upd("last",e.target.value)} /></div>
             </div>
             <div className="field"><label>E-Mail</label><input type="email" value={f.email} onChange={e=>upd("email",e.target.value)} /></div>
 
             <label className="check-line" style={{alignItems:"flex-start",gap:12,marginTop:6}}>
               <input type="checkbox" checked={f.consent} onChange={e=>upd("consent",e.target.checked)} style={{marginTop:3}}/>
-              <span>Ich bin einverstanden, dass meine Angaben f�r die R�ckmeldung gespeichert werden.</span>
+              <span>Ich bin einverstanden, dass meine Angaben für die Rückmeldung gespeichert werden.</span>
             </label>
 
             <div className="info-box">
-              <strong>Was passiert dann?</strong> Die Schule liest mit, kann R�ckfragen stellen
-              und - wenn es passt - aus Ihrer Idee einen konkreten Mitmach-Termin machen. Sie sind dabei nicht in der Pflicht.
+              <strong>Was passiert dann?</strong> Die Schule liest mit, kann Rückfragen stellen
+              und – wenn es passt – aus Ihrer Idee einen konkreten Mitmach-Termin machen. Sie sind dabei nicht in der Pflicht.
             </div>
 
             <div className="btn-row">
               <button className="btn btn-primary btn-lg" disabled={!valid} onClick={submit}>
-                {f.kind==="idee" ? "Idee senden" : "Angebot senden"} ?
+                {f.kind==="idee" ? "Idee senden" : "Angebot senden"} →
               </button>
               <button className="btn btn-ghost" onClick={()=>go("public")}>Abbrechen</button>
             </div>
@@ -2567,35 +2567,35 @@ function AnzeigeScreen({ state, go }){
   const contact = slot?.contactEmail || "mitmachen@schule-musterstadt.de";
 
   function print(){
-    document.title = `Anzeige - ${hasSlot ? slot.title : p.name}`;
+    document.title = `Anzeige – ${hasSlot ? slot.title : p.name}`;
     setTimeout(()=>window.print(), 80);
   }
 
   return (
     <div className="container fade-in">
-      <button className="btn btn-ghost" style={{marginBottom:14,marginLeft:-12}} onClick={()=>go("dashboard")}>? Zur�ck zum Backend</button>
+      <button className="btn btn-ghost" style={{marginBottom:14,marginLeft:-12}} onClick={()=>go("dashboard")}>← Zurück zum Backend</button>
 
       <div className="anzeige-shell">
         <div className="anzeige-controls">
           <div>
-            <span className="eyebrow">Anzeige � druckfertig</span>
-            <h2 className="section" style={{margin:"4px 0 4px"}}>Anzeige f�r {hasSlot ? "Ihren Mitmach-Termin" : p.name}</h2>
+            <span className="eyebrow">Anzeige · druckfertig</span>
+            <h2 className="section" style={{margin:"4px 0 4px"}}>Anzeige für {hasSlot ? "Ihren Mitmach-Termin" : p.name}</h2>
             <p style={{color:"var(--ink-3)",fontSize:14,margin:0}}>
               {hasSlot
-                ? "Vorausgef�llt mit den Daten Ihres Mitmach-Termins."
-                : "Allgemeine Anzeige zum gew�hlten Format. Sobald ein Termin existiert, wird sie konkreter."}
+                ? "Vorausgefüllt mit den Daten Ihres Mitmach-Termins."
+                : "Allgemeine Anzeige zum gewählten Format. Sobald ein Termin existiert, wird sie konkreter."}
             </p>
           </div>
           <div style={{display:"flex",gap:10}}>
             <button className="btn btn-primary" onClick={print}>Als PDF speichern / Drucken</button>
-            <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Newsletter / Amtsblatt-Text ?</button>
+            <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Newsletter / Amtsblatt-Text →</button>
           </div>
         </div>
 
         <article className="anzeige-paper">
           <div className="brand-row">
             <span className="mark">s</span>
-            <span>{lib} � Mitmach-Ort</span>
+            <span>{lib} · Mitmach-Ort</span>
           </div>
 
           {hasSlot ? (
@@ -2610,19 +2610,19 @@ function AnzeigeScreen({ state, go }){
               </div>
               <div className="anz-block">
                 <h4>Wo</h4>
-                <p>{lib} � Lesesaal</p>
+                <p>{lib} · Lesesaal</p>
               </div>
               <div className="anz-block">
                 <h4>Ihre Rolle</h4>
                 <p>{slot.role || "Beim ersten Termin gemeinsam besprochen."}</p>
               </div>
               <div className="anz-block">
-                <h4>Schule / Hort �bernimmt</h4>
+                <h4>Schule / Hort übernimmt</h4>
                 <p>{slot.library}</p>
               </div>
               <div className="anz-block">
-                <h4>Pl�tze</h4>
-                <p>{slot.seats} � {slot.type} � keine langfristige Verpflichtung</p>
+                <h4>Plätze</h4>
+                <p>{slot.seats} · {slot.type} · keine langfristige Verpflichtung</p>
               </div>
             </>
           ) : (
@@ -2630,8 +2630,8 @@ function AnzeigeScreen({ state, go }){
               <div className="anz-tag">Wir sind Mitmach-Ort</div>
               <h1>Mitmachen ab 55. Mit Zeit, Erfahrung oder Neugier.</h1>
               <p className="anz-lede">
-                Die {lib} �ffnet sich f�r Menschen ab 55, die mit ihrer Erfahrung,
-                Geduld oder Freude an Begegnung einen Beitrag leisten m�chten.
+                Die {lib} öffnet sich für Menschen ab 55, die mit ihrer Erfahrung,
+                Geduld oder Freude an Begegnung einen Beitrag leisten möchten.
               </p>
 
               <div className="anz-block">
@@ -2640,11 +2640,11 @@ function AnzeigeScreen({ state, go }){
               </div>
               <div className="anz-block">
                 <h4>Worum es nicht geht</h4>
-                <p>Keine langfristige Verpflichtung. Kein Bewerbungsgespr�ch. Sie schauen vorbei, wir lernen uns kennen, ein konkreter Termin entsteht sp�ter.</p>
+                <p>Keine langfristige Verpflichtung. Kein Bewerbungsgespräch. Sie schauen vorbei, wir lernen uns kennen, ein konkreter Termin entsteht später.</p>
               </div>
               <div className="anz-block">
-                <h4>M�gliche Rollen</h4>
-                <p>{p.roles.slice(0,3).join(" � ")}</p>
+                <h4>Mögliche Rollen</h4>
+                <p>{p.roles.slice(0,3).join(" · ")}</p>
               </div>
             </>
           )}
@@ -2656,7 +2656,7 @@ function AnzeigeScreen({ state, go }){
         </article>
 
         <p style={{color:"var(--ink-3)",fontSize:13,marginTop:18,textAlign:"center"}}>
-          Tipp: Im Druckdialog "Als PDF speichern" w�hlen. Hintergrundgrafiken aktivieren f�r die volle Wirkung.
+          Tipp: Im Druckdialog „Als PDF speichern" wählen. Hintergrundgrafiken aktivieren für die volle Wirkung.
         </p>
       </div>
     </div>
@@ -2678,24 +2678,24 @@ function AufrufScreen({ state, go }){
   const texts = useMemo(()=>{
     const lib = "Schule Musterstadt";
     const contact = slot?.contactEmail || "mitmachen@schule-musterstadt.de";
-    const when = slot ? (slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when) : "-";
+    const when = slot ? (slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when) : "—";
 
     if (mode === "allgemein") {
-      // No slot yet - generic "we are a Mitmach-Ort" call
+      // No slot yet — generic "we are a Mitmach-Ort" call
       return {
         aushang:
 `Wir sind Mitmach-Ort.
 
-Die ${lib} �ffnet sich f�r Menschen ab 55,
+Die ${lib} öffnet sich für Menschen ab 55,
 die mit ihrer Erfahrung, Geduld oder Neugier
-einen Beitrag leisten m�chten.
+einen Beitrag leisten möchten.
 
-Aktuell denken wir �ber folgendes Thema nach:
+Aktuell denken wir über folgendes Thema nach:
 ${p.name}.
 
 ${p.short}
 
-Sie m�ssen sich nicht festlegen.
+Sie müssen sich nicht festlegen.
 Schauen Sie vorbei, sprechen Sie uns an, lernen Sie uns kennen.
 
 Kontakt: ${contact}`,
@@ -2703,30 +2703,30 @@ Kontakt: ${contact}`,
         newsletter:
 `Liebe Leserinnen und Leser,
 
-unsere Schule m�chte Menschen aus der Gemeinde einladen, ihr Wissen, ihre Zeit und ihre Erfahrung in klaren Mitmach-Formaten einzubringen.
+unsere Schule möchte Menschen aus der Gemeinde einladen, ihr Wissen, ihre Zeit und ihre Erfahrung in klaren Mitmach-Formaten einzubringen.
 
-Als n�chsten Schritt besch�ftigen wir uns mit dem Thema "${p.name}".
+Als nächsten Schritt beschäftigen wir uns mit dem Thema „${p.name}".
 ${p.short}
 
-Wenn Sie das anspricht: Wir freuen uns, Sie kennenzulernen. Ein konkreter Termin entsteht in den n�chsten Wochen - Sie k�nnen sich vormerken lassen.
+Wenn Sie das anspricht: Wir freuen uns, Sie kennenzulernen. Ein konkreter Termin entsteht in den nächsten Wochen – Sie können sich vormerken lassen.
 
 Antworten Sie einfach auf diese E-Mail oder schreiben Sie an ${contact}.
 
-Herzliche Gr��e
+Herzliche Grüße
 Ihre ${lib}`,
 
         amtsblatt:
 `${lib} sucht Mitmachende ab 55
 
-Die ${lib} entwickelt sich zu einem Mitmach-Ort. Im Mittelpunkt stehen kleine, niedrigschwellige Formate, bei denen Menschen ab 55 mit Erfahrung, Zeit oder Interesse beitragen k�nnen - ohne langfristige Verpflichtung.
+Die ${lib} entwickelt sich zu einem Mitmach-Ort. Im Mittelpunkt stehen kleine, niedrigschwellige Formate, bei denen Menschen ab 55 mit Erfahrung, Zeit oder Interesse beitragen können – ohne langfristige Verpflichtung.
 
 Aktueller Schwerpunkt: ${p.name}. ${p.short}
 
-Interessierte k�nnen sich unverbindlich melden unter ${contact}.`,
+Interessierte können sich unverbindlich melden unter ${contact}.`,
       };
     }
 
-    // Concrete mode - slot exists
+    // Concrete mode — slot exists
     return {
       aushang:
 `Mitmachen statt zuschauen.
@@ -2738,45 +2738,45 @@ ${lib}
 Was passiert?
 ${slot.desc}
 
-Was �bernehmen Sie?
+Was übernehmen Sie?
 ${slot.role || "Wird gemeinsam besprochen."}
 
-Was �bernimmt Schule oder Hort?
+Was übernimmt Schule oder Hort?
 ${slot.library}
 
 Gut geeignet, wenn Sie ${slot.seek?.toLowerCase().replace(/^./, c=>c) || "Freude an Begegnung haben"}.
 
-Mit Ihrer Anmeldung �bernehmen Sie keine
+Mit Ihrer Anmeldung übernehmen Sie keine
 langfristige Verpflichtung.
 
-Kontakt: ${slot.contactName || ""} � ${contact}`,
+Kontakt: ${slot.contactName || ""} · ${contact}`,
 
       newsletter:
 `Liebe Leserinnen und Leser,
 
-wir m�chten Sie zu einem konkreten Mitmach-Termin an unserer Schule einladen:
+wir möchten Sie zu einem konkreten Mitmach-Termin an unserer Schule einladen:
 
-"${slot.title}"
+„${slot.title}"
 ${when}, ${lib}
 
 ${slot.desc}
 
 Ihre Rolle: ${slot.role || "Beim ersten Termin gemeinsam besprochen."}
-Wir k�mmern uns um: ${slot.library}.
+Wir kümmern uns um: ${slot.library}.
 
-Sie �bernehmen mit der Anmeldung keine langfristige Verpflichtung - es geht um einen ersten Eindruck und ein gutes Gespr�ch.
+Sie übernehmen mit der Anmeldung keine langfristige Verpflichtung – es geht um einen ersten Eindruck und ein gutes Gespräch.
 
-Anmeldung und R�ckfragen: ${contact}
+Anmeldung und Rückfragen: ${contact}
 
-Herzliche Gr��e
+Herzliche Grüße
 Ihre ${lib}`,
 
       amtsblatt:
 `${lib}: Mitmachen am ${when.split(",")[0] || when}
 
-Unter dem Titel "${slot.title}" l�dt die ${lib} Menschen ab 55 ein, ${slot.type.toLowerCase()}. ${slot.desc}
+Unter dem Titel „${slot.title}" lädt die ${lib} Menschen ab 55 ein, ${slot.type.toLowerCase()}. ${slot.desc}
 
-Termin: ${when}. Pl�tze: ${slot.seats}. Eine Anmeldung ist erw�nscht, aber nicht verbindlich.
+Termin: ${when}. Plätze: ${slot.seats}. Eine Anmeldung ist erwünscht, aber nicht verbindlich.
 
 Kontakt: ${contact}.`,
     };
@@ -2798,21 +2798,21 @@ Kontakt: ${contact}.`,
 
   return (
     <div className="container fade-in">
-      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>? Zur�ck</button>
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>← Zurück</button>
       <span className="eyebrow">Aktivierungsaufruf</span>
       <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>
-        {mode==="allgemein" ? '"Wir sind Mitmach-Ort"' : "Aufruf zu Ihrem Mitmach-Termin"}
+        {mode==="allgemein" ? '„Wir sind Mitmach-Ort"' : "Aufruf zu Ihrem Mitmach-Termin"}
       </h1>
       <p className="lede">
         {mode==="allgemein"
-          ? <>Ein erster Aufruf ist auch schon ohne konkreten Termin m�glich. Sie machen sichtbar, dass Ihre Schule Engagierte mit Erfahrung einl�dt - das Thema ist klar, der Termin entsteht sp�ter.</>
-          : <>Mit den Daten Ihres Mitmach-Termins <strong>"{slot?.title}"</strong> vorausgef�llt. W�hlen Sie einen Kanal, kopieren Sie den Text, passen Sie ihn an.</>}
+          ? <>Ein erster Aufruf ist auch schon ohne konkreten Termin möglich. Sie machen sichtbar, dass Ihre Schule Engagierte mit Erfahrung einlädt – das Thema ist klar, der Termin entsteht später.</>
+          : <>Mit den Daten Ihres Mitmach-Termins <strong>„{slot?.title}"</strong> vorausgefüllt. Wählen Sie einen Kanal, kopieren Sie den Text, passen Sie ihn an.</>}
       </p>
 
       {hasSlot && (
         <div className="seg" style={{marginBottom:24}}>
           <button data-on={mode==="allgemein"} onClick={()=>setMode("allgemein")}>Allgemeiner Aufruf</button>
-          <button data-on={mode==="konkret"} onClick={()=>setMode("konkret")}>Konkreter Aufruf � mit Slot</button>
+          <button data-on={mode==="konkret"} onClick={()=>setMode("konkret")}>Konkreter Aufruf · mit Slot</button>
         </div>
       )}
 
@@ -2820,9 +2820,9 @@ Kontakt: ${contact}.`,
         <div className="footnote" style={{marginBottom:24}}>
           <span className="footnote-icon">i</span>
           <span>
-            Sobald Sie einen Mitmach-Termin erstellt haben, k�nnen Sie hier auch einen konkreten
+            Sobald Sie einen Mitmach-Termin erstellt haben, können Sie hier auch einen konkreten
             Aufruf mit Termin, Rolle und Anmeldelink generieren.
-            <button className="btn btn-ghost" style={{padding:"2px 10px",marginLeft:8,fontSize:13}} onClick={()=>go("slotForm")}>Termin anlegen ?</button>
+            <button className="btn btn-ghost" style={{padding:"2px 10px",marginLeft:8,fontSize:13}} onClick={()=>go("slotForm")}>Termin anlegen →</button>
           </span>
         </div>
       )}
@@ -2850,10 +2850,10 @@ Kontakt: ${contact}.`,
 
           <div className="btn-row">
             <button className="btn btn-primary" onClick={copy}>
-              {copied ? "? Kopiert" : "Text kopieren"}
+              {copied ? "✓ Kopiert" : "Text kopieren"}
             </button>
             <button className="btn btn-secondary" onClick={()=>window.print()}>Drucken / als PDF</button>
-            {!hasSlot && <button className="btn btn-ghost" onClick={()=>go("slotForm")}>Mitmach-Termin anlegen ?</button>}
+            {!hasSlot && <button className="btn btn-ghost" onClick={()=>go("slotForm")}>Mitmach-Termin anlegen →</button>}
           </div>
         </div>
 
@@ -2861,9 +2861,9 @@ Kontakt: ${contact}.`,
           <h5>Was Sie versenden</h5>
           <p className="pkg-name" style={{fontSize:20}}>{channels.find(c=>c.id===channel).label}</p>
           <p className="pkg-desc">
-            {channel==="aushang"   && "Kurz, ruhig, mit gro�em Titel. Geeignet f�r Eingangsbereich, Schwarzes Brett, Schaufenster."}
-            {channel==="newsletter"&& "Ansprache wie ein Brief - pers�nlich, mit klarer Einladung und Kontakt."}
-            {channel==="amtsblatt" && "Sachlich, knapp, ein Absatz. F�r lokale Presse und Amtsblatt."}
+            {channel==="aushang"   && "Kurz, ruhig, mit großem Titel. Geeignet für Eingangsbereich, Schwarzes Brett, Schaufenster."}
+            {channel==="newsletter"&& "Ansprache wie ein Brief – persönlich, mit klarer Einladung und Kontakt."}
+            {channel==="amtsblatt" && "Sachlich, knapp, ein Absatz. Für lokale Presse und Amtsblatt."}
           </p>
           <dl style={{margin:0}}>
             <div className="side-row"><dt>Format</dt><dd>{p.name}</dd></div>
@@ -2871,7 +2871,7 @@ Kontakt: ${contact}.`,
             {hasSlot && mode==="konkret" && <div className="side-row"><dt>Slot</dt><dd style={{maxWidth:180}}>{slot.title}</dd></div>}
           </dl>
           <p className="micro">
-            Tipp: Drei Kan�le gleichzeitig zu bespielen erh�ht die Chance, dass jemand Engagiertes den Aufruf sieht - Aushang vor Ort, Newsletter an Stammleser:innen, Amtsblatt f�r die Breite.
+            Tipp: Drei Kanäle gleichzeitig zu bespielen erhöht die Chance, dass jemand Engagiertes den Aufruf sieht – Aushang vor Ort, Newsletter an Stammleser:innen, Amtsblatt für die Breite.
           </p>
         </aside>
       </div>
@@ -2885,9 +2885,9 @@ Kontakt: ${contact}.`,
 function SlotForm({ state, set, go }){
   const p = PACKAGES[state.pilotPkg] || PACKAGES.gemeinschaft;
   const [f,setF] = useState(state.slot || {
-    title: p.id==="begegnung" ? "Spieleabend-Gastgeber:in schnuppern" : `${p.name} - Schnuppertermin`,
+    title: p.id==="begegnung" ? "Spieleabend-Gastgeber:in schnuppern" : `${p.name} – Schnuppertermin`,
     type:"Schnuppern",
-    when:"12. M�rz, 18:00-20:30 Uhr",
+    when:"12. März, 18:00–20:30 Uhr",
     flexible:false,
     seats:"2",
     desc: p.formats[0],
@@ -2908,7 +2908,7 @@ function SlotForm({ state, set, go }){
 
   return (
     <div className="container fade-in">
-      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>? Zur�ck</button>
+      <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>← Zurück</button>
       <span className="eyebrow">Mitmach-Termin</span>
       <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Mitmach-Termin anlegen</h1>
       <p className="lede">Machen Sie aus dem Format einen konkreten, niedrigschwelligen Einstieg.</p>
@@ -2925,7 +2925,7 @@ function SlotForm({ state, set, go }){
           <div className="field">
             <label>Format</label>
             <input type="text" value={p.name} disabled style={{opacity:.7}} />
-            <span className="hint">Wird automatisch aus Ihrer Auswahl �bernommen.</span>
+            <span className="hint">Wird automatisch aus Ihrer Auswahl übernommen.</span>
           </div>
 
           <div className="field">
@@ -2940,7 +2940,7 @@ function SlotForm({ state, set, go }){
           <div className="field">
             <label>Datum / Zeitraum</label>
             <input type="text" value={f.when} disabled={f.flexible} onChange={e=>upd("when",e.target.value)}
-                   placeholder="z. B. 12. M�rz, 18:00-20:30 Uhr" />
+                   placeholder="z. B. 12. März, 18:00–20:30 Uhr" />
             <label className="check-line">
               <input type="checkbox" checked={f.flexible} onChange={e=>upd("flexible",e.target.checked)} />
               Termin wird gemeinsam gefunden
@@ -2948,9 +2948,9 @@ function SlotForm({ state, set, go }){
           </div>
 
           <div className="field">
-            <label>Anzahl Pl�tze</label>
+            <label>Anzahl Plätze</label>
             <div className="seg">
-              {["1","2","3-4","unbegrenzt"].map(s=>(
+              {["1","2","3–4","unbegrenzt"].map(s=>(
                 <button key={s} data-on={f.seats===s} onClick={()=>upd("seats",s)}>{s}</button>
               ))}
             </div>
@@ -2963,37 +2963,37 @@ function SlotForm({ state, set, go }){
 
           <div className="field">
             <label>Aufgabe der Mitmachenden</label>
-            <textarea value={f.role} onChange={e=>upd("role",e.target.value)} placeholder="Was �bernehmen die Engagierten konkret?"/>
+            <textarea value={f.role} onChange={e=>upd("role",e.target.value)} placeholder="Was übernehmen die Engagierten konkret?"/>
           </div>
 
           <div className="field">
-            <label>Was �bernimmt Schule oder Hort?</label>
+            <label>Was übernimmt Schule oder Hort?</label>
             <textarea value={f.library} onChange={e=>upd("library",e.target.value)} placeholder="z. B. Raum, Anmeldung, Material, Ansprechperson, Ablauf"/>
           </div>
 
           <div className="field">
             <label>Wen suchen wir?</label>
-            <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)} placeholder="z. B. Menschen mit Freude an Begegnung, Geduld, Kreativit�t oder Erfahrung"/>
+            <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)} placeholder="z. B. Menschen mit Freude an Begegnung, Geduld, Kreativität oder Erfahrung"/>
           </div>
 
           <div className="field">
-            <label>Kontaktperson - Name</label>
+            <label>Kontaktperson – Name</label>
             <input type="text" value={f.contactName} onChange={e=>upd("contactName",e.target.value)} placeholder="z. B. Anna Hoffmann"/>
           </div>
           <div className="field">
-            <label>Kontaktperson - E-Mail</label>
+            <label>Kontaktperson – E-Mail</label>
             <input type="email" value={f.contactEmail} onChange={e=>upd("contactEmail",e.target.value)} placeholder="anna.hoffmann@schule-musterstadt.de"/>
           </div>
 
           <div className="info-box">
-            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung. F�r den gew�hlten
+            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung. Für den gewählten
             Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
           </div>
 
           <div className="btn-row between">
-            <button className="btn btn-ghost" onClick={()=>go("next")}>? Zur�ck</button>
+            <button className="btn btn-ghost" onClick={()=>go("next")}>← Zurück</button>
             <button className="btn btn-primary btn-lg" disabled={!valid} onClick={publish}>
-              Mitmach-Termin ver�ffentlichen ?
+              Mitmach-Termin veröffentlichen →
             </button>
           </div>
         </div>
@@ -3007,7 +3007,7 @@ function SlotForm({ state, set, go }){
             <div className="side-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
           </dl>
           <p className="micro">
-            Ver�ffentlichen erzeugt eine �ffentliche Mitmach-Seite und legt den Slot im Backend an.
+            Veröffentlichen erzeugt eine öffentliche Mitmach-Seite und legt den Slot im Backend an.
           </p>
         </aside>
       </div>
@@ -3022,10 +3022,10 @@ function SlotForm({ state, set, go }){
 function PublishConfirmScreen({ state, go }){
   const slot = state.slot;
   const CHANNELS = [
-    { id:"web",        label:"Schul-Webseite",             icon:"??" },
-    { id:"instagram",  label:"Instagram",                  icon:"??" },
-    { id:"facebook",   label:"Facebook",                   icon:"??" },
-    { id:"amtsblatt",  label:"Amtsblatt / Anzeigeblatt",   icon:"??" },
+    { id:"web",        label:"Schul-Webseite",             icon:"🌐" },
+    { id:"instagram",  label:"Instagram",                  icon:"📸" },
+    { id:"facebook",   label:"Facebook",                   icon:"👥" },
+    { id:"amtsblatt",  label:"Amtsblatt / Anzeigeblatt",   icon:"📰" },
   ];
   const [selected, setSelected] = React.useState(["web"]);
   function toggle(id){ setSelected(s => s.includes(id) ? s.filter(x=>x!==id) : [...s,id]); }
@@ -3033,22 +3033,22 @@ function PublishConfirmScreen({ state, go }){
   if (!slot) return null;
   return (
     <div className="container fade-in" style={{maxWidth:640}}>
-      <span className="eyebrow">Mitmach-Termin ver�ffentlichen</span>
+      <span className="eyebrow">Mitmach-Termin veröffentlichen</span>
       <h1 className="display" style={{fontSize:"clamp(28px,3.5vw,40px)"}}>Alles bereit?</h1>
       <p className="lede" style={{marginBottom:32}}>
-        Pr�fen Sie, ob alles stimmt - dann w�hlen Sie, wo Sie den Termin bekannt machen m�chten.
+        Prüfen Sie, ob alles stimmt — dann wählen Sie, wo Sie den Termin bekannt machen möchten.
       </p>
 
       <div className="info-box" style={{marginBottom:24}}>
         <strong>{slot.title}</strong><br/>
         <span style={{color:"var(--ink-2)",fontSize:14}}>
           {slot.flexible ? "Datum flexibel" : slot.when || "Kein Datum angegeben"}
-          {" � "}{slot.seats === "unbegrenzt" ? "Unbegrenzt Pl�tze" : slot.seats + " Platz / Pl�tze"}
+          {" · "}{slot.seats === "unbegrenzt" ? "Unbegrenzt Plätze" : slot.seats + " Platz / Plätze"}
         </span>
         {slot.desc && <p style={{margin:"8px 0 0",fontSize:14}}>{slot.desc}</p>}
       </div>
 
-      <h4 style={{marginBottom:12}}>Wo m�chten Sie diesen Termin teilen?</h4>
+      <h4 style={{marginBottom:12}}>Wo möchten Sie diesen Termin teilen?</h4>
       <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:32}}>
         {CHANNELS.map(ch=>(
           <label key={ch.id} style={{display:"flex",alignItems:"center",gap:12,cursor:"pointer",
@@ -3065,14 +3065,14 @@ function PublishConfirmScreen({ state, go }){
       {selected.includes("instagram") || selected.includes("facebook") ? (
         <div className="footnote" style={{marginBottom:24}}>
           <span className="footnote-icon">i</span>
-          <span>Social-Media-Texte finden Sie im <strong>Aktivierungsaufruf</strong> - dort k�nnen Sie sie kopieren und anpassen.</span>
+          <span>Social-Media-Texte finden Sie im <strong>Aktivierungsaufruf</strong> — dort können Sie sie kopieren und anpassen.</span>
         </div>
       ) : null}
 
       <div className="btn-row between">
-        <button className="btn btn-ghost" onClick={()=>go("next")}>? Zur�ck</button>
+        <button className="btn btn-ghost" onClick={()=>go("next")}>← Zurück</button>
         <button className="btn btn-primary btn-lg" onClick={()=>go("public")}>
-          Jetzt ver�ffentlichen ?
+          Jetzt veröffentlichen →
         </button>
       </div>
     </div>
@@ -3086,7 +3086,7 @@ function PublicSlot({ state, go }){
   if (!slot) {
     return (
       <div className="container fade-in" style={{textAlign:"center",paddingTop:100}}>
-        <h2 className="section">Noch kein Mitmach-Termin ausgew�hlt</h2>
+        <h2 className="section">Noch kein Mitmach-Termin ausgewählt</h2>
         <p className="lede" style={{margin:"0 auto 24px"}}>Schauen Sie sich die offenen Termine im Portal an.</p>
         <button className="btn btn-primary" onClick={()=>go("portal")}>Zum Mitmach-Portal</button>
       </div>
@@ -3097,7 +3097,7 @@ function PublicSlot({ state, go }){
     ? "unbegrenzt"
     : (parseSeats(slot.seats) - (slot.registrations||[]).length);
   const isDemo = !!(slot.id && String(slot.id).startsWith("demo-"));
-  const einrichtung = slot.einrichtung || "Schule Musterstadt � Ganztag";
+  const einrichtung = slot.einrichtung || "Schule Musterstadt · Ganztag";
 
   return (
     <div className="public-shell fade-in">
@@ -3105,14 +3105,14 @@ function PublicSlot({ state, go }){
         <div className="breadcrumb">
           {isDemo ? (
             <>
-              <span>SISU � Mitmach-Portal</span>
-              <span>></span>
+              <span>SISU · Mitmach-Portal</span>
+              <span>›</span>
               <span>{slot.einrichtung}</span>
             </>
           ) : (
             <>
               <span>schule-musterstadt.de</span>
-              <span>></span>
+              <span>›</span>
               <span>Mitmachen</span>
             </>
           )}
@@ -3120,14 +3120,14 @@ function PublicSlot({ state, go }){
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           {!isDemo && <span className="mono" style={{background:"var(--brand)",color:"#fff",padding:"2px 10px",borderRadius:4,fontSize:11,fontWeight:700,letterSpacing:".04em"}}>VORSCHAU</span>}
           <button className="btn btn-ghost" style={{padding:"4px 12px",fontSize:13}} onClick={()=>go(isDemo ? "portal" : "dashboard")}>
-            {isDemo ? "? Zur�ck zum Portal" : "? Zur Verwaltung"}
+            {isDemo ? "← Zurück zum Portal" : "← Zur Verwaltung"}
           </button>
         </div>
       </div>
 
       <article className="slot-public">
         <header className="head">
-          <span className="eyebrow">Mitmachen � {einrichtung}</span>
+          <span className="eyebrow">Mitmachen · {einrichtung}</span>
           <h1 className="display">{slot.title}</h1>
           <div className="where">
             <span><strong>{slot.flexible ? "Termin wird gemeinsam gefunden" : slot.when}</strong></span>
@@ -3138,7 +3138,7 @@ function PublicSlot({ state, go }){
         <div className="body">
           <dl className="slot-fact-grid">
             <div className="slot-fact">
-              <dt>Freie Pl�tze</dt>
+              <dt>Freie Plätze</dt>
               <dd className="mono">{free}</dd>
             </div>
             <div className="slot-fact">
@@ -3160,23 +3160,23 @@ function PublicSlot({ state, go }){
             <p>{slot.role || "Wird beim ersten Termin gemeinsam besprochen."}</p>
           </div>
           <div className="slot-block">
-            <h4>Schule / Hort �bernimmt</h4>
+            <h4>Schule / Hort übernimmt</h4>
             <p>{slot.library}</p>
           </div>
           <div className="slot-block">
-            <h4>Gut geeignet, wenn Sie.</h4>
+            <h4>Gut geeignet, wenn Sie…</h4>
             <p>{slot.seek}</p>
           </div>
 
           <div className="commitment-note">
-            Mit Ihrer Anmeldung �bernehmen Sie keine langfristige Verpflichtung.
+            Mit Ihrer Anmeldung übernehmen Sie keine langfristige Verpflichtung.
           </div>
         </div>
 
         <div className="cta-row">
           <button className="btn btn-primary btn-lg" onClick={()=>go("register")}>Ich mache unverbindlich mit</button>
           <button className="btn btn-secondary" onClick={()=>go("register")}>Ich habe erst eine Frage</button>
-          <span style={{marginLeft:"auto",color:"var(--ink-3)",fontSize:13}}>Kontakt: {slot.contactName||"Schule"} � {slot.contactEmail||""}</span>
+          <span style={{marginLeft:"auto",color:"var(--ink-3)",fontSize:13}}>Kontakt: {slot.contactName||"Schule"} · {slot.contactEmail||""}</span>
         </div>
       </article>
 
@@ -3196,14 +3196,14 @@ function IdeaInvite({ go }){
       <div>
         <div className="eyebrow" style={{marginBottom:8}}>Mitdenken willkommen</div>
         <h3 style={{fontFamily:"'Instrument Serif',serif",fontWeight:400,fontSize:24,margin:"0 0 6px",letterSpacing:"-.005em"}}>
-          Sie haben selbst eine Idee, was hier passieren k�nnte?
+          Sie haben selbst eine Idee, was hier passieren könnte?
         </h3>
         <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55,maxWidth:"50ch"}}>
-          Erz�hlen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen -
-          die Einrichtung meldet sich, wenn etwas daraus werden k�nnte.
+          Erzählen Sie uns kurz davon. Auch unfertige Gedanken sind willkommen –
+          die Einrichtung meldet sich, wenn etwas daraus werden könnte.
         </p>
       </div>
-      <button className="btn btn-secondary" onClick={()=>go("idea")}>Idee einbringen ?</button>
+      <button className="btn btn-secondary" onClick={()=>go("idea")}>Idee einbringen →</button>
     </aside>
   );
 }
@@ -3211,7 +3211,7 @@ function IdeaInvite({ go }){
 function parseSeats(s){
   if (s==="1") return 1;
   if (s==="2") return 2;
-  if (s==="3-4") return 4;
+  if (s==="3–4") return 4;
   return 99;
 }
 
@@ -3255,16 +3255,16 @@ function RegisterScreen({ state, set, go }){
     return (
       <div className="public-shell fade-in">
         <div className="public-bar">
-          <div className="breadcrumb"><span>schule-musterstadt.de</span><span>></span><span>Mitmachen</span><span>></span><span>Best�tigung</span></div>
+          <div className="breadcrumb"><span>schule-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Bestätigung</span></div>
         </div>
         <div className="confirm-card">
-          <div className="confirm-mark">?</div>
+          <div className="confirm-mark">✓</div>
           <h2 className="section">Vielen Dank, {f.first}.</h2>
           <p>Ihre Interessensbekundung wurde gesendet. Die Schule oder SISU meldet sich
-             bei Ihnen. Sie �bernehmen noch keine langfristige Verpflichtung.</p>
+             bei Ihnen. Sie übernehmen noch keine langfristige Verpflichtung.</p>
           <div className="btn-row" style={{justifyContent:"center"}}>
-            <button className="btn btn-secondary" onClick={()=>go("public")}>Zur�ck zur Slot-Seite</button>
-            <button className="btn btn-ghost" onClick={()=>go("dashboard")}>So sieht die Schule das ?</button>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-ghost" onClick={()=>go("dashboard")}>So sieht die Schule das ↗</button>
           </div>
         </div>
       </div>
@@ -3276,15 +3276,15 @@ function RegisterScreen({ state, set, go }){
   return (
     <div className="public-shell fade-in">
       <div className="public-bar">
-        <div className="breadcrumb"><span>schule-musterstadt.de</span><span>></span><span>Mitmachen</span><span>></span><span>Anmeldung</span></div>
-        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>? Zur�ck</button>
+        <div className="breadcrumb"><span>schule-musterstadt.de</span><span>›</span><span>Mitmachen</span><span>›</span><span>Anmeldung</span></div>
+        <button className="btn btn-ghost" style={{padding:"4px 10px"}} onClick={()=>go("public")}>← Zurück</button>
       </div>
       <article className="slot-public" style={{maxWidth:680}}>
         <header className="head">
           <span className="eyebrow">Anmeldung</span>
-          <h1 className="display">Sch�n, dass Sie mitmachen m�chten.</h1>
+          <h1 className="display">Schön, dass Sie mitmachen möchten.</h1>
           <p style={{margin:"8px 0 0",color:"var(--ink-2)",fontSize:15.5}}>
-            Slot: <strong>{slot?.title || "-"}</strong> � {slot?.flexible ? "Termin wird gemeinsam gefunden" : slot?.when}
+            Slot: <strong>{slot?.title || "—"}</strong> · {slot?.flexible ? "Termin wird gemeinsam gefunden" : slot?.when}
           </p>
         </header>
         <div className="body">
@@ -3294,29 +3294,29 @@ function RegisterScreen({ state, set, go }){
               <div className="field"><label>Nachname</label><input value={f.last} onChange={e=>upd("last",e.target.value)} /></div>
             </div>
             <div className="field"><label>E-Mail</label><input type="email" value={f.email} onChange={e=>upd("email",e.target.value)} /></div>
-            <div className="field"><label>Telefon <span style={{color:"var(--ink-3)",fontWeight:400}}>- optional</span></label><input type="tel" value={f.phone} onChange={e=>upd("phone",e.target.value)} /></div>
+            <div className="field"><label>Telefon <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label><input type="tel" value={f.phone} onChange={e=>upd("phone",e.target.value)} /></div>
 
             <div className="field">
-              <label>Ich m�chte</label>
+              <label>Ich möchte</label>
               <div className="seg" style={{flexWrap:"wrap"}}>
-                {["erst einmal schnuppern","einmalig mitmachen","gerne mehr erfahren","mir regelm��iges Mitmachen vorstellen"].map(o=>(
+                {["erst einmal schnuppern","einmalig mitmachen","gerne mehr erfahren","mir regelmäßiges Mitmachen vorstellen"].map(o=>(
                   <button key={o} data-on={f.wish===o} onClick={()=>upd("wish",o)}>{o}</button>
                 ))}
               </div>
             </div>
 
             <div className="field">
-              <label>Nachricht <span style={{color:"var(--ink-3)",fontWeight:400}}>- optional</span></label>
+              <label>Nachricht <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
               <textarea value={f.note} onChange={e=>upd("note",e.target.value)} placeholder="Gibt es etwas, das wir wissen sollten?"/>
             </div>
 
             <label className="check-line" style={{alignItems:"flex-start",gap:12,marginTop:6}}>
               <input type="checkbox" checked={f.consent} onChange={e=>upd("consent",e.target.checked)} style={{marginTop:3}}/>
-              <span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme f�r diesen Mitmach-Termin gespeichert werden.</span>
+              <span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme für diesen Mitmach-Termin gespeichert werden.</span>
             </label>
 
             <div className="btn-row">
-              <button className="btn btn-primary btn-lg" disabled={!valid} onClick={submit}>Interesse senden ?</button>
+              <button className="btn btn-primary btn-lg" disabled={!valid} onClick={submit}>Interesse senden →</button>
               <button className="btn btn-ghost" onClick={()=>go("public")}>Abbrechen</button>
             </div>
           </div>
@@ -3347,16 +3347,16 @@ function Dashboard({ state, set, go }){
       <div className="dash-head">
         <div>
           <span className="eyebrow">SISU Backend</span>
-          <h1>Pilot�bersicht</h1>
+          <h1>Pilotübersicht</h1>
           <div className="meta" style={{marginTop:8}}>
             <span><span className="dot"/> Schule Musterstadt</span>
-            <span>�</span>
+            <span>·</span>
             <span className="mono">Stand: {new Date().toLocaleDateString("de-DE")}</span>
           </div>
         </div>
         <div style={{display:"flex",gap:8}}>
           <button className="btn btn-ghost" onClick={()=>go("start")}>Zum Mitmach-Planer</button>
-          {state.slot && <button className="btn btn-secondary" onClick={()=>go("public")}>�ffentliche Ansicht �ffnen ?</button>}
+          {state.slot && <button className="btn btn-secondary" onClick={()=>go("public")}>Öffentliche Ansicht öffnen ↗</button>}
         </div>
       </div>
 
@@ -3380,27 +3380,27 @@ function Dashboard({ state, set, go }){
 
       {tab==="formate" && (
         <div className="dash-card">
-          <h3>{state.customOffer ? "Eigenes Angebot" : "Gew�hltes Format"}</h3>
-          <div className="sub">{state.customOffer ? "Ein direkt angelegtes Angebot - ohne Mitmach-Planer." : "Das aktuelle Pilot-Format Ihrer Schule."}</div>
+          <h3>{state.customOffer ? "Eigenes Angebot" : "Gewähltes Format"}</h3>
+          <div className="sub">{state.customOffer ? "Ein direkt angelegtes Angebot – ohne Mitmach-Planer." : "Das aktuelle Pilot-Format Ihrer Schule."}</div>
           {pilot ? (
             <table className="dash">
               <thead><tr><th>{state.customOffer?"Angebot":"Format"}</th><th>Schule</th><th>Aufwand</th><th>Status</th><th>Aktion</th></tr></thead>
               <tbody>
                 <tr>
-                  <td><strong>{pilot.name}</strong><br/><span style={{color:"var(--ink-3)",fontSize:13}}>{(pilot.short||"").slice(0,80)}{pilot.short?.length>80?".":""}</span></td>
+                  <td><strong>{pilot.name}</strong><br/><span style={{color:"var(--ink-3)",fontSize:13}}>{(pilot.short||"").slice(0,80)}{pilot.short?.length>80?"…":""}</span></td>
                   <td>Schule Musterstadt</td>
                   <td>{pilot.effort}</td>
-                  <td><span className="pill ok">{state.customOffer?"Eigenes Angebot":"Format ausgew�hlt"}</span></td>
+                  <td><span className="pill ok">{state.customOffer?"Eigenes Angebot":"Format ausgewählt"}</span></td>
                   <td><div className="row-actions">
                     {!state.customOffer && <button onClick={()=>go("detail")}>Details</button>}
                     <button onClick={()=>go("slotForm")}>Termin anlegen</button>
-                    <button onClick={()=>go("anzeige")} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Anzeige erstellen ?</button>
+                    <button onClick={()=>go("anzeige")} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Anzeige erstellen ↗</button>
                   </div></td>
                 </tr>
               </tbody>
             </table>
           ) : (
-            <table className="dash"><tbody><tr className="empty-row"><td colSpan="5">Noch kein Format ausgew�hlt - starten Sie den Mitmach-Planer.</td></tr></tbody></table>
+            <table className="dash"><tbody><tr className="empty-row"><td colSpan="5">Noch kein Format ausgewählt – starten Sie den Mitmach-Planer.</td></tr></tbody></table>
           )}
         </div>
       )}
@@ -3408,9 +3408,9 @@ function Dashboard({ state, set, go }){
       {tab==="slots" && (
         <div className="dash-card">
           <h3>Mitmach-Termine</h3>
-          <div className="sub">Konkrete Einstiegstermine, die im Pilot ver�ffentlicht wurden.</div>
+          <div className="sub">Konkrete Einstiegstermine, die im Pilot veröffentlicht wurden.</div>
           <table className="dash">
-            <thead><tr><th>Titel</th><th>Format</th><th>Datum</th><th>Pl�tze</th><th>Anmeldungen</th><th>Status</th><th>Aktion</th></tr></thead>
+            <thead><tr><th>Titel</th><th>Format</th><th>Datum</th><th>Plätze</th><th>Anmeldungen</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
               {slots.length === 0 && <tr className="empty-row"><td colSpan="7">Noch keine Mitmach-Termine angelegt.</td></tr>}
               {slots.map(s=>(
@@ -3420,7 +3420,7 @@ function Dashboard({ state, set, go }){
                   <td>{s.flexible?"flexibel":s.when}</td>
                   <td className="mono">{s.seats}</td>
                   <td className="mono">{s.registrations.length}</td>
-                  <td><span className="pill ok">ver�ffentlicht</span></td>
+                  <td><span className="pill ok">veröffentlicht</span></td>
                   <td><div className="row-actions">
                     <button onClick={()=>go("public")}>Ansehen</button>
                     <button>Slot wiederholen</button>
@@ -3439,23 +3439,23 @@ function Dashboard({ state, set, go }){
           <table className="dash">
             <thead><tr><th>Name</th><th>Slot</th><th>Kontakt</th><th>Wunsch</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
-              {regs.length === 0 && <tr className="empty-row"><td colSpan="6">Noch keine Anmeldungen. �ffnen Sie die �ffentliche Ansicht, um eine Test-Anmeldung zu erzeugen.</td></tr>}
+              {regs.length === 0 && <tr className="empty-row"><td colSpan="6">Noch keine Anmeldungen. Öffnen Sie die öffentliche Ansicht, um eine Test-Anmeldung zu erzeugen.</td></tr>}
               {regs.map(r=>(
                 <tr key={r.id}>
-                  <td><strong>{r.first} {r.last}</strong>{r.note && <div style={{color:"var(--ink-3)",fontSize:12.5,marginTop:3,maxWidth:200}}>"{r.note}"</div>}</td>
+                  <td><strong>{r.first} {r.last}</strong>{r.note && <div style={{color:"var(--ink-3)",fontSize:12.5,marginTop:3,maxWidth:200}}>„{r.note}“</div>}</td>
                   <td>{r.slotTitle}</td>
                   <td><div>{r.email}</div>{r.phone && <div style={{color:"var(--ink-3)",fontSize:12.5}}>{r.phone}</div>}</td>
                   <td>{r.wish}</td>
                   <td>
                     <select value={r.status} onChange={e=>setStatus(r.id,e.target.value)}
                             style={{font:"inherit",fontSize:12.5,padding:"4px 8px",borderRadius:6,border:"1px solid var(--line)",background:"var(--paper)"}}>
-                      {["neu","best�tigt","R�ckfrage n�tig","passt vielleicht zu anderem Format","abgesagt","erschienen","m�chte weitermachen"].map(o=>(
+                      {["neu","bestätigt","Rückfrage nötig","passt vielleicht zu anderem Format","abgesagt","erschienen","möchte weitermachen"].map(o=>(
                         <option key={o} value={o}>{o}</option>
                       ))}
                     </select>
                   </td>
                   <td><div className="row-actions">
-                    <button onClick={()=>setStatus(r.id,"best�tigt")}>Anmeldung best�tigen</button>
+                    <button onClick={()=>setStatus(r.id,"bestätigt")}>Anmeldung bestätigen</button>
                     {r.note && <button>Nachricht anzeigen</button>}
                   </div></td>
                 </tr>
@@ -3468,9 +3468,9 @@ function Dashboard({ state, set, go }){
       {tab==="ideen" && (
         <div className="dash-card">
           <h3>Ideen aus der Stadt</h3>
-          <div className="sub">Eingebracht �ber die �ffentliche Mitmach-Seite. Sie entscheiden, was passt.</div>
+          <div className="sub">Eingebracht über die öffentliche Mitmach-Seite. Sie entscheiden, was passt.</div>
           <table className="dash">
-            <thead><tr><th>Art</th><th>Thema � Beschreibung</th><th>Von</th><th>Status</th><th>Aktion</th></tr></thead>
+            <thead><tr><th>Art</th><th>Thema · Beschreibung</th><th>Von</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
               {(state.ideas||[]).length === 0 && <tr className="empty-row"><td colSpan="5">Noch keine Ideen eingegangen.</td></tr>}
               {(state.ideas||[]).map(idea=>(
@@ -3478,7 +3478,7 @@ function Dashboard({ state, set, go }){
                   <td><span className={"pill "+(idea.kind==="angebot"?"ok":"new")}>{idea.kind==="angebot"?"Eigenes Angebot":"Idee"}</span></td>
                   <td>
                     {idea.topic && <strong>{idea.topic}</strong>}
-                    <div style={{color:"var(--ink-2)",fontSize:13,marginTop:idea.topic?4:0,maxWidth:380,lineHeight:1.5}}>"{idea.text}"</div>
+                    <div style={{color:"var(--ink-2)",fontSize:13,marginTop:idea.topic?4:0,maxWidth:380,lineHeight:1.5}}>„{idea.text}"</div>
                   </td>
                   <td><div>{idea.first} {idea.last}</div><div style={{color:"var(--ink-3)",fontSize:12.5}}>{idea.email}</div></td>
                   <td>
@@ -3486,7 +3486,7 @@ function Dashboard({ state, set, go }){
                       const st = e.target.value;
                       set({ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:st}:i)});
                     }} style={{font:"inherit",fontSize:12.5,padding:"4px 8px",borderRadius:6,border:"1px solid var(--line)",background:"var(--paper)"}}>
-                      {["neu","R�ckfrage gestellt","wird Slot","nicht passend","abgesagt"].map(o=><option key={o} value={o}>{o}</option>)}
+                      {["neu","Rückfrage gestellt","wird Slot","nicht passend","abgesagt"].map(o=><option key={o} value={o}>{o}</option>)}
                     </select>
                   </td>
                   <td>
@@ -3507,7 +3507,7 @@ function Dashboard({ state, set, go }){
                         };
                         set({slot: seedSlot, ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:"wird Slot"}:i)});
                         go("slotForm");
-                      }} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Aus Idee Slot machen ?</button>
+                      }} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Aus Idee Slot machen ↗</button>
                       <button>Antworten</button>
                     </div>
                   </td>
@@ -3524,12 +3524,12 @@ function Dashboard({ state, set, go }){
             <h3>Pilot-Fortschritt</h3>
             <div className="sub">Wo steht Ihre Schule im Mitmach-Pilot?</div>
             <ol style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:10}}>
-              <StatusStep done={!!pilot} label="Format ausgew�hlt" extra={pilot?.name}/>
+              <StatusStep done={!!pilot} label="Format ausgewählt" extra={pilot?.name}/>
               <StatusStep done={slots.length>0} label="Mitmach-Termin angelegt" extra={slots[0]?.title}/>
               <StatusStep done={regs.length>0} label="Erste Anmeldung erhalten" extra={regs[0] && `${regs[0].first} ${regs[0].last}`}/>
-              <StatusStep done={regs.some(r=>r.status==="best�tigt")} label="Anmeldung best�tigt"/>
-              <StatusStep done={false} label="Erster Termin durchgef�hrt"/>
-              <StatusStep done={false} label="Feedback gesammelt � Slot wiederholt"/>
+              <StatusStep done={regs.some(r=>r.status==="bestätigt")} label="Anmeldung bestätigt"/>
+              <StatusStep done={false} label="Erster Termin durchgeführt"/>
+              <StatusStep done={false} label="Feedback gesammelt · Slot wiederholt"/>
             </ol>
           </div>
         </div>
@@ -3547,7 +3547,7 @@ function StatusStep({ done, label, extra }){
         border:"1px solid "+(done?"var(--sage-deep)":"var(--line)"),
         color:"#fff",display:"grid",placeItems:"center",
         fontSize:13,flexShrink:0,marginTop:1
-      }}>{done?"?":""}</span>
+      }}>{done?"✓":""}</span>
       <div>
         <div style={{fontWeight:600,color:done?"var(--ink)":"var(--ink-3)"}}>{label}</div>
         {extra && <div style={{color:"var(--ink-3)",fontSize:13,marginTop:2}}>{extra}</div>}
@@ -3615,11 +3615,11 @@ function App(){
       }[screen]}
 
       <footer style={{borderTop:"1px solid var(--line-soft)",padding:"24px 32px",color:"var(--ink-3)",fontSize:13,display:"flex",justifyContent:"space-between",maxWidth:1200,margin:"0 auto",width:"100%"}}>
-        <span>SISU Mitmach-Planer � Prototyp</span>
+        <span>SISU Mitmach-Planer · Prototyp</span>
         <span>
           <button onClick={()=>{localStorage.removeItem("sisu-state");location.reload();}}
                   style={{background:"none",border:0,color:"var(--ink-3)",cursor:"pointer",font:"inherit"}}>
-            Prototyp zur�cksetzen
+            Prototyp zurücksetzen
           </button>
         </span>
       </footer>
