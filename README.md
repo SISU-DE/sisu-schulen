@@ -5,10 +5,10 @@ Statischer HTML-Prototyp fuer SISU Landing Pages und Mitmach-Planer.
 ## Seiten
 
 - `index.html` - Einstieg / Auswahl
-- `bibliotheken.html` - Landing Page fuer Bibliotheken
-- `schulen.html` - Landing Page fuer Schulen
-- `mitmach-planer-bibliotheken.html` - Mitmach-Planer fuer Bibliotheken
-- `mitmach-planer-schulen.html` - Mitmach-Planer fuer Schulen
+- `bibliothek/index.html` - Landing Page fuer Bibliotheken
+- `bibliothek/mitmach-planer.html` - Mitmach-Planer fuer Bibliotheken
+- `schule/index.html` - Landing Page fuer Schulen
+- `schule/mitmach-planer.html` - Mitmach-Planer fuer Schulen
 
 ## Lokal oeffnen
 

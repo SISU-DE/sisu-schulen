@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>SISU fÃ¼r Bibliotheken - Mitmach-Formate fÃ¼r den Dritten Ort</title>
+  <title>SISU fÃ¼r Schulen - Erfahrungswissen fÃ¼r Ganztag und BÃ¼rgerschule</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --paper: #fbfaf6;
-      --paper-warm: #f1eadf;
+      --paper-warm: #efe9dd;
       --ink: #20242b;
       --muted: #555b66;
       --soft: #767b86;
@@ -121,7 +121,6 @@
 
     .btn-primary { background: var(--green); color: var(--white); }
     .btn-secondary { background: var(--white); color: var(--green); border-color: var(--line); }
-    .btn-dark { background: var(--ink); color: var(--white); }
 
     .hero {
       min-height: calc(100vh - 68px);
@@ -131,8 +130,8 @@
       overflow: hidden;
       color: var(--white);
       background:
-        linear-gradient(90deg, rgba(18,24,25,.84) 0%, rgba(18,24,25,.56) 48%, rgba(18,24,25,.18) 100%),
-        url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1800&q=82") center/cover;
+        linear-gradient(90deg, rgba(18,24,25,.86) 0%, rgba(18,24,25,.56) 50%, rgba(18,24,25,.18) 100%),
+        url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=82") center/cover;
     }
 
     .hero::after {
@@ -169,7 +168,7 @@
     }
 
     .hero p {
-      max-width: 620px;
+      max-width: 640px;
       margin-top: 22px;
       color: rgba(255,255,255,.88);
       font-size: clamp(18px, 2.2vw, 22px);
@@ -200,7 +199,7 @@
     }
 
     .practice-line {
-      max-width: 600px;
+      max-width: 650px;
       margin-top: 16px;
       color: rgba(255,255,255,.8);
       font-size: 14px;
@@ -209,7 +208,7 @@
     section { padding: 84px 0; }
 
     .section-head {
-      max-width: 720px;
+      max-width: 740px;
       margin-bottom: 38px;
     }
 
@@ -231,14 +230,21 @@
       margin-top: 16px;
       color: var(--muted);
       font-size: 18px;
-      max-width: 62ch;
+      max-width: 64ch;
     }
 
-    .problem-grid {
+    .problem-grid,
+    .formats-grid,
+    .steps-grid,
+    .signals {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
+
+    .problem-grid { grid-template-columns: repeat(3, 1fr); }
+    .formats-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid { grid-template-columns: repeat(3, 1fr); counter-reset: steps; }
+    .signals { grid-template-columns: repeat(4, 1fr); margin-top: 36px; gap: 14px; }
 
     .problem-card,
     .format-card,
@@ -255,16 +261,19 @@
       min-height: 220px;
     }
 
-    .problem-card strong {
+    .problem-card strong,
+    .signal-card strong {
       display: block;
       margin-bottom: 12px;
       color: var(--green);
       font-size: 15px;
+      font-weight: 800;
       letter-spacing: .04em;
       text-transform: uppercase;
     }
 
-    .problem-card h3 {
+    .problem-card h3,
+    .step-card h3 {
       margin-bottom: 12px;
       font-size: 27px;
     }
@@ -275,29 +284,6 @@
     .signal-card p {
       color: var(--muted);
       font-size: 16px;
-    }
-
-    .test-notes {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .test-note {
-      border-top: 3px solid var(--green);
-      padding: 18px 0 0;
-    }
-
-    .test-note blockquote {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: 25px;
-      line-height: 1.2;
-    }
-
-    .test-note p {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 15px;
     }
 
     .band {
@@ -313,40 +299,35 @@
       align-items: center;
     }
 
-    .quote-block {
+    .note-box {
       padding: 34px;
-      border-left: 5px solid var(--coral);
+      border-left: 5px solid var(--blue);
       background: var(--white);
       box-shadow: var(--shadow);
     }
 
-    .quote-image {
+    .note-image {
       height: 210px;
       margin: -34px -34px 28px;
       overflow: hidden;
     }
 
-    .quote-image img {
+    .note-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: saturate(.92) contrast(.98);
+      filter: saturate(.9) contrast(.98);
     }
 
-    .quote-block blockquote {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(27px, 3.2vw, 38px);
-      font-style: italic;
-      line-height: 1.2;
+    .note-box h3 {
+      margin-bottom: 16px;
+      font-size: clamp(28px, 3.2vw, 40px);
     }
 
-    .quote-block cite {
-      display: block;
-      margin-top: 18px;
-      color: var(--soft);
-      font-style: normal;
-      font-size: 14px;
+    .note-box p {
+      color: var(--muted);
+      font-size: 17px;
     }
 
     .check-list {
@@ -374,12 +355,6 @@
       color: var(--green);
       background: var(--green-soft);
       font-weight: 900;
-    }
-
-    .formats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
     }
 
     .format-card { padding: 24px; }
@@ -417,13 +392,6 @@
       font-size: 25px;
     }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      counter-reset: steps;
-    }
-
     .step-card {
       position: relative;
       padding: 30px;
@@ -441,18 +409,6 @@
       letter-spacing: .1em;
     }
 
-    .step-card h3 {
-      margin-bottom: 12px;
-      font-size: 29px;
-    }
-
-    .signals {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 36px;
-    }
-
     .signal-card {
       padding: 20px;
       background: var(--green-soft);
@@ -460,10 +416,10 @@
     }
 
     .signal-card strong {
-      display: block;
       margin-bottom: 6px;
       color: var(--green);
-      font-size: 16px;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     .cta {
@@ -523,7 +479,6 @@
       .formats-grid,
       .steps-grid,
       .signals,
-      .test-notes,
       .split,
       .cta-inner {
         grid-template-columns: 1fr;
@@ -544,8 +499,8 @@
       .hero-actions .btn { width: 100%; }
       section { padding: 58px 0; }
       .problem-card { min-height: 0; }
-      .quote-block { padding: 26px; }
-      .quote-image { height: 190px; margin: -26px -26px 22px; }
+      .note-box { padding: 26px; }
+      .note-image { height: 190px; margin: -26px -26px 22px; }
       .cta-actions, .cta-actions .btn { width: 100%; }
     }
   </style>
@@ -555,34 +510,34 @@
     <div class="container topbar-inner">
       <a class="brand" href="#">
         <span class="brand-main">SISU</span>
-        <span class="brand-sub">fÃ¼r Bibliotheken</span>
+        <span class="brand-sub">fÃ¼r Schulen</span>
       </a>
       <nav class="nav-actions" aria-label="Hauptnavigation">
-        <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Demo ansehen</a>
-        <a class="btn btn-primary" href="#kontakt">Bedarfscheck buchen</a>
+        <a class="btn btn-secondary" href="./mitmach-planer.html">Demo ansehen</a>
+        <a class="btn btn-primary" href="#kontakt">Format besprechen</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero" aria-label="SISU fÃ¼r Bibliotheken">
+    <section class="hero" aria-label="SISU fÃ¼r Schulen">
       <div class="hero-content">
-        <span class="eyebrow">Pilotprogramm 2026 Â· Baden-WÃ¼rttemberg</span>
-        <h1>Machen Sie Ihre Bibliothek zum lebendigen Begegnungsort.</h1>
+        <span class="eyebrow">FÃ¼r BÃ¼rgerschulen, Grundschule und Ganztag</span>
+        <h1>Erfahrungswissen aus der Gemeinde fÃ¼r Schule und Hort nutzbar machen.</h1>
         <p>
-          SISU hilft Bibliotheken, passende Mitmach-Formate mit engagierten Menschen aus der Gemeinde zu entwickeln,
-          sichtbar zu machen und zuverlÃ¤ssig zu starten.
+          SISU hilft Schulleitung und Team, aus guten Ideen klare Mitmach-Formate zu entwickeln:
+          fÃ¼r Ganztag, Hort, Lernbegleitung, Natur, Handwerk und Berufswege.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#kontakt">30-minÃ¼tigen Bedarfscheck vereinbaren</a>
-          <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Mitmach-Planer ansehen</a>
+          <a class="btn btn-primary" href="#kontakt">Erstes Mitmach-Format finden</a>
+          <a class="btn btn-secondary" href="./mitmach-planer.html">Mitmach-Planer ansehen</a>
         </div>
         <div class="hero-proof" aria-label="Vertrauenssignale">
-          <span class="proof-pill">Pilot in Schwieberdingen</span>
-          <span class="proof-pill">Kein Login fÃ¼r den Ersttest</span>
-          <span class="proof-pill">Formate statt bloÃŸes Matching</span>
+          <span class="proof-pill">BÃ¼rgerschule anschlussfÃ¤hig</span>
+          <span class="proof-pill">Erste Schulprojekte erprobt</span>
+          <span class="proof-pill">Klare Rollen statt Zusatzaufwand</span>
         </div>
-        <p class="practice-line">Entwickelt mit Bibliotheken und Engagierten aus der Praxis in Baden-WÃ¼rttemberg.</p>
+        <p class="practice-line">FÃ¼r Schulen, die engagierte Menschen aus der Gemeinde strukturiert und verlÃ¤sslich einbinden wollen.</p>
       </div>
     </section>
 
@@ -590,57 +545,29 @@
       <div class="container">
         <div class="section-head">
           <span class="section-kicker">Ausgangslage</span>
-          <h2>Bibliotheken sollen mehr leisten, aber selten mit mehr Personal.</h2>
+          <h2>Ganztag und Hort brauchen mehr als zusÃ¤tzliche PlÃ¤tze.</h2>
           <p>
-            Viele kommunale Bibliotheken wollen Begegnung ermÃ¶glichen, neue Zielgruppen erreichen und ihre Relevanz
-            gegenÃ¼ber Gemeinde und Politik sichtbar machen. Die Ideen sind da. Was fehlt, ist oft die KapazitÃ¤t,
-            aus Ideen ein tragfÃ¤higes Mitmach-Format zu machen.
+            Ab dem Schuljahr 2026/2027 wÃ¤chst der Anspruch auf Ganztagesbetreuung im Grundschulalter.
+            FÃ¼r Schulen und kommunale Betreuung heiÃŸt das: mehr Kinder, mehr Zeitfenster, mehr sinnvolle Angebote.
+            Gleichzeitig darf das Lehr- und Betreuungsteam nicht noch mehr Koordination tragen.
           </p>
         </div>
 
         <div class="problem-grid">
           <article class="problem-card">
-            <strong>Dritter Ort</strong>
-            <h3>Begegnung muss konkret werden.</h3>
-            <p>Ein Leitbild allein bringt noch kein Angebot. SISU Ã¼bersetzt Ziele in machbare Termine und Rollen.</p>
+            <strong>Ganztag</strong>
+            <h3>Nachmittage brauchen Inhalt.</h3>
+            <p>Nicht jedes Angebot muss Unterricht sein. Kinder profitieren von Projekten, Bewegung, Natur, Lesen und praktischem Tun.</p>
           </article>
           <article class="problem-card">
-            <strong>Personal</strong>
-            <h3>Gute Ideen bleiben liegen.</h3>
-            <p>Das Team kann nicht zusÃ¤tzlich Ehrenamtliche suchen, briefen und jeden neuen Termin von Grund auf planen.</p>
+            <strong>Team</strong>
+            <h3>Gute Ideen brauchen Struktur.</h3>
+            <p>LehrkrÃ¤fte und Betreuung haben Ideen, aber wenig Zeit, externe Menschen zu suchen, einzuarbeiten und Formate zu planen.</p>
           </article>
           <article class="problem-card">
-            <strong>Sichtbarkeit</strong>
-            <h3>Wirkung muss erzÃ¤hlbar sein.</h3>
-            <p>Mitmach-Formate schaffen Angebote, Beteiligung und belastbare Beispiele fÃ¼r Bericht, Presse und Gemeinderat.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <span class="section-kicker">Aus dem Nutzertest</span>
-          <h2>Was Bibliotheken im GesprÃ¤ch wichtig war.</h2>
-          <p>
-            Die ersten Tests zeigen: Bibliotheken suchen nicht noch ein abstraktes Tool.
-            Sie brauchen eine einfache Struktur, passende Sprache und Formate, die sie selbst steuern kÃ¶nnen.
-          </p>
-        </div>
-
-        <div class="test-notes">
-          <article class="test-note">
-            <blockquote>"Bibliotheken mÃ¼ssen ihre Daseinsberechtigung begrÃ¼nden."</blockquote>
-            <p>Der stÃ¤rkste Treiber ist nicht Effizienz, sondern sichtbare Relevanz fÃ¼r Gemeinde und Ã–ffentlichkeit.</p>
-          </article>
-          <article class="test-note">
-            <blockquote>"Die Bibliothek kann ihre Themen-Pakete selbst bestimmen."</blockquote>
-            <p>SISU soll den Rahmen geben, ohne der Bibliothek ein fertiges Programm Ã¼berzustÃ¼lpen.</p>
-          </article>
-          <article class="test-note">
-            <blockquote>"Die Idee ist super. Es war mÃ¶glichst einfach."</blockquote>
-            <p>Im kommunalen Alltag zÃ¤hlt, ob ein erster Mitmach-Termin ohne lange Vorbereitung wirklich startbar ist.</p>
+            <strong>Gemeinde</strong>
+            <h3>BÃ¼rgerschule lebt von Beteiligung.</h3>
+            <p>Menschen aus der Gemeinde bringen Berufserfahrung, Handwerk, Gartenwissen, Lesefreude und Lebenspraxis in den Schulalltag.</p>
           </article>
         </div>
       </div>
@@ -651,76 +578,110 @@
         <div>
           <div class="section-head">
             <span class="section-kicker">Was SISU anders macht</span>
-            <h2>Aus einer Idee wird ein machbarer Mitmach-Termin.</h2>
+            <h2>Aus einer guten Idee wird ein schulisch machbares Format.</h2>
             <p>
-              Viele Bibliotheken haben gute Ideen, aber wenig Zeit fÃ¼r die Umsetzung.
-              SISU hilft, aus einem vagen Wunsch ein klares Format zu machen:
-              mit passender Aufgabe, verstÃ¤ndlichem Aufruf und einem Einstieg, der Engagierte nicht Ã¼berfordert.
+              SISU startet nicht mit einer offenen Suche nach Engagierten.
+              Wir klÃ¤ren zuerst, was zur Schule, zur Klasse, zum Hort und zur verfÃ¼gbaren Begleitung passt.
+              Daraus entsteht ein Format mit klarer Aufgabe, Zeitraum und Rollenverteilung.
             </p>
           </div>
           <ul class="check-list">
-            <li><span>âœ“</span><p>GefÃ¼hrter Mitmach-Planer fÃ¼r passende Engagement-Pakete</p></li>
-            <li><span>âœ“</span><p>Fertige Texte fÃ¼r Aushang, Newsletter, Website und Amtsblatt</p></li>
-            <li><span>âœ“</span><p>Klare Rollen fÃ¼r Engagierte: schnuppern, mitmachen, spÃ¤ter bleiben</p></li>
-            <li><span>âœ“</span><p>PersÃ¶nliche Begleitung im Pilot, bevor daraus ein dauerhaftes Angebot wird</p></li>
+            <li><span>âœ“</span><p>Projektformat gemeinsam mit Schulleitung, Lehrkraft oder Betreuungsteam klÃ¤ren</p></li>
+            <li><span>âœ“</span><p>Passende Rollen fÃ¼r Engagierte beschreiben: Projektpat:in, Lesementor:in, Berufs-ErzÃ¤hler:in</p></li>
+            <li><span>âœ“</span><p>Aufwand, Material, Begleitung und erster Termin werden vorab realistisch gemacht</p></li>
+            <li><span>âœ“</span><p>Engagierte ergÃ¤nzen Schule und Hort. Sie ersetzen keine Lehr- oder BetreuungskrÃ¤fte.</p></li>
           </ul>
         </div>
 
-        <aside class="quote-block">
-          <div class="quote-image">
-            <img src="https://images.unsplash.com/photo-1635862624756-2f64dd64fd68?auto=format&fit=crop&w=900&q=72" alt="Frau steht vor BÃ¼cherregalen in einer Bibliothek" loading="lazy"/>
+        <aside class="note-box">
+          <div class="note-image">
+            <img src="https://images.unsplash.com/photo-1771765754567-e7b5bbf6a3b3?auto=format&fit=crop&w=900&q=72" alt="Erwachsene Begleitung arbeitet mit Kindern an einem Tisch" loading="lazy"/>
           </div>
-          <blockquote>
-            "Ihr wollt mehr Begegnung und zu einem dritten Ort werden, habt zu wenig Personal - dann ist das der geeignete Weg."
-          </blockquote>
-          <cite>Bibliothekarin im SISU-Nutzertest, Mai 2026</cite>
+          <h3>Wichtig fÃ¼r Schulen</h3>
+          <p>
+            SISU ist kein Ersatz fÃ¼r Aufsicht, pÃ¤dagogische FachkrÃ¤fte oder schulische Verantwortung.
+            Der Wert liegt in der Vorbereitung: ein klares Format, verlÃ¤ssliche Erwartungen und ein Einstieg,
+            der fÃ¼r Schule, Kinder und Engagierte tragfÃ¤hig ist.
+          </p>
         </aside>
       </div>
     </section>
 
-    <section>
+    <section id="formate">
       <div class="container">
         <div class="section-head">
-          <span class="section-kicker">Mitmach-Formate</span>
-          <h2>Konkrete Angebote, die eine Bibliothek klein testen kann.</h2>
+          <span class="section-kicker">Projektformate</span>
+          <h2>Konkrete Formate fÃ¼r Grundschule, Hort und Ganztag.</h2>
           <p>
-            Der Pilot beginnt nicht mit einer groÃŸen Plattform, sondern mit einem ersten passenden Format.
-            Danach wird gemessen, ob Engagierte kommen, ob das Team entlastet wird und ob daraus ein wiederholbares Angebot entsteht.
+            Die ersten Formate sollten Ã¼berschaubar sein: wenige Termine, klare Aufgabe, sichtbares Ergebnis.
+            Genau dort kÃ¶nnen engagierte Menschen aus der Gemeinde ihre Erfahrung sinnvoll einbringen.
           </p>
         </div>
 
         <div class="formats-grid">
           <article class="format-card">
             <div class="format-media">
-              <img src="https://images.unsplash.com/photo-1764173039570-537dc1c8bb3a?auto=format&fit=crop&w=900&q=72" alt="Zwei Ã¤ltere Menschen besprechen gemeinsam ein Buch in einer Bibliothek" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1757838661170-186930ac95db?auto=format&fit=crop&w=900&q=72" alt="Hochbeete mit jungen Pflanzen in einem Garten" loading="lazy"/>
             </div>
-            <span class="format-tag">Lesen & Geschichten</span>
-            <h3>Vorlesen, ErzÃ¤hlen, Erinnern</h3>
-            <p>FÃ¼r Kinder, Familien oder Ã¤ltere Besucher:innen. Niedrigschwellig, sichtbar und gut kommunizierbar.</p>
+            <span class="format-tag">Natur & Garten</span>
+            <h3>Hochbeet und Gartenprojekt</h3>
+            <p>Ein Beet bauen, bepflanzen und Ã¼ber mehrere Termine pflegen. Praktisch, sichtbar und gut fÃ¼r Hort oder Grundschule.</p>
           </article>
           <article class="format-card">
             <div class="format-media">
-              <img src="https://images.unsplash.com/photo-1675179181597-ae9e76ccbca9?auto=format&fit=crop&w=900&q=72" alt="Ã„ltere Frau nutzt ein digitales GerÃ¤t auf einem Tisch" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1650907195186-8a41fb31494b?auto=format&fit=crop&w=900&q=72" alt="Vogelnest mit Eiern zwischen Zweigen" loading="lazy"/>
             </div>
-            <span class="format-tag">Digital & Medien</span>
-            <h3>Smartphone-Sprechstunde</h3>
-            <p>Erfahrene Engagierte helfen bei digitalen Alltagsfragen. Die Bibliothek bleibt Lernort fÃ¼r alle Generationen.</p>
+            <span class="format-tag">Handwerk</span>
+            <h3>NistkÃ¤sten bauen oder pflegen</h3>
+            <p>Kinder erleben Natur und Handwerk konkret. Engagierte bringen Anleitung, Geduld und praktisches KÃ¶nnen mit.</p>
           </article>
           <article class="format-card">
             <div class="format-media">
-              <img src="https://images.unsplash.com/photo-1762955911310-f068a0622703?auto=format&fit=crop&w=900&q=72" alt="HÃ¤nde mit bunter Wolle und Strickmaterial" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=72" alt="Aufgeschlagenes Buch in ruhiger Leseumgebung" loading="lazy"/>
             </div>
-            <span class="format-tag">Begegnung</span>
-            <h3>Strickrunde, Spiel, GesprÃ¤ch</h3>
-            <p>Formate, die Menschen regelmÃ¤ÃŸig zusammenbringen, ohne das Bibliotheksteam dauerhaft zu Ã¼berlasten.</p>
+            <span class="format-tag">Lesen</span>
+            <h3>Vorlese-Pat:innen und Lesementor:innen</h3>
+            <p>RegelmÃ¤ÃŸige Lesezeit mit vertrauten Erwachsenen. Besonders passend fÃ¼r Grundschule, Hort und SprachfÃ¶rderung.</p>
           </article>
           <article class="format-card">
             <div class="format-media">
-              <img src="https://images.unsplash.com/photo-1764173039318-75d362d60af8?auto=format&fit=crop&w=900&q=72" alt="Drei Menschen sitzen gemeinsam an einem Tisch in einer Bibliothek" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=72" alt="Menschen sitzen gemeinsam an einem Tisch im GesprÃ¤ch" loading="lazy"/>
             </div>
-            <span class="format-tag">Wissen & KÃ¶nnen</span>
-            <h3>Fachwissen aus der Gemeinde</h3>
-            <p>Menschen im Ruhestand bringen Berufserfahrung, Handwerk, Sprache oder KreativitÃ¤t als klare Mitmach-Rolle ein.</p>
+            <span class="format-tag">Erfahrung</span>
+            <h3>Berufs- und Lebenswege erzÃ¤hlen</h3>
+            <p>Menschen aus der Gemeinde erzÃ¤hlen von Arbeit, Umwegen und KÃ¶nnen. Das macht Berufsorientierung lebensnÃ¤her.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Aus der Praxis</span>
+          <h2>LehrkrÃ¤fte sehen den Wert, wenn Erfahrung von auÃŸen wirklich ankommt.</h2>
+          <p>
+            Aus ersten Schulprojekten wird deutlich: BeitrÃ¤ge von auÃŸen sind besonders wertvoll,
+            wenn sie nicht zusÃ¤tzlich Arbeit erzeugen, sondern als Lebenswissen, praktisches KÃ¶nnen
+            und konkrete UnterstÃ¼tzung in den Schulalltag passen.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem-card">
+            <strong>RÃ¼ckmeldung</strong>
+            <h3>"So ein Projekt wÃ¼rden wir wieder machen."</h3>
+            <p>Ein Lehrer mÃ¶chte erneut mit den Hochbeetbauern arbeiten, weil das Projekt sichtbar, praktisch und gut anschlussfÃ¤hig war.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Lebenswissen</strong>
+            <h3>"Jeder Beitrag von auÃŸen bringt etwas Eigenes mit."</h3>
+            <p>LehrkrÃ¤fte erleben es als Bereicherung, wenn Menschen aus der Gemeinde ihr Wissen, ihre Erfahrung und ihre Ruhe einbringen.</p>
+          </article>
+          <article class="problem-card">
+            <strong>Struktur</strong>
+            <h3>"Es funktioniert, wenn der Rahmen klar ist."</h3>
+            <p>Mehrere Termine sind dann machbar, wenn Aufgabe, Begleitung, Material und Verantwortung vorher gut abgestimmt sind.</p>
           </article>
         </div>
       </div>
@@ -730,40 +691,40 @@
       <div class="container">
         <div class="section-head">
           <span class="section-kicker">Pilotablauf</span>
-          <h2>Ein Ã¼berschaubarer Weg vom Bedarf zum ersten Termin.</h2>
+          <h2>Ein Ã¼berschaubarer Weg vom Bedarf zum ersten Projekt.</h2>
         </div>
 
         <div class="steps-grid">
           <article class="step-card">
             <h3>Bedarf klÃ¤ren</h3>
-            <p>In 30 Minuten prÃ¼fen wir, welche Zielgruppe, RÃ¤ume und KapazitÃ¤ten bei Ihnen realistisch sind.</p>
+            <p>Wir besprechen mit Schulleitung und Team, wo ein externes Mitmach-Format wirklich hilft.</p>
           </article>
           <article class="step-card">
             <h3>Format festlegen</h3>
-            <p>Der Mitmach-Planer schlÃ¤gt passende Pakete vor. Sie entscheiden, was zu Ihrer Bibliothek passt.</p>
+            <p>Aus Thema, Altersgruppe, Zeitfenster und Begleitung entsteht ein klarer Projektsteckbrief.</p>
           </article>
           <article class="step-card">
-            <h3>Engagierte aktivieren</h3>
-            <p>SISU liefert Aufruftexte und eine einfache Anmeldestrecke. Sie behalten den Ãœberblick und starten klein.</p>
+            <h3>Engagierte einbinden</h3>
+            <p>SISU hilft bei Ansprache und RollenklÃ¤rung. Der Start bleibt klein, konkret und Ã¼berprÃ¼fbar.</p>
           </article>
         </div>
 
         <div class="signals">
           <article class="signal-card">
-            <strong>Ihr Aufwand</strong>
-            <p>Ein GesprÃ¤ch, ein Format, ein erster Termin.</p>
+            <strong>FÃ¼r Kinder</strong>
+            <p>Praktisches Lernen mit Menschen aus der Gemeinde.</p>
+          </article>
+          <article class="signal-card">
+            <strong>FÃ¼r das Team</strong>
+            <p>Klare Vorbereitung statt zusÃ¤tzlicher Organisationslast.</p>
           </article>
           <article class="signal-card">
             <strong>FÃ¼r Engagierte</strong>
-            <p>Klare Aufgabe statt unklarer Ehrenamtsrolle.</p>
-          </article>
-          <article class="signal-card">
-            <strong>FÃ¼r die Gemeinde</strong>
-            <p>Sichtbare Beteiligung und konkrete Wirkung.</p>
+            <p>Eine konkrete Aufgabe mit Anfang, Ende und Wirkung.</p>
           </article>
           <article class="signal-card">
             <strong>FÃ¼r den Start</strong>
-            <p>Der Bedarfscheck ist kostenfrei.</p>
+            <p>Ein erstes Projektformat lÃ¤sst sich in 30 Minuten prÃ¼fen.</p>
           </article>
         </div>
       </div>
@@ -773,15 +734,15 @@
       <div class="container cta-inner">
         <div>
           <span class="section-kicker">NÃ¤chster Schritt</span>
-          <h2>Finden wir ein erstes Format, das zu Ihrer Bibliothek passt.</h2>
+          <h2>Finden wir ein erstes Format, das zu Ihrer Schule passt.</h2>
           <p>
-            Der beste Einstieg ist ein konkreter Anlass: ein offener Treff, ein Leseformat, eine digitale Sprechstunde
-            oder eine Idee, die schon lÃ¤nger in Ihrer Bibliothek liegt.
+            Der beste Einstieg ist ein konkreter Anlass: ein Hortangebot, eine Grundschulklasse,
+            ein Gartenprojekt, ein Leseformat oder ein Ganztagsfenster, das sinnvoll gefÃ¼llt werden soll.
           </p>
         </div>
         <div class="cta-actions">
-          <a class="btn btn-primary" href="mailto:jeanera@gmx.net?subject=SISU%20Bedarfscheck%20Bibliothek&body=Guten%20Tag%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20einen%20SISU-Bedarfscheck%20f%C3%BCr%20unsere%20Bibliothek.%0A%0ABibliothek%2FOrt%3A%20%0AName%3A%20%0AErste%20Idee%20oder%20Frage%3A%20%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen">Bedarfscheck anfragen</a>
-          <a class="btn btn-secondary" href="./mitmach-planer-bibliotheken.html">Demo Ã¶ffnen</a>
+          <a class="btn btn-primary" href="mailto:jeanera@gmx.net?subject=SISU%20Projektformat%20Schule&body=Guten%20Tag%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20ein%20SISU-Projektformat%20f%C3%BCr%20unsere%20Schule%20oder%20Betreuung.%0A%0ASchule%2FOrt%3A%20%0AName%3A%20%0AErste%20Idee%20oder%20Frage%3A%20%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen">Format anfragen</a>
+          <a class="btn btn-secondary" href="../bibliothek/">Bibliotheksseite ansehen</a>
         </div>
       </div>
     </section>
@@ -795,4 +756,5 @@
   </footer>
 </body>
 </html>
+
 
