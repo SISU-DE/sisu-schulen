@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SISU Mitmach-Planer für Schulen</title>
+<title>Unser Service - Mitmach-Planer für Ganztag und Schulen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -758,7 +758,7 @@ const PACKAGES = {
     short:"Engagierte bringen Umweltwissen und praktisches Tun in Schule, Hort oder Ganztag – zum Beispiel mit Hochbeet, Garten, Nistkästen oder Insektenhotel.",
     fitFor:"BNE, Schulgarten, Hort, Grundschule, handlungsorientiertes Lernen.",
     effort:"Mittel", effortLevel:2, stage:"3–4 Termine bis Projektreihe", potential:"hoch", potentialLevel:3,
-    why:"Dieses Format passt, wenn Kinder Nachhaltigkeit nicht nur besprechen, sondern selbst bauen, pflanzen, beobachten und Verantwortung übernehmen sollen.",
+    why:"Dieses Format passt, wenn Kinder Nachhaltigkeit selbst bauen, pflanzen, beobachten und Verantwortung übernehmen sollen.",
     roles:["Garten-Pat:in","Naturbegleiter:in","Hochbeet-Team","Nistkasten-Pat:in"],
     formats:["Hochbeet bauen und bepflanzen","Nistkästen bauen oder pflegen","3–4 Termine Gartenprojekt","Insektenhotel oder Kompost praktisch erklären"],
     clarify:["Welche Klasse oder Hortgruppe ist beteiligt?","Wer übernimmt Aufsicht und pädagogische Verantwortung?","Welche Materialien und Werkzeuge werden gebraucht?","Wo kann das Projekt sichtbar bleiben?"],
@@ -791,7 +791,7 @@ const PACKAGES = {
     short:"Engagierte unterstützen Formate, die Gemeinschaft, Beteiligung und gutes Miteinander stärken – vom Pausenspiel bis zum Generationendialog.",
     fitFor:"Klassengemeinschaft, Beteiligung, soziale Projekte, ruhige Gruppenangebote.",
     effort:"Niedrig bis mittel", effortLevel:1, stage:"Schnuppern bis Dranbleiben", potential:"mittel", potentialLevel:2,
-    why:"Dieses Format passt, wenn Schule oder Hort mehr gemeinsames Tun und Beteiligung ermöglichen möchte, ohne ein großes Projekt aufzusetzen.",
+    why:"Dieses Format passt, wenn Schule oder Hort gemeinsames Tun und Beteiligung als überschaubaren Einstieg ermöglichen möchte.",
     roles:["Spiele-Pat:in","Mitmach-Begleiter:in","Generationen-Brückenbauer:in","Projektpate für Beteiligung"],
     formats:["Pausenspiele oder Gesellschaftsspiele","Generationenbegegnung","Kinder planen eine kleine Aktion","Ruhiger Gesprächs- oder Kreativkreis"],
     clarify:["Welche Gruppe braucht welches Maß an Struktur?","Wer moderiert?","Welche Regeln gelten?","Wie wird Überforderung bei Kindern und Engagierten vermieden?"],
@@ -822,44 +822,43 @@ const PACKAGES = {
 };
 
 const TOPICS = [
-  { id:"natur", label:"Umwelt und Nachhaltigkeit praktisch machen" },
-  { id:"handwerk", label:"Handwerk, Bauen oder Kreativität ermöglichen" },
-  { id:"lesen", label:"Lesen und Sprache stärken" },
-  { id:"gemeinschaft", label:"Gemeinschaft und soziales Miteinander fördern" },
-  { id:"bewegung", label:"Bewegung und Gesundheit einbringen" },
-  { id:"wissen", label:"Berufs- und Lebenswissen sichtbar machen" },
-  { id:"beteiligung", label:"Beteiligung und Verantwortung stärken" },
-  { id:"unsicher", label:"Wir wissen es noch nicht genau" },
+  { id:"natur", label:"Natur, Umwelt und Schulgarten" },
+  { id:"handwerk", label:"Handwerk, Bauen und Gestalten" },
+  { id:"lesen", label:"Lesen, Sprache und Vorlesen" },
+  { id:"gemeinschaft", label:"Miteinander, Spielen und soziale Stärke" },
+  { id:"bewegung", label:"Bewegung, Gesundheit und Draußenzeit" },
+  { id:"wissen", label:"Berufswege und Lebenserfahrung" },
+  { id:"beteiligung", label:"Verantwortung übernehmen und mitgestalten" },
+  { id:"unsicher", label:"Wir suchen noch die passende Richtung" },
 ];
 
 const EXISTING = [
-  { id:"ganztag", label:"AGs oder Ganztagsangebote" },
-  { id:"hort", label:"Hort- oder Betreuungsangebote" },
-  { id:"garten", label:"Schulgarten / Hochbeete / Naturprojekt" },
-  { id:"lesen", label:"Leseförderung / Vorlesen / Sprachförderung" },
+  { id:"ganztag", label:"AGs, Ganztag oder Betreuung" },
+  { id:"garten", label:"Schulgarten, Hochbeete oder Naturprojekt" },
+  { id:"lesen", label:"Leseförderung, Vorlesen oder Sprachförderung" },
   { id:"jugendbegleiter", label:"Jugendbegleiter:innen oder externe Engagierte" },
-  { id:"verein", label:"Kooperationen mit Vereinen oder außerschulischen Partnern" },
-  { id:"bo", label:"Berufsorientierung / Praxisimpulse" },
-  { id:"bewegung", label:"Bewegungs-, Pausen- oder Gesundheitsangebote" },
-  { id:"wenig", label:"Noch wenig regelmäßige Angebote" },
+  { id:"verein", label:"Vereine oder außerschulische Partner" },
+  { id:"bo", label:"Berufsorientierung oder Praxisimpulse" },
+  { id:"bewegung", label:"Bewegung, Pausen oder Gesundheit" },
+  { id:"wenig", label:"Wir stehen noch am Anfang" },
 ];
 
 const COORD_OPTS = [
-  { id:"A", letter:"A", title:"Sehr wenig", desc:"Nur klar vorbereitete Einzeltermine sind realistisch." },
-  { id:"B", letter:"B", title:"Etwas",      desc:"Eine Lehrkraft oder Betreuungsperson kann einzelne Termine begleiten." },
-  { id:"C", letter:"C", title:"Mittel",     desc:"3–4 Termine sind möglich, wenn Rollen und Material klar sind." },
-  { id:"D", letter:"D", title:"Hoch",       desc:"Ein regelmäßiges Angebot oder eine AG ist grundsätzlich denkbar." },
+  { id:"A", letter:"A", title:"Kleiner Einstieg", desc:"Ein einzelner, gut vorbereiteter Termin passt aktuell am besten." },
+  { id:"B", letter:"B", title:"Begleiteter Termin", desc:"Eine Lehrkraft oder Betreuungsperson kann einzelne Termine begleiten." },
+  { id:"C", letter:"C", title:"Kleine Reihe", desc:"3–4 Termine sind gut machbar, wenn Rollen und Material klar sind." },
+  { id:"D", letter:"D", title:"Regelmäßiges Format", desc:"Eine AG oder ein wiederkehrendes Angebot ist grundsätzlich denkbar." },
 ];
 
 const COORD_RESULT = {
   A: { title:"Niedrigschwellig starten",
-       text:"Ihre Schule sollte mit einem klar begrenzten Einzeltermin beginnen. SISU empfiehlt Formate mit wenig Vorlauf und sehr klarer Rollenklärung." },
+       text:"Ihre Schule startet am besten mit einem klar begrenzten Einzeltermin. Unser Service empfiehlt Formate mit wenig Vorlauf und sehr klarer Rollenklärung." },
   B: { title:"Erste Rollen möglich",
        text:"Ihre Schule kann erste Mitmachrollen gut testen, wenn Aufgabe, Termin, Begleitung und Verantwortlichkeiten vorab definiert sind." },
   C: { title:"Kleine Projektreihe möglich",
        text:"Ihre Schule kann Formate über mehrere Termine aufbauen, wenn Material, Aufsicht, Begleitung und Feedback einfach geregelt sind." },
   D: { title:"Ausbau zum Bürgerschul-Format möglich",
-       text:"Ihre Schule kann Engagierte nicht nur punktuell einbinden, sondern gemeinsam mit ihnen ein wiederholbares Ganztags- oder Projektformat entwickeln." },
+       text:"Ihre Schule kann Engagierte punktuell einbinden und daraus gemeinsam ein wiederholbares Ganztags- oder Projektformat entwickeln." },
 };
 
 const TARGETS = [
@@ -868,9 +867,9 @@ const TARGETS = [
   { id:"hort", label:"Hort / Betreuung" },
   { id:"gts56", label:"Ganztag Klasse 5–6" },
   { id:"gts78", label:"Ganztag Klasse 7–8" },
-  { id:"foerder", label:"Kinder mit besonderem Förder- oder Ruhebedarf" },
-  { id:"generation", label:"Generationenbegegnung" },
-  { id:"offen", label:"offen / noch unklar" },
+  { id:"foerder", label:"Kinder mit zusätzlichem Unterstützungsbedarf" },
+  { id:"generation", label:"Generationenübergreifende Begegnung" },
+  { id:"offen", label:"Wir möchten offen prüfen" },
 ];
 
 /* ============================================================
@@ -978,13 +977,13 @@ const COMMIT_OPTS = [
 
 const COMMIT_RESULT = {
   A: { title:"Erstmal hineinschnuppern",
-       text:"Sie beginnen mit einem einzelnen Termin — kein Druck, kein Commitment. Sie spüren in Ruhe, ob es passt." },
+       text:"Sie beginnen mit einem einzelnen Termin. Sie spüren in Ruhe, ob es passt." },
   B: { title:"Eine kurze, klare Reihe",
        text:"Sie steigen mit wenigen Terminen ein. Klares Ende, klare Wirkung — und Sie entscheiden danach, wie weiter." },
   C: { title:"Regelmäßig dabei",
        text:"Sie kommen verlässlich, in überschaubarem Rhythmus. Vertrauen und Kontinuität bauen sich auf." },
   D: { title:"Mitgestalten und dranbleiben",
-       text:"Sie übernehmen Verantwortung, prägen mit. Hier zählt nicht nur Mithilfe — sondern Ihre Handschrift." },
+       text:"Sie übernehmen Verantwortung und prägen mit. Hier zählt Ihre Erfahrung und Ihre Handschrift." },
 };
 
 const CONTEXTS = [
@@ -1125,7 +1124,7 @@ const DEMO_SLOTS = [
   {
     id:"demo-lese-mentor",
     pkgId:"lesen",
-    title:"Lese-Mentor:in für ein Schulkind",
+    title:"Lese-Mentor:in für Schulkinder",
     flexible:true,
     when:"Wochentag flexibel · 60 Minuten pro Woche · ab September",
     seats:"3–4",
@@ -1189,7 +1188,7 @@ const TESTIMONIALS = [
   },
   {
     name:"Margarete", age:71, role:"Strickrunde-Gastgeberin",
-    quote:"Es ist kein Geben und Nehmen — es ist Begegnung. Und die fehlt mir seit meinem Ruhestand am meisten.",
+    quote:"Es ist Begegnung auf Augenhöhe. Genau das wünsche ich mir seit meinem Ruhestand wieder häufiger.",
   },
 ];
 
@@ -1209,7 +1208,7 @@ const FAQS = [
   { q:"Muss ich ein Führungszeugnis vorlegen?",
     a:"Bei regelmäßiger Arbeit mit Kindern kann ein erweitertes Führungszeugnis erforderlich sein. Schule, Betreuung oder Träger klären vorab, was für das konkrete Format gilt." },
   { q:"Kann ich einfach ausprobieren?",
-    a:"Ja, selbstverständlich. Sie können klein starten und jederzeit aufhören." },
+    a:"Ja, selbstverständlich. Sie können mit Schnuppern oder flexibel starten." },
 ];
 
 function scoreRoles({motivations=[], competences=[], commit="", contexts=[]}){
@@ -1238,7 +1237,7 @@ function Brand({ onClick, screen }){
     <div className="brand" onClick={onClick}>
       <div className="brand-mark">s</div>
       <div>
-        <span className="brand-name">SISU</span>
+        <span className="brand-name">Unser Service</span>
         <span className="brand-sub">{sub}</span>
       </div>
     </div>
@@ -1254,7 +1253,7 @@ function Topbar({ go, screen, hideNav }){
           <nav className="nav">
             <button className={["start"].includes(screen)?"active":""} onClick={()=>go("start")}>Start</button>
             <button className={["q1","q2","q3","q4","result","detail","eigenesAngebot"].includes(screen)?"active":""} onClick={()=>go("q1")}>Mitmach-Planer</button>
-            <button className={["dashboard"].includes(screen)?"active":""} onClick={()=>go("dashboard")}>Backend</button>
+            <button className={["dashboard"].includes(screen)?"active":""} onClick={()=>go("dashboard")}>Verwaltung</button>
             <button className={"portal-tab "+(["portal","m1","m2","m3","m4","mResult","mDetail","mConfirm","public","register","idea"].includes(screen)?"active":"")} onClick={()=>go("portal")}>Für Engagierte →</button>
           </nav>
         )}
@@ -1289,9 +1288,9 @@ function PotentialPips({ level }){
    ============================================================ */
 function HeroQuotes(){
   const quotes = [
-    { text:"So ein Projekt würden wir wieder machen.", source:"Rückmeldung aus einem Hochbeet-Projekt", img:"https://images.unsplash.com/photo-1757838661170-186930ac95db?auto=format&fit=crop&w=1200&q=80" },
-    { text:"Jeder Beitrag von außen bringt etwas Eigenes mit.", source:"Lehrerperspektive auf Lebenswissen in der Schule", img:"https://images.unsplash.com/photo-1771765754567-e7b5bbf6a3b3?auto=format&fit=crop&w=1200&q=80" },
-    { text:"Es funktioniert, wenn der Rahmen klar ist.", source:"Erfahrung aus ersten Schulprojekten", img:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80" },
+    { text:"Die Kinder waren sofort dabei. Das Naturwissen kam ganz selbstverständlich mit.", source:"Rückmeldung aus einem Gartenprojekt", img:"https://commons.wikimedia.org/wiki/Special:FilePath/202108009-FNS-UNC-0008.jpg?width=1200" },
+    { text:"Das hat richtig gut funktioniert. So eine Bauaktion würden wir gerne noch einmal machen.", source:"Lehrerstimme nach einer Mitmach-Aktion", img:"https://images.unsplash.com/photo-1652040006854-4c826e4f18f0?auto=format&fit=crop&w=1200&q=80" },
+    { text:"Man hat gemerkt: Da bringt jemand Erfahrung, Geduld und Freude mit.", source:"Lehrerperspektive aus der Entwicklung", img:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80" },
   ];
   const [i,setI] = useState(0);
   useEffect(()=>{ const t=setInterval(()=>setI(x=>(x+1)%quotes.length),6000); return ()=>clearInterval(t); },[]);
@@ -1305,7 +1304,7 @@ function HeroQuotes(){
     }}>
       <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg,rgba(31,37,48,0) 30%,rgba(31,37,48,.55) 55%,rgba(31,37,48,.92) 100%)"}}/>
       <div style={{position:"absolute",left:0,right:0,bottom:0,padding:"32px 28px 24px",zIndex:1,color:"#FCFAF5"}}>
-        <div style={{fontSize:11,letterSpacing:".14em",textTransform:"uppercase",color:"#D4B97E",marginBottom:10,fontWeight:600}}>Aus der Schulpraxis</div>
+        <div style={{fontSize:11,letterSpacing:".14em",textTransform:"uppercase",color:"#D4B97E",marginBottom:10,fontWeight:600}}>Aus der Pilotentwicklung</div>
         <p style={{fontFamily:"'Instrument Serif',serif",fontStyle:"italic",fontSize:24,lineHeight:1.3,margin:"0 0 14px",color:"#FCFAF5"}} key={i} className="fade-in">„{q.text}"</p>
         <div style={{fontSize:13,color:"rgba(252,250,245,.78)",letterSpacing:".02em"}}>{q.source}</div>
         <div style={{display:"flex",gap:6,marginTop:18}}>
@@ -1327,10 +1326,10 @@ function StartScreen({ go }){
     <div className="container fade-in">
       <div className="hero">
         <div>
-          <span className="eyebrow">Für Schulleitung, Lehrkräfte und Ganztag · Kein Login</span>
-          <h1 className="display">Aus guten Ideen werden machbare Mitmach-Angebote für Schule und Hort.</h1>
+          <span className="eyebrow">Für Schulleitung, Ganztag und Betreuung · Direkter Einstieg</span>
+          <h1 className="display">Aus Ideen werden machbare Formate für Unterricht, Ganztag und Projekte.</h1>
           <p className="lede">
-            In Ihrer Gemeinde leben Menschen mit Kompetenzen und Erfahrung, die sich einbringen möchten. SISU hilft Ihrer Schule, daraus klare Formate zu entwickeln — organisch, abgestimmt auf Kinder, Teamkapazität und schulische Verantwortung.
+            In Ihrer Gemeinde leben Menschen mit Kompetenzen und Erfahrung, die sich einbringen möchten. Unser Service hilft Ihrer Schule, daraus klare Formate zu entwickeln — strukturiert, abgestimmt auf Kinder, Teamkapazität und schulische Verantwortung.
           </p>
           <div className="btn-row">
             <button className="btn btn-primary btn-lg" onClick={()=>go("q1")}>
@@ -1340,7 +1339,7 @@ function StartScreen({ go }){
               Ich weiß schon was ich will →
             </button>
           </div>
-          <p className="small-note" style={{marginTop:10}}>Ca. 5 Minuten · Kein Login · Kein Commitment</p>
+          <p className="small-note" style={{marginTop:10}}>Ca. 5 Minuten · Direkter Einstieg · Erstes Pilotformat prüfen</p>
         </div>
 
         <HeroQuotes/>
@@ -1349,17 +1348,17 @@ function StartScreen({ go }){
       <div className="tiles">
         <div className="tile">
           <div className="tile-num mono">01</div>
-          <div className="tile-title">Das Format das zu Ihrer Schule passt</div>
-          <div className="tile-text">4 Fragen zeigen, welches Mitmach-Angebot zu Zielgruppe, Zeitfenster und Begleitung passt.</div>
+          <div className="tile-title">Ein Format, das zum Alltag passt</div>
+          <div className="tile-text">4 Fragen zeigen, welches Mitmach-Format zu Zielgruppe, Zeitfenster und Begleitung passt.</div>
         </div>
         <div className="tile">
           <div className="tile-num mono">02</div>
           <div className="tile-title">Aufgabe, Rahmen und erster Termin — klar</div>
-          <div className="tile-text">SISU strukturiert Rolle, Material, Begleitung und Erwartung, bevor Engagierte angesprochen werden.</div>
+          <div className="tile-text">Unser Service strukturiert Rolle, Material, Begleitung und Erwartung, bevor Engagierte angesprochen werden.</div>
         </div>
         <div className="tile">
           <div className="tile-num mono">03</div>
-          <div className="tile-title">Engagierte, die ergänzen statt ersetzen</div>
+          <div className="tile-title">Engagierte, die Schule ergänzen</div>
           <div className="tile-text">Engagierte bringen Lebenswissen ein. Schule und Hort behalten Verantwortung, Aufsicht und pädagogischen Rahmen.</div>
         </div>
       </div>
@@ -1409,8 +1408,8 @@ function Q1({ state, set, go }){
   return (
     <QuestionShell
       step={1}
-      title="Was möchten Sie als Nächstes ermöglichen?"
-      sub="Wählen Sie bis zu 3 Themen, die für Ihre Schule, Ihren Hort oder den Ganztag aktuell wichtig sind."
+      title="Wobei soll Erfahrung von außen Ihre Schule ergänzen?"
+      sub="Wählen Sie bis zu 3 Bereiche, die gut in Ihren Schulalltag passen."
       onBack={()=>go("start")}
       onNext={()=>go("q2")}
       nextDisabled={sel.length===0}
@@ -1445,8 +1444,8 @@ function Q2({ state, set, go }){
   return (
     <QuestionShell
       step={2}
-      title="Was gibt es bei Ihnen bereits?"
-      sub="Das hilft SISU zu unterscheiden, ob ein Angebot gesichert, erweitert oder neu gestartet werden sollte."
+      title="Woran können wir bei Ihnen anknüpfen?"
+      sub="Wählen Sie aus, was es an Ihrer Schule bereits gibt oder gerade entsteht."
       onBack={()=>go("q1")}
       onNext={()=>go("q3")}
       nextDisabled={false}
@@ -1472,8 +1471,8 @@ function Q3({ state, set, go }){
   return (
     <QuestionShell
       step={3}
-      title="Wie viel Begleitung kann Ihr Team leisten?"
-      sub="Gemeint ist der Rahmen durch Schule, Hort oder Ganztag – nicht der Aufwand der Engagierten."
+      title="Wie groß darf der erste Schritt sein?"
+      sub="Wählen Sie den Rahmen, der für Schule, Hort oder Ganztag aktuell gut machbar ist."
       onBack={()=>go("q2")}
       onNext={()=>go("q4")}
       nextDisabled={!v}
@@ -1502,8 +1501,8 @@ function Q4({ state, set, go }){
   return (
     <QuestionShell
       step={4}
-      title="Für wen soll das Angebot vor allem sein?"
-      sub="Die Zielgruppe beeinflusst, welche Rollen und welcher Rahmen sinnvoll sind."
+      title="Für welche Gruppe soll der erste Schritt passen?"
+      sub="Wählen Sie aus, mit wem das Mitmach-Format starten soll."
       onBack={()=>go("q3")}
       onNext={()=>go("result")}
       nextLabel="Empfehlung anzeigen"
@@ -1546,8 +1545,8 @@ function ResultScreen({ state, set, go }){
       </div>
 
       <div className="results-head">
-        <h2 className="section">Ihre 3 empfohlenen Mitmach-Formate</h2>
-        <p className="small-note">Wir zeigen bewusst nur drei Empfehlungen. So bleibt der nächste Schritt realistisch.</p>
+        <h2 className="section">Ihre 3 möglichen Startformate</h2>
+        <p className="small-note">Das ist eine erste Arbeitsgrundlage für den Pilot. Der konkrete Rahmen wird gemeinsam geprüft.</p>
       </div>
 
       <div className="pkg-grid">
@@ -1574,7 +1573,7 @@ function ResultScreen({ state, set, go }){
               <div className="pkg-meta-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
               <div className="pkg-meta-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
               <div className="pkg-meta-row">
-                <dt>Engagement-Potenzial</dt>
+                <dt>Einschätzung zum Start</dt>
                 <dd>
                   <span className="pot-bar">
                     <PotentialPips level={p.potentialLevel}/>
@@ -1598,9 +1597,9 @@ function ResultScreen({ state, set, go }){
       <div className="footnote">
         <span className="footnote-icon">i</span>
         <span>
-          <strong>Hinweis zum Engagement-Potenzial:</strong> Die Potenzialeinschätzung ist eine erste Orientierung
-          und nutzt Dummy-Daten. Ob Menschen tatsächlich mitmachen, zeigt der konkrete Aufruf.
-          Die Empfehlung ersetzt keine schulische Entscheidung – sie hilft, einen realistischen ersten Schritt zu wählen.
+          <strong>Hinweis zum Pilotstand:</strong> Die Empfehlung ist eine erste Orientierung im Prototyp.
+          Ob das Format für Ihre Schule tragfähig ist und ob sich passende Menschen finden, zeigt erst der konkrete Pilot.
+          Die schulische Entscheidung bleibt bei Ihnen. Die Empfehlung hilft, einen realistischen ersten Schritt zu prüfen.
         </span>
       </div>
 
@@ -1647,7 +1646,7 @@ function DetailScreen({ state, set, go }){
           </div>
 
           <div className="detail-section">
-            <h4>Was Schule, Hort oder Ganztag klären sollten</h4>
+            <h4>Was wir gemeinsam klären</h4>
             <ul className="detail-list">
               {p.clarify.map(r=><li key={r}>{r}</li>)}
             </ul>
@@ -1671,13 +1670,13 @@ function DetailScreen({ state, set, go }){
           <dl style={{margin:0}}>
             <div className="side-row"><dt>Aufwand</dt><dd>{p.effort}</dd></div>
             <div className="side-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
-            <div className="side-row"><dt>Engagement-Potenzial</dt>
+            <div className="side-row"><dt>Einschätzung zum Start</dt>
               <dd><span className="pot-bar"><PotentialPips level={p.potentialLevel}/><span className="pot-text mono">{p.potential}</span></span></dd>
             </div>
             <div className="side-row"><dt>Geeignet für</dt><dd style={{textAlign:"right",maxWidth:200}}>{p.fitFor}</dd></div>
           </dl>
           <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
-            <strong>Engagement-Potenzial:</strong> voraussichtlich {p.potential}. Sollte mit einem konkreten Aufruf
+            <strong>Einschätzung zum Start:</strong> voraussichtlich {p.potential}. Sollte mit einem konkreten Aufruf
             getestet werden.
           </div>
         </aside>
@@ -1851,7 +1850,7 @@ function MResult({ state, set, go }){
 
       <div className="results-head">
         <h2 className="section">Ihre 3 passenden Mitmach-Rollen</h2>
-        <p className="small-note">Drei Vorschläge, abgestimmt auf das, was Sie eingebracht haben. Realistisch starten – nicht alles auf einmal.</p>
+        <p className="small-note">Drei Vorschläge, abgestimmt auf das, was Sie eingebracht haben. Realistisch starten, Schritt für Schritt.</p>
       </div>
 
       <div className="pkg-grid">
@@ -1879,7 +1878,7 @@ function MResult({ state, set, go }){
         <span className="footnote-icon">i</span>
         <span>
           <strong>Hinweis:</strong> Die Auswahl basiert auf Beispielrollen für Schule, Hort und Ganztag.
-          Wenn nichts richtig passt, melden Sie sich trotzdem – wir suchen weiter.
+          Wenn Sie weiter suchen möchten, melden Sie sich gern – wir entwickeln gemeinsam weiter.
         </span>
       </div>
 
@@ -1934,7 +1933,7 @@ function MDetail({ state, set, go }){
             <div className="side-row"><dt>Einstiegsform</dt><dd>{(COMMIT_RESULT[state.commit]||COMMIT_RESULT.B).title}</dd></div>
           </dl>
           <div style={{marginTop:18,padding:"14px 16px",background:"var(--sand-soft)",borderRadius:10,fontSize:13,color:"#6B5728",lineHeight:1.55}}>
-            <strong>SISU begleitet den Start:</strong> Sie müssen nicht alleine ankommen — wir bereiten den ersten Termin mit Ihnen und der Einrichtung vor.
+            <strong>Unser Service begleitet den Start:</strong> Wir bereiten den ersten Termin mit Ihnen und der Einrichtung vor.
           </div>
         </aside>
       </div>
@@ -2022,40 +2021,37 @@ function Portal({ state, set, go }){
   return (
     <div className="container fade-in" style={{paddingTop:20}}>
       <div style={{marginBottom:20}}>
-        <span className="eyebrow">SISU · Mitmach-Portal</span>
+        <span className="eyebrow">Mitmach-Portal</span>
         <h1 className="display" style={{fontSize:"clamp(30px,4.5vw,48px)",margin:"8px 0 12px"}}>
           Flexibles Engagement
         </h1>
         <div style={{display:"flex",flexWrap:"wrap",gap:"6px 20px",color:"var(--ink-2)",fontSize:16,lineHeight:1.5,maxWidth:"64ch"}}>
           <span>Geben Sie Ihre Erfahrung weiter.</span>
-          <span style={{color:"var(--sage-deep)",fontWeight:500}}>Flexibel und passend zu Ihrem Alltag.</span>
+          <span style={{color:"var(--sage-deep)",fontWeight:500}}>Ihre Zeit und Erfahrung kann vor Ort etwas bewirken.</span>
         </div>
       </div>
 
       <div style={{
         margin:"0 0 28px",
-        display:"flex",
-        flexWrap:"wrap",
-        gap:"8px 24px",
-        padding:"12px 20px",
+        padding:"14px 20px",
         background:"var(--sage-tint)",
         border:"1px solid var(--sage-soft)",
         borderRadius:12,
         fontSize:14.5,
         color:"var(--ink-2)",
-        justifyContent:"center",
       }}>
+        <div style={{display:"flex",flexWrap:"wrap",gap:"8px 24px",justifyContent:"center"}}>
         {[
+          "Flexibel und alltagstauglich",
+          "Gut vorbereitet starten",
           "Versichert über Land BW",
-          "Klein starten – jederzeit aufhören",
-          "Keine Vorkenntnisse nötig",
-          "Wir melden uns persönlich",
         ].map((c,i)=>(
           <span key={i} style={{display:"inline-flex",alignItems:"center",gap:8}}>
             <span style={{color:"var(--sage-deep)",fontWeight:700,fontSize:16}}>✓</span>
             {c}
           </span>
         ))}
+        </div>
       </div>
 
       <div style={{borderTop:"1px solid var(--line-soft)",paddingTop:24}}>
@@ -2140,7 +2136,7 @@ function Portal({ state, set, go }){
           }}>
             <div className="eyebrow" style={{color:"var(--sage-deep)"}}>Beratung &amp; Orientierung</div>
             <h3 style={{margin:0,fontFamily:"'Instrument Serif',serif",fontWeight:400,fontSize:26,letterSpacing:"-.005em"}}>
-              Sie wissen noch nicht, was passt?
+              Sie möchten Orientierung?
             </h3>
             <p style={{margin:0,color:"var(--ink-2)",fontSize:14.5,lineHeight:1.55}}>
               Vier kurze Fragen, zwei Minuten — wir schlagen Ihnen drei Mitmach-Rollen vor,
@@ -2257,7 +2253,7 @@ function NextScreen({ state, go }){
         <div className="next-card recommended">
           <span className="badge">Empfohlen</span>
           <h3>Mitmach-Termin anlegen</h3>
-          <p>Legen Sie einen konkreten Termin an, bei dem Engagierte mit Erfahrung unverbindlich schnuppern oder mitmachen können.</p>
+          <p>Legen Sie einen konkreten Einstieg an, bei dem Engagierte mit Erfahrung unverbindlich schnuppern oder mitmachen können.</p>
           <button className="btn btn-primary" onClick={()=>go("slotForm")}>Termin anlegen →</button>
         </div>
         <div className="next-card">
@@ -2266,7 +2262,7 @@ function NextScreen({ state, go }){
             Erzeugen Sie Texte für Website, Aushang, Amtsblatt oder Newsletter.
             {state.slot
               ? " Mit den Daten Ihres Mitmach-Termins vorausgefüllt."
-              : ' Auch schon ohne konkreten Termin möglich – als allgemeiner „Wir öffnen Schule für Mitmachen"-Aufruf.'}
+              : ' Auch mit flexiblem Termin möglich – als „Wir prüfen Mitmachen an unserer Schule"-Aufruf.'}
           </p>
           <button className="btn btn-secondary" onClick={()=>go("aufruf")}>Aufruf erstellen →</button>
         </div>
@@ -2280,7 +2276,7 @@ function NextScreen({ state, go }){
       <div className="footnote" style={{marginTop:32}}>
         <span className="footnote-icon">i</span>
         <span>
-          <strong>Was ist ein Mitmach-Termin?</strong> Ein Mitmach-Termin ist ein konkreter Einstiegstermin.
+          <strong>Was ist ein Mitmach-Termin?</strong> Ein Mitmach-Termin ist ein konkreter, kleiner Einstieg.
           Engagierte mit Erfahrung können schnuppern, einmalig mitmachen oder Interesse bekunden.
         </span>
       </div>
@@ -2324,7 +2320,7 @@ function EigenesAngebotForm({ state, set, go }){
       <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("start")}>← Zurück</button>
       <span className="eyebrow">Eigenes Angebot</span>
       <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Angebot direkt anlegen</h1>
-      <p className="lede">Sie wissen bereits, was Sie ermöglichen möchten – ohne Umweg über den Mitmach-Planer.</p>
+      <p className="lede">Sie wissen bereits, was Sie ermöglichen möchten und können Ihr Angebot direkt anlegen.</p>
 
       <div className="form-shell">
         <div className="form-fields">
@@ -2332,14 +2328,14 @@ function EigenesAngebotForm({ state, set, go }){
           <div className="field">
             <label>Thema oder Bereich <span style={{color:"var(--ink-3)",fontWeight:400}}>– optional</span></label>
             <input type="text" value={f.thema} onChange={e=>upd("thema",e.target.value)}
-                   placeholder="z. B. Nähgruppe, Sprachcafé, Gartenworkshop, Erzählcafé" />
+                   placeholder="z. B. Lesezeit Klasse 2, Hochbeet im Ganztag, Berufsimpuls Klasse 8" />
             <span className="hint">Hilft Engagierten bei der ersten Einordnung.</span>
           </div>
 
           <div className="field">
             <label>Titel des Angebots</label>
             <input type="text" value={f.title} onChange={e=>upd("title",e.target.value)}
-                   placeholder="z. B. Nähgruppe – erster Schnuppertermin" />
+                   placeholder="z. B. Lesezeit im Ganztag – erster Schnuppertermin" />
           </div>
 
           <div className="field">
@@ -2391,7 +2387,7 @@ function EigenesAngebotForm({ state, set, go }){
           <div className="field">
             <label>Wen suchen wir?</label>
             <textarea value={f.seek} onChange={e=>upd("seek",e.target.value)}
-                      placeholder="z. B. Menschen mit Freude am Nähen, Geduld mit Anfängerinnen" />
+                      placeholder="z. B. Menschen mit Geduld, Lesefreude, Gartenerfahrung oder Berufspraxis" />
           </div>
 
           <div className="field">
@@ -2406,8 +2402,8 @@ function EigenesAngebotForm({ state, set, go }){
           </div>
 
           <div className="info-box">
-            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung.
-            Für den gewählten Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
+            <strong>Unverbindlich bedeutet:</strong> Der erste Termin dient dem Kennenlernen.
+            Für den gewählten Termin bitten wir um kurze Rückmeldung, falls sich etwas ändert.
           </div>
 
           <div className="btn-row between">
@@ -2474,9 +2470,9 @@ function IdeaScreen({ state, set, go }){
           <div className="confirm-mark">✓</div>
           <h2 className="section">Danke, {f.first}.</h2>
           <p>Ihre {f.kind==="idee"?"Idee":"Angebot"} ist bei uns angekommen.
-             Die Schule schaut sich das an und meldet sich – ohne Druck, ohne Verpflichtung.</p>
+             Die Schule schaut sich das an und meldet sich für den passenden nächsten Schritt.</p>
           <div className="btn-row" style={{justifyContent:"center"}}>
-            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Termin-Seite</button>
             <button className="btn btn-ghost" onClick={()=>{ set({ dashboardTab:"ideen" }); go("dashboard"); }}>So sieht die Schule das ↗</button>
           </div>
         </div>
@@ -2540,7 +2536,7 @@ function IdeaScreen({ state, set, go }){
 
             <div className="info-box">
               <strong>Was passiert dann?</strong> Die Schule liest mit, kann Rückfragen stellen
-              und – wenn es passt – aus Ihrer Idee einen konkreten Mitmach-Termin machen. Sie sind dabei nicht in der Pflicht.
+              und – wenn es passt – aus Ihrer Idee einen konkreten Mitmach-Termin machen. Sie entscheiden danach in Ruhe, ob Sie mitgehen möchten.
             </div>
 
             <div className="btn-row">
@@ -2573,7 +2569,7 @@ function AnzeigeScreen({ state, go }){
 
   return (
     <div className="container fade-in">
-      <button className="btn btn-ghost" style={{marginBottom:14,marginLeft:-12}} onClick={()=>go("dashboard")}>← Zurück zum Backend</button>
+      <button className="btn btn-ghost" style={{marginBottom:14,marginLeft:-12}} onClick={()=>go("dashboard")}>← Zurück zur Verwaltung</button>
 
       <div className="anzeige-shell">
         <div className="anzeige-controls">
@@ -2622,7 +2618,7 @@ function AnzeigeScreen({ state, go }){
               </div>
               <div className="anz-block">
                 <h4>Plätze</h4>
-                <p>{slot.seats} · {slot.type} · keine langfristige Verpflichtung</p>
+                <p>{slot.seats} · {slot.type} · erster Kennenlerntermin</p>
               </div>
             </>
           ) : (
@@ -2639,8 +2635,8 @@ function AnzeigeScreen({ state, go }){
                 <p><strong>{p.name}.</strong> {p.short}</p>
               </div>
               <div className="anz-block">
-                <h4>Worum es nicht geht</h4>
-                <p>Keine langfristige Verpflichtung. Kein Bewerbungsgespräch. Sie schauen vorbei, wir lernen uns kennen, ein konkreter Termin entsteht später.</p>
+                <h4>Worum es geht</h4>
+                <p>Ein erster Kontakt, ein gutes Gespräch und ein konkreter Termin, der gemeinsam entstehen kann.</p>
               </div>
               <div className="anz-block">
                 <h4>Mögliche Rollen</h4>
@@ -2695,7 +2691,6 @@ ${p.name}.
 
 ${p.short}
 
-Sie müssen sich nicht festlegen.
 Schauen Sie vorbei, sprechen Sie uns an, lernen Sie uns kennen.
 
 Kontakt: ${contact}`,
@@ -2718,7 +2713,7 @@ Ihre ${lib}`,
         amtsblatt:
 `${lib} sucht Mitmachende ab 55
 
-Die ${lib} entwickelt sich zu einem Mitmach-Ort. Im Mittelpunkt stehen kleine, niedrigschwellige Formate, bei denen Menschen ab 55 mit Erfahrung, Zeit oder Interesse beitragen können – ohne langfristige Verpflichtung.
+Die ${lib} entwickelt sich zu einem Mitmach-Ort. Im Mittelpunkt stehen kleine, niedrigschwellige Formate, bei denen Menschen ab 55 mit Erfahrung, Zeit oder Interesse beitragen können.
 
 Aktueller Schwerpunkt: ${p.name}. ${p.short}
 
@@ -2729,7 +2724,7 @@ Interessierte können sich unverbindlich melden unter ${contact}.`,
     // Concrete mode — slot exists
     return {
       aushang:
-`Mitmachen statt zuschauen.
+`Mitmachen und Erfahrung einbringen.
 
 ${slot.title}
 ${when}
@@ -2746,8 +2741,7 @@ ${slot.library}
 
 Gut geeignet, wenn Sie ${slot.seek?.toLowerCase().replace(/^./, c=>c) || "Freude an Begegnung haben"}.
 
-Mit Ihrer Anmeldung übernehmen Sie keine
-langfristige Verpflichtung.
+Ihre Anmeldung ist ein erster Schritt zum Kennenlernen.
 
 Kontakt: ${slot.contactName || ""} · ${contact}`,
 
@@ -2764,7 +2758,7 @@ ${slot.desc}
 Ihre Rolle: ${slot.role || "Beim ersten Termin gemeinsam besprochen."}
 Wir kümmern uns um: ${slot.library}.
 
-Sie übernehmen mit der Anmeldung keine langfristige Verpflichtung – es geht um einen ersten Eindruck und ein gutes Gespräch.
+Ihre Anmeldung ist ein erster Schritt für einen ersten Eindruck und ein gutes Gespräch.
 
 Anmeldung und Rückfragen: ${contact}
 
@@ -2776,7 +2770,7 @@ Ihre ${lib}`,
 
 Unter dem Titel „${slot.title}" lädt die ${lib} Menschen ab 55 ein, ${slot.type.toLowerCase()}. ${slot.desc}
 
-Termin: ${when}. Plätze: ${slot.seats}. Eine Anmeldung ist erwünscht, aber nicht verbindlich.
+Termin: ${when}. Plätze: ${slot.seats}. Eine Anmeldung hilft uns bei der Planung.
 
 Kontakt: ${contact}.`,
     };
@@ -2805,14 +2799,14 @@ Kontakt: ${contact}.`,
       </h1>
       <p className="lede">
         {mode==="allgemein"
-          ? <>Ein erster Aufruf ist auch schon ohne konkreten Termin möglich. Sie machen sichtbar, dass Ihre Schule Engagierte mit Erfahrung einlädt – das Thema ist klar, der Termin entsteht später.</>
+          ? <>Ein erster Aufruf ist mit flexiblem Termin möglich. Sie machen sichtbar, dass Ihre Schule Engagierte mit Erfahrung einlädt – das Thema ist klar, der Termin entsteht später.</>
           : <>Mit den Daten Ihres Mitmach-Termins <strong>„{slot?.title}"</strong> vorausgefüllt. Wählen Sie einen Kanal, kopieren Sie den Text, passen Sie ihn an.</>}
       </p>
 
       {hasSlot && (
         <div className="seg" style={{marginBottom:24}}>
           <button data-on={mode==="allgemein"} onClick={()=>setMode("allgemein")}>Allgemeiner Aufruf</button>
-          <button data-on={mode==="konkret"} onClick={()=>setMode("konkret")}>Konkreter Aufruf · mit Slot</button>
+          <button data-on={mode==="konkret"} onClick={()=>setMode("konkret")}>Konkreter Aufruf · mit Termin</button>
         </div>
       )}
 
@@ -2868,10 +2862,10 @@ Kontakt: ${contact}.`,
           <dl style={{margin:0}}>
             <div className="side-row"><dt>Format</dt><dd>{p.name}</dd></div>
             <div className="side-row"><dt>Modus</dt><dd>{mode==="allgemein"?"Allgemein":"Konkret"}</dd></div>
-            {hasSlot && mode==="konkret" && <div className="side-row"><dt>Slot</dt><dd style={{maxWidth:180}}>{slot.title}</dd></div>}
+            {hasSlot && mode==="konkret" && <div className="side-row"><dt>Termin</dt><dd style={{maxWidth:180}}>{slot.title}</dd></div>}
           </dl>
           <p className="micro">
-            Tipp: Drei Kanäle gleichzeitig zu bespielen erhöht die Chance, dass jemand Engagiertes den Aufruf sieht – Aushang vor Ort, Newsletter an Stammleser:innen, Amtsblatt für die Breite.
+            Tipp: Drei Kanäle gleichzeitig zu bespielen erhöht die Chance, dass jemand Engagiertes den Aufruf sieht – Schul-Webseite, Eltern-/Gemeindenetzwerk, Amtsblatt für die Breite.
           </p>
         </aside>
       </div>
@@ -2911,15 +2905,15 @@ function SlotForm({ state, set, go }){
       <button className="btn btn-ghost" style={{marginBottom:18,marginLeft:-12}} onClick={()=>go("next")}>← Zurück</button>
       <span className="eyebrow">Mitmach-Termin</span>
       <h1 className="display" style={{fontSize:"clamp(34px,4vw,48px)"}}>Mitmach-Termin anlegen</h1>
-      <p className="lede">Machen Sie aus dem Format einen konkreten, niedrigschwelligen Einstieg.</p>
+      <p className="lede">Machen Sie aus dem Format einen konkreten, niedrigschwelligen Einstieg für Nachmittag, Ganztag oder ein schulisches Projekt.</p>
 
       <div className="form-shell">
         <div className="form-fields">
 
           <div className="field">
-            <label>Titel des Slots</label>
+            <label>Titel des Mitmach-Termins</label>
             <input type="text" value={f.title} onChange={e=>upd("title",e.target.value)}
-                   placeholder="z. B. Spieleabend-Gastgeber:in schnuppern" />
+                   placeholder="z. B. Lesezeit im Ganztag – erster Schnuppertermin" />
           </div>
 
           <div className="field">
@@ -2986,8 +2980,8 @@ function SlotForm({ state, set, go }){
           </div>
 
           <div className="info-box">
-            <strong>Unverbindlich bedeutet:</strong> keine langfristige Verpflichtung. Für den gewählten
-            Termin bitten wir um kurze Absage, falls jemand doch nicht kommen kann.
+            <strong>Unverbindlich bedeutet:</strong> Der erste Termin dient dem Kennenlernen. Für den gewählten
+            Termin bitten wir um kurze Rückmeldung, falls sich etwas ändert.
           </div>
 
           <div className="btn-row between">
@@ -3007,7 +3001,7 @@ function SlotForm({ state, set, go }){
             <div className="side-row"><dt>Engagementstufe</dt><dd>{p.stage}</dd></div>
           </dl>
           <p className="micro">
-            Veröffentlichen erzeugt eine öffentliche Mitmach-Seite und legt den Slot im Backend an.
+            Veröffentlichen erzeugt eine öffentliche Mitmach-Seite und legt den Termin in der Verwaltung an.
           </p>
         </aside>
       </div>
@@ -3036,7 +3030,7 @@ function PublishConfirmScreen({ state, go }){
       <span className="eyebrow">Mitmach-Termin veröffentlichen</span>
       <h1 className="display" style={{fontSize:"clamp(28px,3.5vw,40px)"}}>Alles bereit?</h1>
       <p className="lede" style={{marginBottom:32}}>
-        Prüfen Sie, ob alles stimmt — dann wählen Sie, wo Sie den Termin bekannt machen möchten.
+        Prüfen Sie, ob alles stimmt — dann wählen Sie, wo Sie den Termin vorsichtig bekannt machen möchten.
       </p>
 
       <div className="info-box" style={{marginBottom:24}}>
@@ -3086,7 +3080,7 @@ function PublicSlot({ state, go }){
   if (!slot) {
     return (
       <div className="container fade-in" style={{textAlign:"center",paddingTop:100}}>
-        <h2 className="section">Noch kein Mitmach-Termin ausgewählt</h2>
+        <h2 className="section">Wählen Sie einen Mitmach-Termin aus</h2>
         <p className="lede" style={{margin:"0 auto 24px"}}>Schauen Sie sich die offenen Termine im Portal an.</p>
         <button className="btn btn-primary" onClick={()=>go("portal")}>Zum Mitmach-Portal</button>
       </div>
@@ -3105,7 +3099,7 @@ function PublicSlot({ state, go }){
         <div className="breadcrumb">
           {isDemo ? (
             <>
-              <span>SISU · Mitmach-Portal</span>
+              <span>Mitmach-Portal</span>
               <span>›</span>
               <span>{slot.einrichtung}</span>
             </>
@@ -3169,7 +3163,7 @@ function PublicSlot({ state, go }){
           </div>
 
           <div className="commitment-note">
-            Mit Ihrer Anmeldung übernehmen Sie keine langfristige Verpflichtung.
+            Ihre Anmeldung ist ein erster Schritt zum Kennenlernen.
           </div>
         </div>
 
@@ -3260,10 +3254,10 @@ function RegisterScreen({ state, set, go }){
         <div className="confirm-card">
           <div className="confirm-mark">✓</div>
           <h2 className="section">Vielen Dank, {f.first}.</h2>
-          <p>Ihre Interessensbekundung wurde gesendet. Die Schule oder SISU meldet sich
-             bei Ihnen. Sie übernehmen noch keine langfristige Verpflichtung.</p>
+          <p>Ihre Interessensbekundung wurde gesendet. Die Schule oder unser Service meldet sich
+             bei Ihnen für den passenden nächsten Schritt.</p>
           <div className="btn-row" style={{justifyContent:"center"}}>
-            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Slot-Seite</button>
+            <button className="btn btn-secondary" onClick={()=>go("public")}>Zurück zur Termin-Seite</button>
             <button className="btn btn-ghost" onClick={()=>go("dashboard")}>So sieht die Schule das ↗</button>
           </div>
         </div>
@@ -3284,7 +3278,7 @@ function RegisterScreen({ state, set, go }){
           <span className="eyebrow">Anmeldung</span>
           <h1 className="display">Schön, dass Sie mitmachen möchten.</h1>
           <p style={{margin:"8px 0 0",color:"var(--ink-2)",fontSize:15.5}}>
-            Slot: <strong>{slot?.title || "—"}</strong> · {slot?.flexible ? "Termin wird gemeinsam gefunden" : slot?.when}
+            Termin: <strong>{slot?.title || "—"}</strong> · {slot?.flexible ? "Termin wird gemeinsam gefunden" : slot?.when}
           </p>
         </header>
         <div className="body">
@@ -3346,7 +3340,7 @@ function Dashboard({ state, set, go }){
     <div className="container wide fade-in">
       <div className="dash-head">
         <div>
-          <span className="eyebrow">SISU Backend</span>
+          <span className="eyebrow">Verwaltung</span>
           <h1>Pilotübersicht</h1>
           <div className="meta" style={{marginTop:8}}>
             <span><span className="dot"/> Schule Musterstadt</span>
@@ -3381,7 +3375,7 @@ function Dashboard({ state, set, go }){
       {tab==="formate" && (
         <div className="dash-card">
           <h3>{state.customOffer ? "Eigenes Angebot" : "Gewähltes Format"}</h3>
-          <div className="sub">{state.customOffer ? "Ein direkt angelegtes Angebot – ohne Mitmach-Planer." : "Das aktuelle Pilot-Format Ihrer Schule."}</div>
+          <div className="sub">{state.customOffer ? "Ein direkt angelegtes Angebot mit öffentlicher Termin-Seite." : "Das aktuelle Pilot-Format Ihrer Schule."}</div>
           {pilot ? (
             <table className="dash">
               <thead><tr><th>{state.customOffer?"Angebot":"Format"}</th><th>Schule</th><th>Aufwand</th><th>Status</th><th>Aktion</th></tr></thead>
@@ -3400,7 +3394,7 @@ function Dashboard({ state, set, go }){
               </tbody>
             </table>
           ) : (
-            <table className="dash"><tbody><tr className="empty-row"><td colSpan="5">Noch kein Format ausgewählt – starten Sie den Mitmach-Planer.</td></tr></tbody></table>
+            <table className="dash"><tbody><tr className="empty-row"><td colSpan="5">Wählen Sie ein Format und starten Sie den Mitmach-Planer.</td></tr></tbody></table>
           )}
         </div>
       )}
@@ -3412,7 +3406,7 @@ function Dashboard({ state, set, go }){
           <table className="dash">
             <thead><tr><th>Titel</th><th>Format</th><th>Datum</th><th>Plätze</th><th>Anmeldungen</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
-              {slots.length === 0 && <tr className="empty-row"><td colSpan="7">Noch keine Mitmach-Termine angelegt.</td></tr>}
+              {slots.length === 0 && <tr className="empty-row"><td colSpan="7">Legen Sie den ersten Mitmach-Termin an.</td></tr>}
               {slots.map(s=>(
                 <tr key={s.id}>
                   <td><strong>{s.title}</strong></td>
@@ -3423,7 +3417,7 @@ function Dashboard({ state, set, go }){
                   <td><span className="pill ok">veröffentlicht</span></td>
                   <td><div className="row-actions">
                     <button onClick={()=>go("public")}>Ansehen</button>
-                    <button>Slot wiederholen</button>
+                    <button>Termin wiederholen</button>
                   </div></td>
                 </tr>
               ))}
@@ -3437,9 +3431,9 @@ function Dashboard({ state, set, go }){
           <h3>Neue Anmeldungen</h3>
           <div className="sub">Interessierte Menschen, die sich auf einen Mitmach-Termin gemeldet haben.</div>
           <table className="dash">
-            <thead><tr><th>Name</th><th>Slot</th><th>Kontakt</th><th>Wunsch</th><th>Status</th><th>Aktion</th></tr></thead>
+            <thead><tr><th>Name</th><th>Termin</th><th>Kontakt</th><th>Wunsch</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
-              {regs.length === 0 && <tr className="empty-row"><td colSpan="6">Noch keine Anmeldungen. Öffnen Sie die öffentliche Ansicht, um eine Test-Anmeldung zu erzeugen.</td></tr>}
+              {regs.length === 0 && <tr className="empty-row"><td colSpan="6">Öffnen Sie die öffentliche Ansicht, um eine Test-Anmeldung zu erzeugen.</td></tr>}
               {regs.map(r=>(
                 <tr key={r.id}>
                   <td><strong>{r.first} {r.last}</strong>{r.note && <div style={{color:"var(--ink-3)",fontSize:12.5,marginTop:3,maxWidth:200}}>„{r.note}“</div>}</td>
@@ -3472,7 +3466,7 @@ function Dashboard({ state, set, go }){
           <table className="dash">
             <thead><tr><th>Art</th><th>Thema · Beschreibung</th><th>Von</th><th>Status</th><th>Aktion</th></tr></thead>
             <tbody>
-              {(state.ideas||[]).length === 0 && <tr className="empty-row"><td colSpan="5">Noch keine Ideen eingegangen.</td></tr>}
+              {(state.ideas||[]).length === 0 && <tr className="empty-row"><td colSpan="5">Ideen aus der Stadt erscheinen hier.</td></tr>}
               {(state.ideas||[]).map(idea=>(
                 <tr key={idea.id}>
                   <td><span className={"pill "+(idea.kind==="angebot"?"ok":"new")}>{idea.kind==="angebot"?"Eigenes Angebot":"Idee"}</span></td>
@@ -3486,7 +3480,7 @@ function Dashboard({ state, set, go }){
                       const st = e.target.value;
                       set({ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:st}:i)});
                     }} style={{font:"inherit",fontSize:12.5,padding:"4px 8px",borderRadius:6,border:"1px solid var(--line)",background:"var(--paper)"}}>
-                      {["neu","Rückfrage gestellt","wird Slot","nicht passend","abgesagt"].map(o=><option key={o} value={o}>{o}</option>)}
+                      {["neu","Rückfrage gestellt","wird Termin","für später merken","abgesagt"].map(o=><option key={o} value={o}>{o}</option>)}
                     </select>
                   </td>
                   <td>
@@ -3505,9 +3499,9 @@ function Dashboard({ state, set, go }){
                           contactName:"", contactEmail:"",
                           fromIdea: idea.id,
                         };
-                        set({slot: seedSlot, ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:"wird Slot"}:i)});
+                        set({slot: seedSlot, ideas:(state.ideas||[]).map(i=>i.id===idea.id?{...i,status:"wird Termin"}:i)});
                         go("slotForm");
-                      }} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Aus Idee Slot machen ↗</button>
+                      }} style={{background:"var(--sage-tint)",borderColor:"var(--sage-soft)",color:"var(--sage-deep)",fontWeight:600}}>Aus Idee Termin machen ↗</button>
                       <button>Antworten</button>
                     </div>
                   </td>
@@ -3529,7 +3523,7 @@ function Dashboard({ state, set, go }){
               <StatusStep done={regs.length>0} label="Erste Anmeldung erhalten" extra={regs[0] && `${regs[0].first} ${regs[0].last}`}/>
               <StatusStep done={regs.some(r=>r.status==="bestätigt")} label="Anmeldung bestätigt"/>
               <StatusStep done={false} label="Erster Termin durchgeführt"/>
-              <StatusStep done={false} label="Feedback gesammelt · Slot wiederholt"/>
+              <StatusStep done={false} label="Feedback gesammelt · Termin wiederholt"/>
             </ol>
           </div>
         </div>
@@ -3615,7 +3609,7 @@ function App(){
       }[screen]}
 
       <footer style={{borderTop:"1px solid var(--line-soft)",padding:"24px 32px",color:"var(--ink-3)",fontSize:13,display:"flex",justifyContent:"space-between",maxWidth:1200,margin:"0 auto",width:"100%"}}>
-        <span>SISU Mitmach-Planer · Prototyp</span>
+        <span>Mitmach-Planer · Prototyp</span>
         <span>
           <button onClick={()=>{localStorage.removeItem("sisu-state");location.reload();}}
                   style={{background:"none",border:0,color:"var(--ink-3)",cursor:"pointer",font:"inherit"}}>
